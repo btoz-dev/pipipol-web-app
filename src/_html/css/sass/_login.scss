@@ -1,0 +1,71 @@
+.login{
+    color: #fff;
+    .login-copy{
+        padding: 2rem;
+    }
+    .login-form{
+        background-color: #fff;
+        border-radius: 50px;
+        margin: 2rem;
+        padding: 3rem;
+        color: #000;
+        @media only screen and (max-width: 600px) {
+            margin: 0;
+            padding: 2rem;
+        }
+        .input-container {
+            position: relative;
+            display: -ms-flexbox; /* IE10 */
+            display: flex;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        ::placeholder {
+            color: #000;
+            opacity: 0.5;
+            font-style: italic;
+        }
+        
+        .icon {
+            position: absolute;
+            padding: 10px;
+            color:#000;;
+            min-width: 50px;
+            text-align: center;
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 10px 10px 10px 50px;
+            outline: none;
+            border: none;
+            border-bottom: solid 1px #ccc;
+        }
+        
+        .input-field:focus {
+            border-color: #000;
+        }
+
+        .btn{
+            width: 80%;
+            margin: 1rem auto;
+            display: block;
+            &.btn-facebook{
+                background-color: #3B5998;
+            }
+            &.btn-google{
+                background-color: #3B5998;
+            }
+        }
+
+        .text-daftar,
+        .text-lupa-password{
+            text-align: center;
+            a{
+                color: #000;
+                text-decoration: underline;
+            }
+        }
+    }
+}

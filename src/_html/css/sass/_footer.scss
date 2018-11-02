@@ -1,0 +1,33 @@
+.footer{
+    background-color: #191919;
+    text-align: center;
+    color: #fff;
+    padding-top: 2rem;
+    .container-fluid{
+        padding: 2rem;
+    }
+    .footer-logo-pipipol{
+        margin-top: 1rem;
+    }
+    .sosmed{
+        margin-top: 1rem;
+        a{
+            display: inline-block;
+            width: 32px;
+            height: 32px;
+            background-color: #a2a2a2;
+            color: #191919;
+            line-height: 32px;
+            border-radius: 50%;
+            margin: 8px;
+            &:hover{
+                background-color: #ec2828;
+                color: #fff;
+            }
+        }
+    }
+    .copyright{
+        padding: 1rem;
+        border-top: solid 1px #666;
+    }
+}

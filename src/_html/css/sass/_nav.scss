@@ -1,0 +1,123 @@
+.navbar{
+    z-index: 999;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 0rem;
+    background-color: #fff;
+    .navbar-brand{
+        padding-left: 2rem;
+    }
+}
+.navbar-nav{
+    line-height: 4.5;
+    .nav-item{
+        a.nav-link{
+            color: #000;
+            padding-right: 2rem;
+            @media only screen and (max-width: 575px) {
+                padding-right: 0;
+            }
+        }
+        &.nav-profile{
+            
+            .avatar{
+                float: left;
+                width: 60px;
+                height: 60px;
+                border-radius: 30px;
+                margin: 0.4rem 0.6rem 0 0;
+                background-color: #000;
+                background-position: center;
+                background-size: cover;
+            }
+        }
+        &.nav-redeem{
+            background-color: #ec2828;
+            &:hover{
+                background-color: #191919;    
+            }
+            a.nav-link{
+                color: #fff;
+                padding-left: 2rem;
+                @media only screen and (max-width: 575px) {
+                    padding-left: 0;
+                }
+            }
+        }
+    }
+    .dropdown-item{
+        line-height: 2rem;
+        &:hover{
+            color: #ec2828;
+        }
+    }
+    .dropdown-toggle .fas{
+        font-size: 1.3rem;
+        position: relative;
+        top: 3px;
+    }
+    .dropdown-toggle::after{
+        display: none;
+    }
+}
+.navbar-dark .navbar-nav .show > .nav-link, 
+.navbar-dark .navbar-nav .active > .nav-link, 
+.navbar-dark .navbar-nav .nav-link.show, 
+.navbar-dark .navbar-nav .nav-link.active {
+    color: #333;
+}
+.navbar-dark .navbar-nav .nav-link:hover, 
+.navbar-dark .navbar-nav .nav-link:focus {
+    color: #ec2828;
+}
+.navbar-toggler{
+    padding: 1.5rem;
+}
+.navbar-toggler-icon{
+    background-color: #ec2828;
+    width: 2em;
+    height: 2em;
+    background-size: 31px;
+    border-radius: 5px;
+}
+.navbar-collapse.collapse.show,
+.navbar-collapse.collapsing{
+    .nav-item{
+        line-height: 3;
+        text-align: center;
+        border-top: solid 1px #ec2828;
+    }
+}
+
+
+
+// POLL TOOLBAR
+.poll-toolbar{
+    background-color: #272c2e;
+    padding: 1rem 0;
+    .btn,
+    select{    
+        height: 44px;
+        border-radius: 24px !important;
+    }
+    select{
+        background-color: #191919;
+        border: solid 2px #191919;
+        color: #fff !important;
+        height: 46px;
+    }
+    .btn{
+        width: 100%;
+        color: #fff;
+        &-red{
+            background-color: #ec2828 !important;
+            border: solid 2px #ec2828;
+        }
+        &-outline{
+            background-color: transparent !important;
+            border: solid 2px #fff;
+        }
+    }
+}

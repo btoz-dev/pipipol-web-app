@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Redeem | Pipipol</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <link href="https://fonts.googleapis.com/css?family=Exo+2:400,400i,700,700i" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <!--[if lte IE 9]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+
+  <!-- NAV BAR -->
+	<nav class="navbar navbar-expand-sm navbar-dark bg-tr">
+		<a class="navbar-brand" href="./"><img src="img/logo-pipipol_black.png"></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+    <!-- MOBILE NAV BAR -->
+		<div class="collapse navbar-collapse" id="navbar">
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item active">
+					<a class="nav-link" data-toggle="collapse" href="#pollToolbar" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fas fa-search"></i></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="index.html">Home</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="login.html">Login</a>
+				</li>
+				<li class="nav-item nav-redeem">
+					<a class="nav-link" href="redeem.html">Redeem</a>
+				</li>
+			</ul>
+    </div>
+    <!-- /END MOBILE NAV BAR -->
+  </nav>
+  <!-- /END NAV BAR -->
+  
+  <!-- POLL TOOLBAR -->
+  <div id="pollToolbar" class="poll-toolbar collapse">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-sm-12">
+          <div class="input-group mt-3">
+            <select class="custom-select" id="inputGroupSelect01">
+              <option selected>Pilih kategori..</option>
+              <option value="1">Kategori Satu</option>
+              <option value="2">Kategori Dua</option>
+              <option value="3">Kategori Tiga</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-12">
+          <div class="row">
+            <div class="col-6">
+              <a class="btn btn-red mb-3 mt-3" href="#" role="button">Populer</a>
+            </div>
+            <div class="col-6">
+              <a class="btn btn-outline mb-3 mt-3" href="#" role="button">Terbaru</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /END POLL TOOLBAR -->
+
+	<!-- SITE CONTENT -->
+    <div class="site-content container-fluid" style="background-image:url('img/bg-redeem.jpg');">
+        <div class="bg-container container-fluid">
+            <section class="redeem container">
+                <div class="redeem-header">
+                    <div class="row no-gutters">
+                        <div class="col-md-4 order-1 order-md-2">
+                            <div class="user-avatar" style="background-image:url('img/placeimg_640_480_tech2.jpg');"></div>
+                            <div class="user-name"><h4>Nama Fulan</h4></div>
+                            <div class="user-email">fulan@fulanah.com</div>
+                        </div>
+                        <div class="col-md-4 order-2 order-md-1 my-auto">
+                            <div class="user-poin">
+                                <div class="user-poin-label">Jumlah Poin</div>
+                                <div class="user-poin-total">130</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 order-3 my-auto">
+                            <div class="user-badge">
+                                <i class="fas fa-award"></i>
+                                <i class="fas fa-award"></i>
+                                <i class="fas fa-award"></i>
+                            </div>
+                        </div>
+                    </div>  
+                </div>  
+
+                <div class="redeem-prizes">
+                    <h4 class="text-center mb-5">Hadiah</h4>
+                    <form role="form">
+                        <div class="card-columns">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title">Piring Cantik</h5>
+                                </div>
+                                <div class="card-body">
+                                    <img class="card-img-top" src="img/placeimg_640_480_tech2.jpg" alt="Card image cap">
+                                </div>
+                                <div class="card-footer">
+                                    <div class="card-poin">700000 <em>poin</em></div>
+                                    <div class="card-checkbox">                       
+                                        <div class="checkbox checkbox-danger">
+                                            <input type="checkbox" name="checkboxPoin" id="checkboxPoin1" value="option1">
+                                            <label htmlFor="checkboxPoin1"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-poin">70 <span>poin</span></div>
+                                <div class="card-checkbox">                       
+                                    <div class="checkbox checkbox-danger">
+                                        <input type="checkbox" name="checkboxPoin" id="checkboxPoin2" value="option1">
+                                        <label htmlFor="checkboxPoin2"></label>
+                                    </div>
+                                </div>
+                                <img class="card-img-top" src="img/placeimg_640_480_tech2.jpg" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title">Piring Cantik</h5>
+                                    <p class="card-text">This is a card with supporting text below.</p>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-poin">70 <span>poin</span></div>
+                                <div class="card-checkbox">                       
+                                    <div class="checkbox checkbox-danger">
+                                        <input type="checkbox" name="checkboxPoin" id="checkboxPoin3" value="option1">
+                                        <label htmlFor="checkboxPoin3"></label>
+                                    </div>
+                                </div>
+                                <img class="card-img-top" src="img/placeimg_640_480_tech2.jpg" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title">Piring Cantik</h5>
+                                    <p class="card-text">This is a card with supporting text below.</p>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-poin">70 <span>poin</span></div>
+                                <div class="card-checkbox">                       
+                                    <div class="checkbox checkbox-danger">
+                                        <input type="checkbox" name="checkboxPoin4" id="checkboxPoin4" value="option1">
+                                        <label htmlFor="checkboxPoin4"></label>
+                                    </div>
+                                </div>
+                                <img class="card-img-top" src="img/placeimg_640_480_tech2.jpg" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title">Piring Cantik</h5>
+                                    <p class="card-text">This is a card with supporting text below.</p>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-poin">70 <span>poin</span></div>
+                                <div class="card-checkbox">                       
+                                    <div class="checkbox checkbox-danger">
+                                        <input type="checkbox" name="checkboxPoin5" id="checkboxPoin5" value="option1">
+                                        <label htmlFor="checkboxPoin5"></label>
+                                    </div>
+                                </div>
+                                <img class="card-img-top" src="img/placeimg_640_480_tech2.jpg" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title">Piring Cantik</h5>
+                                    <p class="card-text">This is a card with supporting text below.</p>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-poin">70 <span>poin</span></div>
+                                <div class="card-checkbox">                       
+                                    <div class="checkbox checkbox-danger">
+                                        <input type="checkbox" name="checkboxPoin6" id="checkboxPoin6" value="option1">
+                                        <label htmlFor="checkboxPoin6"></label>
+                                    </div>
+                                </div>
+                                <img class="card-img-top" src="img/placeimg_640_480_tech2.jpg" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title">Piring Cantik</h5>
+                                    <p class="card-text">This is a card with supporting text below.</p>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-poin">70 <span>poin</span></div>
+                                <div class="card-checkbox">                       
+                                    <div class="checkbox checkbox-danger">
+                                        <input type="checkbox" name="checkboxPoin7" id="checkboxPoin7" value="option1">
+                                        <label htmlFor="checkboxPoin7"></label>
+                                    </div>
+                                </div>
+                                <img class="card-img-top" src="img/placeimg_640_480_tech2.jpg" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title">Piring Cantik</h5>
+                                    <p class="card-text">This is a card with supporting text below.</p>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-poin">70 <span>poin</span></div>
+                                <div class="card-checkbox">                       
+                                    <div class="checkbox checkbox-danger">
+                                        <input type="checkbox" name="checkboxPoin8" id="checkboxPoin8" value="option1">
+                                        <label htmlFor="checkboxPoin8"></label>
+                                    </div>
+                                </div>
+                                <img class="card-img-top" src="img/placeimg_640_480_tech2.jpg" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title">Piring Cantik</h5>
+                                    <p class="card-text">This is a card with supporting text below.</p>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-poin">70 <span>poin</span></div>
+                                <div class="card-checkbox">                       
+                                    <div class="checkbox checkbox-danger">
+                                        <input type="checkbox" name="checkboxPoin9" id="checkboxPoin9" value="option1">
+                                        <label htmlFor="checkboxPoin9"></label>
+                                    </div>
+                                </div>
+                                <img class="card-img-top" src="img/placeimg_640_480_tech2.jpg" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title">Piring Cantik</h5>
+                                    <p class="card-text">This is a card with supporting text below.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-columns-footer">
+                            <a class="btn btn-lg btn-danger" data-toggle="modal" data-target="#modalRedeemSuccess">Redeem</a>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+  </div>
+  <!-- /END SITE CONTENT -->
+
+  <footer class="footer">
+    <div class="container-fluid">
+      <div class="footer-logo-pipipol"><a href="#"><img src="img/logo-pipipol.png"></a></div>
+      <div class="sosmed">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+    <div class="copyright">@ 2018 Pipipol. All Rights Reserved.</div>
+  </footer>
+
+
+  <!-- MODAL POLL RESULTS -->
+  <div class="modal fade" id="modalRedeemSuccess">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-center">
+
+            <!-- Modal Header -->
+            <div class="modal-header text-center">
+                <h4 class="modal-title w-100">Terimakasih, redeem berhasil!</h4>
+            </div>
+          
+          <!-- Modal body -->
+          <div class="modal-body">
+                <i class="fas fa-box-open mt-2 mb-2"></i>
+                <p>Anda telah berhasil menukarkan poin Anda dengan hadiah XXXXXXXX sebesar 70 poin.</p>
+          </div>
+          
+          <!-- Modal footer -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Tutup</button>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    <!-- /END MODAL POLL RESULTS -->
+
+
+  <script src="js/vendor/modernizr-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.3.1.min.js"><\/script>')</script>
+  <script src="js/bootstrap/bootstrap.min.js"></script>
+  <script src="js/plugins.js"></script>
+  <script src="js/main.js"></script>
+
+  <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+  <script>
+    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+    ga('create', 'UA-XXXXX-Y', 'auto'); ga('send', 'pageview')
+  </script>
+  <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+</body>
+
+</html>

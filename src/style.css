@@ -1,0 +1,1266 @@
+@import url(/Users/modja/Sites/btoz/pipipol/_html/css/bootstrap/bootstrap.css);
+@import url(/Users/modja/Sites/btoz/pipipol/_html/css/normalize.css);
+/*! HTML5 Boilerplate v6.1.0 | MIT License | https://html5boilerplate.com/ */
+/*
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+html {
+  color: #222;
+  font-size: 1em;
+  line-height: 1.4;
+}
+
+/*
+ * Remove text-shadow in selection highlight:
+ * https://twitter.com/miketaylr/status/12228805301
+ *
+ * Vendor-prefixed and regular ::selection selectors cannot be combined:
+ * https://stackoverflow.com/a/16982510/7133471
+ *
+ * Customize the background color to match your design.
+ */
+::-moz-selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+::selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+/*
+ * A better looking default horizontal rule
+ */
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
+}
+
+/*
+ * Remove the gap between audio, canvas, iframes,
+ * images, videos and the bottom of their containers:
+ * https://github.com/h5bp/html5-boilerplate/issues/440
+ */
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+  vertical-align: middle;
+}
+
+/*
+ * Remove default fieldset styles.
+ */
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/*
+ * Allow only vertical resizing of textareas.
+ */
+textarea {
+  resize: vertical;
+}
+
+/* ==========================================================================
+   Browser Upgrade Prompt
+   ========================================================================== */
+.browserupgrade {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+body {
+  padding-top: 88px;
+  font-family: "Exo 2", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 0 1rem;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+}
+
+a:hover {
+  text-decoration: none;
+  color: #ec2828;
+}
+
+.checkbox {
+  padding-left: 20px;
+}
+
+.checkbox label {
+  display: inline-block;
+  position: relative;
+  padding-left: 5px;
+}
+
+.checkbox label::before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  width: 17px;
+  height: 17px;
+  left: 0;
+  margin-left: -20px;
+  border: 1px solid #cccccc;
+  border-radius: 3px;
+  background-color: #fff;
+  -webkit-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+  transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+}
+
+.checkbox label::after {
+  display: inline-block;
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  left: 0;
+  top: 0;
+  margin-left: -20px;
+  padding-left: 3px;
+  padding-top: 1px;
+  font-size: 11px;
+  color: #555555;
+}
+
+.checkbox input[type="checkbox"] {
+  opacity: 0;
+}
+
+.checkbox input[type="checkbox"]:focus + label::before {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+
+.checkbox input[type="checkbox"]:checked + label::after {
+  font-family: "FontAwesome";
+  content: "\f00c";
+}
+
+.checkbox input[type="checkbox"]:disabled + label {
+  opacity: 0.65;
+}
+
+.checkbox input[type="checkbox"]:disabled + label::before {
+  background-color: #eeeeee;
+  cursor: not-allowed;
+}
+
+.checkbox.checkbox-circle label::before {
+  border-radius: 50%;
+}
+
+.checkbox.checkbox-inline {
+  margin-top: 0;
+}
+
+.checkbox-primary input[type="checkbox"]:checked + label::before {
+  background-color: #428bca;
+  border-color: #428bca;
+}
+
+.checkbox-primary input[type="checkbox"]:checked + label::after {
+  color: #fff;
+}
+
+.checkbox-danger input[type="checkbox"]:checked + label::before {
+  background-color: #d9534f;
+  border-color: #d9534f;
+}
+
+.checkbox-danger input[type="checkbox"]:checked + label::after {
+  color: #fff;
+}
+
+.checkbox-info input[type="checkbox"]:checked + label::before {
+  background-color: #5bc0de;
+  border-color: #5bc0de;
+}
+
+.checkbox-info input[type="checkbox"]:checked + label::after {
+  color: #fff;
+}
+
+.checkbox-warning input[type="checkbox"]:checked + label::before {
+  background-color: #f0ad4e;
+  border-color: #f0ad4e;
+}
+
+.checkbox-warning input[type="checkbox"]:checked + label::after {
+  color: #fff;
+}
+
+.checkbox-success input[type="checkbox"]:checked + label::before {
+  background-color: #5cb85c;
+  border-color: #5cb85c;
+}
+
+.checkbox-success input[type="checkbox"]:checked + label::after {
+  color: #fff;
+}
+
+.radio {
+  padding-left: 10px;
+}
+
+.radio label {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  padding-left: 16px;
+  margin-bottom: 0.75rem;
+}
+
+.radio label::before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  left: 0;
+  margin-left: -25px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background-color: transparent;
+  -webkit-transition: border 0.15s ease-in-out;
+  transition: border 0.15s ease-in-out;
+}
+
+.radio label::after {
+  display: inline-block;
+  position: absolute;
+  content: " ";
+  width: 16px;
+  height: 16px;
+  left: 0px;
+  top: 5px;
+  margin-left: -20px;
+  border-radius: 50%;
+  background-color: #555555;
+  -webkit-transform: scale(0, 0);
+  transform: scale(0, 0);
+  -webkit-transition: -webkit-transform 0.1s cubic-bezier(0.8, -0.33, 0.2, 1.33);
+  transition: -webkit-transform 0.1s cubic-bezier(0.8, -0.33, 0.2, 1.33);
+  transition: transform 0.1s cubic-bezier(0.8, -0.33, 0.2, 1.33);
+  transition: transform 0.1s cubic-bezier(0.8, -0.33, 0.2, 1.33),
+    -webkit-transform 0.1s cubic-bezier(0.8, -0.33, 0.2, 1.33);
+}
+
+.radio input[type="radio"] {
+  opacity: 0;
+}
+
+.radio input[type="radio"]:focus + label::before {
+  outline: thin dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+
+.radio input[type="radio"]:checked + label::after {
+  -webkit-transform: scale(1, 1);
+  transform: scale(1, 1);
+}
+
+.radio input[type="radio"]:disabled + label {
+  opacity: 0.65;
+}
+
+.radio input[type="radio"]:disabled + label::before {
+  cursor: not-allowed;
+}
+
+.radio.radio-inline {
+  margin-top: 0;
+}
+
+.radio-primary input[type="radio"] + label::after {
+  background-color: #428bca;
+}
+
+.radio-primary input[type="radio"]:checked + label::before {
+  border-color: #428bca;
+}
+
+.radio-primary input[type="radio"]:checked + label::after {
+  background-color: #428bca;
+}
+
+.radio-danger input[type="radio"] + label::after {
+  background-color: #ec2828;
+}
+
+.radio-danger input[type="radio"]:checked + label::before {
+  border-color: #fff;
+}
+
+.radio-danger input[type="radio"]:checked + label::after {
+  background-color: #ec2828;
+}
+
+.radio-info input[type="radio"] + label::after {
+  background-color: #5bc0de;
+}
+
+.radio-info input[type="radio"]:checked + label::before {
+  border-color: #5bc0de;
+}
+
+.radio-info input[type="radio"]:checked + label::after {
+  background-color: #5bc0de;
+}
+
+.radio-warning input[type="radio"] + label::after {
+  background-color: #f0ad4e;
+}
+
+.radio-warning input[type="radio"]:checked + label::before {
+  border-color: #f0ad4e;
+}
+
+.radio-warning input[type="radio"]:checked + label::after {
+  background-color: #f0ad4e;
+}
+
+.radio-success input[type="radio"] + label::after {
+  background-color: #5cb85c;
+}
+
+.radio-success input[type="radio"]:checked + label::before {
+  border-color: #5cb85c;
+}
+
+.radio-success input[type="radio"]:checked + label::after {
+  background-color: #5cb85c;
+}
+
+.navbar {
+  z-index: 999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 0rem;
+  background-color: #fff;
+}
+
+.navbar .navbar-brand {
+  padding-left: 2rem;
+}
+
+.navbar-nav {
+  line-height: 4.5;
+}
+
+.navbar-nav .nav-item a.nav-link {
+  color: #000;
+  padding-right: 2rem;
+}
+
+@media only screen and (max-width: 575px) {
+  .navbar-nav .nav-item a.nav-link {
+    padding-right: 0;
+  }
+}
+
+.navbar-nav .nav-item.nav-redeem {
+  background-color: #ec2828;
+}
+
+.navbar-nav .nav-item.nav-redeem:hover {
+  background-color: #191919;
+}
+
+.navbar-nav .nav-item.nav-redeem a.nav-link {
+  color: #fff;
+  padding-left: 2rem;
+}
+
+@media only screen and (max-width: 575px) {
+  .navbar-nav .nav-item.nav-redeem a.nav-link {
+    padding-left: 0;
+  }
+}
+
+.navbar-dark .navbar-nav .show > .nav-link,
+.navbar-dark .navbar-nav .active > .nav-link,
+.navbar-dark .navbar-nav .nav-link.show,
+.navbar-dark .navbar-nav .nav-link.active {
+  color: #333;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link:focus {
+  color: #ec2828;
+}
+
+.navbar-toggler {
+  padding: 1.5rem;
+}
+
+.navbar-toggler-icon {
+  background-color: #ec2828;
+  width: 2em;
+  height: 2em;
+  background-size: 31px;
+  border-radius: 5px;
+}
+
+.navbar-collapse.collapse.show .nav-item,
+.navbar-collapse.collapsing .nav-item {
+  line-height: 3;
+  text-align: center;
+  border-top: solid 1px #ec2828;
+}
+
+.poll-toolbar {
+  background-color: #272c2e;
+  padding: 1rem 0;
+}
+
+.poll-toolbar .btn,
+.poll-toolbar select {
+  height: 44px;
+  border-radius: 24px !important;
+}
+
+.poll-toolbar select {
+  background-color: #191919;
+  border: solid 2px #191919;
+  color: #fff !important;
+  height: 46px;
+}
+
+.poll-toolbar .btn {
+  width: 100%;
+  color: #fff;
+}
+
+.poll-toolbar .btn-red {
+  background-color: #ec2828 !important;
+  border: solid 2px #ec2828;
+}
+
+.poll-toolbar .btn-outline {
+  background-color: transparent !important;
+  border: solid 2px #fff;
+}
+
+.site-content {
+  z-index: 999999;
+  background-size: cover;
+  background-color: #272c2e;
+  padding: 0;
+}
+
+.site-content .bg-container {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 1rem 0;
+}
+
+.poll-bg-overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.65);
+  z-index: 1;
+}
+
+.btn {
+  border-radius: 24px !important;
+}
+
+.btn-red {
+  background-color: #ec2828 !important;
+  border: solid 2px #ec2828;
+}
+
+.btn-outline {
+  background-color: transparent !important;
+  border: solid 2px #fff;
+}
+
+.poll-grids-container {
+  background-color: #fff;
+}
+
+.poll-grids-title {
+  padding: 4.5rem 1.5rem 1.5rem;
+}
+
+.poll-grids {
+  overflow: hidden;
+  padding-bottom: 2rem;
+}
+
+.poll-card {
+  position: relative;
+  height: 240px;
+  margin: 8px;
+  color: #fff;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.poll-card.featured {
+  height: 496px;
+}
+
+.poll-card .poll-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.65);
+}
+
+.poll-card .poll-btn-quickview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.65);
+  text-align: center;
+  cursor: pointer;
+}
+
+.poll-card .poll-btn-quickview .fas {
+  line-height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 64px;
+  width: 50px;
+  height: 50px;
+  margin-top: -32px;
+  margin-left: -32px;
+}
+
+.poll-card:hover .poll-btn-quickview {
+  display: block;
+}
+
+.poll-card .poll-content {
+  position: relative;
+  height: 100%;
+}
+
+.poll-card .poll-content .poll-copy {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem;
+  text-align: center;
+}
+
+.poll-card .poll-content .poll-copy h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.poll-card .poll-content .poll-copy p {
+  margin: 0;
+  font-size: 0.8rem;
+}
+
+.poll-card .poll-content .poll-category,
+.poll-card .poll-content .poll-exp-date,
+.poll-card .poll-content .poll-value-point {
+  position: absolute;
+  font-size: 0.75rem;
+}
+
+.poll-card .poll-content .poll-category {
+  position: static;
+  margin-top: 0.5rem;
+  min-width: 130px;
+}
+
+.poll-card .poll-content .poll-exp-date {
+  top: 1rem;
+  left: 1rem;
+}
+
+.poll-card .poll-content .poll-exp-date i {
+  position: relative;
+  font-size: 48px;
+  display: block;
+  text-align: center;
+  margin-bottom: 0.25rem;
+}
+
+.poll-card .poll-content .poll-exp-date i span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 24px;
+  text-align: center;
+  display: block;
+  width: 100%;
+  line-height: 56px;
+  font-weight: 700;
+  font-family: "Exo 2", sans-serif;
+}
+
+.poll-card .poll-content .poll-value-point {
+  top: 1rem;
+  right: 1rem;
+  margin: 0;
+  width: 78px;
+  height: 78px;
+  text-align: center;
+  border: solid 4px #ec2828;
+  border-radius: 50%;
+}
+
+.poll-card .poll-content .poll-value-point .value {
+  font-size: 30px;
+  line-height: 2;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.poll-card .poll-content .poll-value-point small {
+  display: block;
+  font-size: 0.8rem;
+  line-height: 0;
+  position: absolute;
+  width: 100%;
+  margin-top: -10px;
+}
+
+.poll-card.featured .poll-content .poll-copy {
+  text-align: left;
+}
+
+.poll-card.featured .poll-content .poll-copy h1 {
+  font-size: 2rem;
+}
+
+.poll-card.featured .poll-content .poll-copy p {
+  font-size: 1rem;
+}
+
+.poll-card.featured .poll-content .poll-category {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  margin-top: 0;
+}
+
+.poll-card.featured .poll-content .poll-value-point {
+  top: 50%;
+  left: 50%;
+  margin: -65px 0 0 -65px;
+  width: 118px;
+  height: 118px;
+  border: solid 6px #ec2828;
+}
+
+.poll-card.featured .poll-content .poll-value-point .value {
+  font-size: 50px;
+  line-height: 1.9;
+}
+
+.poll-card.featured .poll-content .poll-value-point small {
+  font-size: 1rem;
+  margin-top: -20px;
+}
+
+.poll-single {
+  padding: 2rem 0;
+  color: #fff;
+}
+
+.poll-single h1 {
+  font-size: 48px;
+}
+
+.poll-single-header {
+  border-bottom: solid 1px #f1f1f1;
+  padding-bottom: 2rem;
+}
+
+.poll-single-header .poll-title h1 {
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.poll-single-header .poll-meta .meta {
+  margin-right: 1rem;
+}
+
+.poll-single-header .poll-exp-date {
+  width: 64px;
+  text-align: center;
+  margin: 0 auto 1rem;
+}
+
+.poll-single-header .poll-exp-date i {
+  position: relative;
+  font-size: 48px;
+  display: block;
+}
+
+.poll-single-header .poll-exp-date i span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 24px;
+  text-align: center;
+  display: block;
+  width: 100%;
+  line-height: 56px;
+  font-weight: 700;
+  font-family: "Exo 2", sans-serif;
+}
+
+.poll-single-body {
+  padding: 2rem 0 1rem;
+}
+
+.poll-single-body .poll-image img {
+  width: 100%;
+}
+
+.poll-single-body .poll-body-center .poll-question {
+  padding-bottom: 1rem;
+  border-bottom: solid 1px #e1e1e1;
+}
+
+.poll-single-body .poll-body-center .poll-captcha {
+  width: 100%;
+  padding: 2rem 0;
+}
+
+.poll-single-body .poll-body-center .poll-captcha label {
+  margin-right: 1rem;
+}
+
+.poll-single-body .poll-body-center .poll-captcha input[type="text"] {
+  border: none;
+  border-bottom: solid 1px #e1e1e1;
+  background: none;
+}
+
+.poll-single-body .poll-body-center .poll-captcha .btn {
+  width: 100%;
+}
+
+.poll-single-body .poll-body-center .poll-body-right-mobile .btn-outline {
+  border-color: #ec2828;
+}
+
+.poll-single-body .poll-body-right {
+  padding-bottom: 1rem;
+}
+
+.poll-single-body .poll-image {
+  margin-bottom: 1rem;
+}
+
+.poll-single-body .poll-value-point {
+  top: 1rem;
+  right: 1rem;
+  margin: 0 auto;
+  width: 140px;
+  height: 140px;
+  text-align: center;
+  border: solid 7px #ec2828;
+  border-radius: 50%;
+}
+
+.poll-single-body .poll-value-point .value {
+  font-size: 62px;
+  line-height: 1.7;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.poll-single-body .poll-value-point small {
+  display: block;
+  font-size: 1rem;
+  line-height: 0;
+  position: relative;
+  top: -16px;
+}
+
+@media (max-width: 767.98px) {
+  .poll-single-body .poll-value-point {
+    width: 100px;
+    height: 100px;
+    border: solid 5px #ec2828;
+  }
+  .poll-single-body .poll-value-point .value {
+    font-size: 42px;
+    line-height: 1.9;
+  }
+}
+
+.poll-single-body .lapor {
+  display: block;
+  position: absolute;
+  bottom: 88px;
+  left: 0;
+  text-align: center;
+  width: 100%;
+  padding: 1rem;
+}
+
+.redeem {
+  color: #fff;
+}
+
+.redeem-header {
+  text-align: center;
+  padding: 1rem 0 3rem 0;
+  border-bottom: solid 1px #e1e1e1;
+}
+
+.redeem-header .user-avatar {
+  margin: 0 auto 1rem;
+  width: 128px;
+  height: 128px;
+  border-radius: 64px;
+  background-position: center;
+  background-size: cover;
+}
+
+.redeem-header .user-name h4 {
+  margin: 0;
+  font-weight: 700;
+}
+
+.redeem-header .user-poin-total {
+  font-size: 3rem;
+  line-height: 1;
+  font-weight: 700;
+}
+
+.redeem-header .user-email {
+  margin-bottom: 1rem;
+}
+
+.redeem-header .user-badge {
+  font-size: 4rem;
+}
+
+.redeem-prizes {
+  margin-top: 3rem;
+}
+
+.redeem-prizes .card {
+  border: none;
+  margin-bottom: 1.3rem;
+}
+
+.redeem-prizes .card-poin {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  width: 75px;
+  height: 75px;
+  border-radius: 38px;
+  background-color: #f26522;
+  text-align: center;
+  font-size: 2rem;
+  line-height: 2;
+  margin: auto;
+  font-style: italic;
+  font-weight: 700;
+}
+
+.redeem-prizes .card-poin span {
+  position: relative;
+  top: -18px;
+  line-height: 1;
+  font-size: 0.75rem;
+  font-style: normal;
+  display: block;
+}
+
+.redeem-prizes .card-checkbox {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  width: 50px;
+  height: 50px;
+}
+
+.redeem-prizes .card-checkbox .checkbox {
+  width: 50px;
+  height: 50px;
+  padding: 0;
+}
+
+.redeem-prizes .card-checkbox .checkbox label {
+  padding: 0;
+}
+
+.redeem-prizes .card-checkbox .checkbox label::before {
+  width: 50px;
+  height: 50px;
+  left: -14px;
+  top: -10px;
+  margin-left: 0;
+  border: solid 3px #fff;
+  border-radius: 25px;
+  background-color: #000;
+}
+
+.redeem-prizes .card-checkbox .checkbox label::after {
+  width: 50px;
+  height: 50px;
+  left: -14px;
+  top: -10px;
+  margin-left: 0;
+  padding-left: 0;
+  padding-top: 0px;
+  font-size: 36px;
+  color: #fff;
+  text-align: center;
+}
+
+.redeem-prizes
+  .card-checkbox
+  .checkbox.checkbox-danger
+  input[type="checkbox"]:checked
+  + label::before {
+  border-color: #fff;
+}
+
+.redeem-prizes .card-body {
+  text-align: center;
+  color: #000;
+}
+
+.redeem-prizes .card-body h5 {
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.redeem-prizes .card-columns-footer .btn {
+  display: block;
+  width: 300px;
+  margin: 2rem auto;
+}
+
+.redeem .modal {
+  color: #000;
+}
+
+#modalRedeemSuccess .fas {
+  font-size: 7rem;
+  color: #ec2828;
+}
+
+.footer {
+  background-color: #191919;
+  text-align: center;
+  color: #fff;
+  padding-top: 2rem;
+}
+
+.footer .container-fluid {
+  padding: 2rem;
+}
+
+.footer .footer-logo-pipipol {
+  margin-top: 1rem;
+}
+
+.footer .sosmed {
+  margin-top: 1rem;
+}
+
+.footer .sosmed a {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  background-color: #a2a2a2;
+  color: #191919;
+  line-height: 32px;
+  border-radius: 50%;
+  margin: 8px;
+}
+
+.footer .sosmed a:hover {
+  background-color: #ec2828;
+  color: #fff;
+}
+
+.footer .copyright {
+  padding: 1rem;
+  border-top: solid 1px #666;
+}
+
+/* ==========================================================================
+   Helper classes
+   ========================================================================== */
+.btn-danger {
+  background-color: #ec2828;
+  border-color: #ec2828;
+  color: #fff !important;
+}
+
+.modal-content {
+  border-radius: 1rem;
+}
+
+.modal-header,
+.modal-body,
+.modal-footer {
+  padding: 1rem 2rem;
+}
+
+.modal-footer {
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.modal-footer .btn {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.progress {
+  border-radius: 0;
+  background-color: transparent;
+  height: 24px;
+  margin-top: -3px;
+}
+
+.progress-bar {
+  position: relative;
+  height: 13px;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+
+.progress-bar:after {
+  content: "\f164";
+  font-family: "FontAwesome";
+  position: absolute;
+  top: -15px;
+  right: -26px;
+  color: #cc3333;
+  font-size: 1.5rem;
+}
+
+.loader {
+  color: #fff;
+  min-height: 70vh;
+  text-align: center;
+  position: relative;
+  background-color: #333;
+}
+
+.loader-txt {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: block;
+  text-align: center;
+  margin-top: -1rem;
+}
+
+.loader.bg-white {
+  background-color: #fff;
+  color: #333;
+}
+
+/*
+ * Hide visually and from screen readers
+ */
+.hidden {
+  display: none !important;
+}
+
+/*
+ * Hide only visually, but have it available for screen readers:
+ * https://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+ *
+ * 1. For long content, line feeds are not interpreted as spaces and small width
+ *    causes content to wrap 1 word per line:
+ *    https://medium.com/@jessebeach/beware-smushed-off-screen-accessible-text-5952a4c2cbfe
+ */
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  white-space: nowrap;
+  /* 1 */
+}
+
+/*
+ * Extends the .visuallyhidden class to allow the element
+ * to be focusable when navigated to via the keyboard:
+ * https://www.drupal.org/node/897638
+ */
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+  white-space: inherit;
+}
+
+/*
+ * Hide visually and from screen readers, but maintain layout
+ */
+.invisible {
+  visibility: hidden;
+}
+
+/*
+ * Clearfix: contain floats
+ *
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    `contenteditable` attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that receive the `clearfix` class.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  /* 1 */
+  display: table;
+  /* 2 */
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+/* ==========================================================================
+   EXAMPLE Media Queries for Responsive Design.
+   These examples override the primary ('mobile first') styles.
+   Modify as content requires.
+   ========================================================================== */
+@media only screen and (min-width: 35em) {
+  /* Style adjustments for viewports that meet the condition */
+}
+
+@media print,
+  (-webkit-min-device-pixel-ratio: 1.25),
+  (min-resolution: 1.25dppx),
+  (min-resolution: 120dpi) {
+  /* Style adjustments for high resolution devices */
+}
+
+/* ==========================================================================
+   Print styles.
+   Inlined to avoid the additional HTTP request:
+   https://www.phpied.com/delay-loading-your-print-css/
+   ========================================================================== */
+@media print {
+  *,
+  *:before,
+  *:after {
+    background: transparent !important;
+    color: #000 !important;
+    /* Black prints faster */
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+  /*
+     * Don't show links that are fragment identifiers,
+     * or use the `javascript:` pseudo protocol
+     */
+  a[href^="#"]:after,
+  a[href^="javascript:"]:after {
+    content: "";
+  }
+  pre {
+    white-space: pre-wrap !important;
+  }
+  pre,
+  blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+  /*
+     * Printing Tables:
+     * http://css-discuss.incutio.com/wiki/Printing_Tables
+     */
+  thead {
+    display: table-header-group;
+  }
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
+}
+/*# sourceMappingURL=style.css.map */

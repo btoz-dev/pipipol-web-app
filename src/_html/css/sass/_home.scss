@@ -1,0 +1,209 @@
+// ================
+// SITE CONTENT
+// ================
+.site-content{
+    z-index: 999999;
+    background-size: cover;
+    background-color:#272c2e;
+    padding: 0;
+    .bg-container{
+        background-color: rgba(0,0,0,0.5);
+        padding: 1rem 0;
+    }
+}
+
+.poll-bg-overlay{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.65);
+    z-index: 1;
+}
+
+.btn{
+    border-radius: 24px !important;
+    &-red{
+        background-color: #ec2828 !important;
+        border: solid 2px #ec2828;
+    }
+    &-outline{
+        background-color: transparent !important;
+        border: solid 2px #fff;
+    }
+}
+
+.poll-grids-container{
+    background-color: #fff;
+}
+.poll-grids-title{
+    padding: 4.5rem 1.5rem 1.5rem;
+}
+
+.poll-grids{
+    overflow: hidden;
+    padding-bottom: 2rem;
+}
+.poll-card{
+    position: relative;
+    height: 240px;
+    margin: 8px;
+    color: #fff;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    &.featured{
+        height: 496px;
+    }
+
+    .poll-overlay{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.65)
+    }
+    .poll-btn-quickview{
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: none;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.65);
+        text-align: center;
+        cursor: pointer;
+        .fas{
+            line-height: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            font-size: 64px;
+            width: 50px;
+            height: 50px;
+            margin-top: -32px;
+            margin-left: -32px;
+        }
+    }
+    &:hover{
+        .poll-btn-quickview{
+            display: block;
+        }
+    }
+    .poll-content{
+        position: relative;
+        height: 100%;
+        .poll-copy{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem;
+            text-align: center;
+            h1{
+                margin: 0;
+                font-size: 1.5rem;
+            }
+            p{
+                margin: 0;
+                font-size: 0.8rem;
+            }
+        }
+        .poll-category,
+        .poll-exp-date,
+        .poll-value-point{
+            position: absolute;
+            font-size: 0.75rem;
+        }
+        .poll-category{
+            position: static;
+            margin-top: 0.5rem;
+            min-width: 130px;
+        }
+        .poll-exp-date{
+            top: 1rem;
+            left: 1rem;
+            i{
+                position: relative;
+                font-size: 48px;
+                display: block;
+                text-align: center;
+                margin-bottom: 0.25rem;
+                span{
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    font-size: 24px;
+                    text-align: center;
+                    display: block;
+                    width: 100%;
+                    line-height: 56px;
+                    font-weight: 700;
+                    font-family: 'Exo 2', sans-serif;
+                }
+            }
+        }
+        .poll-value-point{
+            top: 1rem;
+            right: 1rem;
+            margin: 0;
+            width: 78px;
+            height: 78px; 
+            text-align: center;
+            border: solid 4px #ec2828;
+            border-radius: 50%;
+
+            .value{
+                font-size: 30px;
+                line-height: 2;
+                font-weight: 700;
+                font-style: italic;
+            }
+            small{
+                display: block;
+                font-size: 0.8rem;
+                line-height: 0;
+                position: absolute;
+                width: 100%;
+                margin-top: -10px;
+            }
+        }
+    }
+    &.featured{
+        .poll-content{
+            .poll-copy{
+                text-align: left;
+                h1{
+                    font-size: 2rem;
+                }
+                p{
+                    font-size: 1rem;
+                }
+            }
+            .poll-category{
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+                margin-top: 0;
+            }
+            .poll-value-point{
+                top: 50%;
+                left: 50%;
+                margin: -65px 0 0 -65px;
+                width: 118px;
+                height: 118px;
+                border: solid 6px #ec2828;
+                .value{
+                    font-size: 50px;
+                    line-height: 1.9;
+                }
+                small{
+                    font-size: 1rem;
+                    margin-top: -20px;
+                }
+            }
+        }
+    }
+}  
