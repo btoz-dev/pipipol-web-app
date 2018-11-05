@@ -91,7 +91,11 @@
     }
 }
 
-
+.dropdown-item.active, 
+.dropdown-item:active{
+    background-color: #fff;
+    color: #ec2828;
+}
 
 // POLL TOOLBAR
 .poll-toolbar{

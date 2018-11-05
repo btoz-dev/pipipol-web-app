@@ -3,7 +3,6 @@ import { NavLink, Link } from "react-router-dom";
 import logo from "./../img/logo-pipipol_black.png";
 import AuthService from '../services/AuthService';
 const Auth = new AuthService();
-
 const BaseURL = "http://pipipol.btoz.co.id";
 
 class Header extends Component {
@@ -11,8 +10,9 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userDetails: [],
+      userDetails: JSON.parse(localStorage.getItem('userDetails')),
       categories: [],
+      sisaPoint: localStorage.getItem('sisaPoint'),
       loading: true
     };
   }
@@ -20,14 +20,10 @@ class Header extends Component {
   componentDidMount = async () => {
     const api_get_categories = await fetch(BaseURL + "/api/getKategori");
     const data = await api_get_categories.json();
-    this.setState({ categories: data.list_kategori, loading: false });
-    // console.log(this.state.categories);
-
-    this.setState({
-      userDetails: JSON.parse(localStorage.getItem('userDetails'))
+    this.setState({ 
+      categories: data.list_kategori, 
+      loading: false,
     })
-    console.log("HEADER - USERDETAILS LOCALSTORAGE")
-    console.log(this.state.userDetails)
   };
 
   handleLogout(){
@@ -40,9 +36,11 @@ class Header extends Component {
   }
 
   render() {
-
-    const userDetails = this.state.userDetails;
     
+    const userDetails = JSON.parse(localStorage.getItem('userDetails'));
+    console.log("USER DETAIL HEADER")
+    console.log(userDetails)
+
     const categories = this.state.categories;
     const listCategories = categories.map(cat => (
       <option key={cat.id} value={cat.id}>
@@ -51,6 +49,9 @@ class Header extends Component {
     ));
 
     if(this.isLoggedIn()){
+
+      localStorage.setItem('currentPoint', userDetails.point)
+      
       return (
         <div>
           <nav className="navbar navbar-expand-sm navbar-dark bg-tr">
@@ -101,7 +102,8 @@ class Header extends Component {
                         backgroundImage: "url("+BaseURL+userDetails.avatar+")" 
                       }}
                     />
-                    <strong>{ userDetails.point } { !userDetails.point && 0 }</strong> poin <i className="fas fa-angle-down ml-1"></i>
+                    <strong>{ !userDetails.point ? 0 : userDetails.point }</strong> poin <i className="fas fa-angle-down ml-1"></i>
+                    { this.state.sisaPoint }
                   </NavLink>
                   <div className="dropdown-menu">
                     <NavLink to="/profil" className="dropdown-item" href="#">

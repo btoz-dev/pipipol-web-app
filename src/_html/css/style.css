@@ -493,6 +493,12 @@ a:hover {
   border-top: solid 1px #ec2828;
 }
 
+.dropdown-item.active,
+.dropdown-item:active {
+  background-color: #fff;
+  color: #ec2828;
+}
+
 .poll-toolbar {
   background-color: #272c2e;
   padding: 1rem 0;
@@ -997,6 +1003,16 @@ a:hover {
   padding: 1rem;
 }
 
+.poll-result {
+  border-bottom: solid 1px #e9ecef;
+}
+
+.poll-result-item {
+  line-height: 1.2;
+  padding: 0.35rem 0;
+  text-align: left;
+}
+
 .redeem {
   color: #fff;
 }
@@ -1045,26 +1061,14 @@ a:hover {
 }
 
 .redeem-prizes .card-poin {
-  float: left;
-  width: auto;
-  height: 50px;
-  border-radius: 38px;
-  background-color: #f26522;
-  text-align: center;
-  font-size: 2rem;
-  line-height: 1.5;
-  padding: 0 1rem;
-  font-style: italic;
+  color: #f26522;
   font-weight: 700;
-  color: #fff;
+  line-height: 2.2;
 }
 
-.redeem-prizes .card-poin em {
+.redeem-prizes .card-poin small {
   position: relative;
-  top: -7px;
-  margin-left: -3px;
   line-height: 0.9;
-  font-size: 0.75rem;
   font-weight: 300;
 }
 
@@ -1108,11 +1112,7 @@ a:hover {
   text-align: center;
 }
 
-.redeem-prizes .card-checkbox .checkbox.checkbox-danger {
-  background-color: input [type= "checkbox"];
-}
-
-.redeem-prizes .card-checkbox .checkbox.checkbox-danger :checked + label::before {
+.redeem-prizes .card-checkbox .checkbox.checkbox-danger input[type="checkbox"]:checked + label::before {
   border-color: #ec2828;
 }
 
@@ -1142,7 +1142,7 @@ a:hover {
   color: #000;
 }
 
-#modalRedeemSuccess .fas {
+#modalRedeem .fas {
   font-size: 7rem;
   color: #ec2828;
 }
@@ -1237,6 +1237,14 @@ a:hover {
   padding: 1rem 2rem;
 }
 
+.modal-header .close {
+  display: none;
+}
+
+.modal-body {
+  text-align: center;
+}
+
 .modal-title {
   text-align: center;
   width: 100%;
@@ -1264,7 +1272,7 @@ a:hover {
 .progress-bar {
   position: relative;
   height: 13px;
-  margin-top: 10px;
+  margin-top: 8px;
   border-radius: 10px;
 }
 
@@ -1272,10 +1280,13 @@ a:hover {
   content: "\f164";
   font-family: "FontAwesome";
   position: absolute;
-  top: -15px;
-  right: -26px;
+  top: -11px;
+  right: 0;
+  padding-right: 3px;
   color: #cc3333;
   font-size: 1.5rem;
+  border-left: solid 1px #fff;
+  background-color: #fff;
 }
 
 .loader {
@@ -1298,6 +1309,36 @@ a:hover {
 .loader.bg-white {
   background-color: #fff;
   color: #333;
+}
+
+.loader {
+  color: #fff;
+  min-height: 70vh;
+  text-align: center;
+  position: relative;
+  background-color: #333;
+}
+
+.loader-txt {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: block;
+  text-align: center;
+  margin-top: -1rem;
+}
+
+.poll-single-body .poll-image img {
+  width: 100%;
+}
+
+.loader.bg-white {
+  background-color: #fff;
+  color: #333;
+}
+
+.redeem .modal {
+  color: #000;
 }
 
 /*
@@ -1450,5 +1491,41 @@ a:hover {
   h3 {
     page-break-after: avoid;
   }
+}
+
+.Toastify .Toastify__toast-container--top-center {
+  top: 90px;
+}
+
+.pipipol-notify.Toastify__toast {
+  padding: 0.75rem 1rem;
+  -webkit-box-shadow: 0px 7px 23px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 7px 23px 0px rgba(0, 0, 0, 0.5);
+}
+
+.pipipol-notify.Toastify__toast--info {
+  background-color: white;
+  color: #000;
+}
+
+.pipipol-notify.Toastify__toast--error {
+  background-color: #ec2828;
+}
+
+.pipipol-notify.Toastify__toast--default {
+  color: #000;
+}
+
+.pipipol-notify .Toastify__progress-bar,
+.pipipol-notify .Toastify__progress-bar--default {
+  background: #ec2828;
+}
+
+.pipipol-notify .Toastify__progress-bar--error {
+  background: black;
+}
+
+.pipipol-notify .Toastify__toast-body {
+  padding: 1rem;
 }
 /*# sourceMappingURL=style.css.map */

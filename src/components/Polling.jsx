@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 import Loader from "./Loader";
-import Header from "../components/Header"
 import AuthService from '../services/AuthService';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import PollingResults from '../components/PollingResults';
 
 const BaseURL = `https://cors-anywhere.herokuapp.com/http://pipipol.btoz.co.id`;
 
@@ -23,13 +26,22 @@ class Polling extends Component {
       idChoice: "",
       loading: true,
       loadingSubmitPoll: false,
-      loadingCaptcha: false
+      loadingCaptcha: false,
+      submitMessage: "Maaf, Pilihan dan Kode Sandi tidak boleh kosong!",
+      modalResultsShow: false,
+      modalResultsOnlyShow: false,
+      modalCaptchaShow: false,
+      pollingResults: [],
+      polled: false 
     };
     this.Auth = new AuthService();
     this.handleChangeChoice = this.handleChangeChoice.bind(this);
     this.handleChangeCaptchaText = this.handleChangeCaptchaText.bind(this);
     this.getCaptcha = this.getCaptcha.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.submitPoll = this.submitPoll.bind(this);
+    this.toggleModalCaptchaShow = this.toggleModalCaptchaShow.bind(this);
+    this.toggleModalResultsShow = this.toggleModalResultsShow.bind(this);
+    this.toggleModalResultsOnlyShow = this.toggleModalResultsOnlyShow.bind(this);
   }
 
   componentWillMount(){
@@ -39,13 +51,6 @@ class Polling extends Component {
     }else{
       console.log("LOGIN")
     }
-
-    console.log("/* ============== */")
-    console.log("=== TOKEN LAMA ===")
-    console.log(this.state.AUTH_TOKEN)
-    console.log(this.state.idPoll)
-    console.log(this.state.idUsers)
-    console.log("/* ============== */")
   }
 
   componentDidMount = async () => {
@@ -57,21 +62,30 @@ class Polling extends Component {
         activeAnswers: res.list_detail_polls[0].answers,
         loading: false
       });
-
-      // this.getCaptcha() // GET DATA CAPTCHA FROM API
     }
   };
 
-  getCaptcha(ev){
+  async getCaptcha(){
     this.setState({
-      loadingCaptcha: true
+      loadingCaptcha: true,
+      modalCaptchaShow: true
     });
-    ev.preventDefault();
-    axios.get(BaseURL + `/api/getCaptcha/` + this.state.idPoll)
+
+    axios.get(BaseURL + `/api/getCaptcha/` + this.state.idPoll, {
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        'Cache-Control': 'no-cache',
+        'x-access-token': this.state.AUTH_TOKEN,
+      },
+      credentials: 'include',
+    })
       .then(res => {
         console.log(res)
         const dataCaptcha = res.data.list_captcha[0];
         const newToken = dataCaptcha.token
+
+        console.log(dataCaptcha.captchaText)
 
         localStorage.setItem("id_token", newToken);
         localStorage.setItem("isLoggedIn", newToken);
@@ -79,19 +93,17 @@ class Polling extends Component {
         this.setState({
           NEW_AUTH_TOKEN: localStorage.getItem("id_token", newToken),
           dataCaptcha: dataCaptcha,
-          loading: false
+          loadingCaptcha: false,
+          modalCaptchaShow: true
         });
-
-        console.log("===== STATE DATA CAPCTHA ======")
-        console.log(this.state.dataCaptcha);
-
-        this.setState({
-          loadingCaptcha: false
-        });
-
-        document.getElementById("showModalCaptcha").click();
       }
     )
+  }
+
+  encodedData(data) {
+    return Object.keys(data).map((key) => {
+      return encodeURIComponent(key) + '=' + encodeURIComponent(data[key]);
+    }).join('&');
   }
 
   handleChangeChoice(ev) {
@@ -110,55 +122,115 @@ class Polling extends Component {
   handleSubmit(ev) {
     ev.preventDefault();
 
-    const idPoll = this.state.activePolling.polls_id;
+    const idPoll = this.state.idPoll;
     const idChoice = this.state.idChoice;
     const idUsers = this.state.idUsers;
     const captcha = this.state.captchaText;
 
-    this.setState({
-      loadingSubmitPoll: true
-    });
-
-    const data = {
+    const dataForSubmit = {
       idPoll,
       idChoice,
       idUsers,
       captcha
     };
 
-    console.log("=== DATA YG BAKAL DISUBMIT ===")
-    console.log(data);
+    this.setState({
+      loadingSubmitPoll: true
+    });
 
-    console.log("=== TOKEN BARU ===")
-    console.log(this.state.NEW_AUTH_TOKEN)
-
-    const encodedDataUser = Object.keys(data).map((key) => {
-      return encodeURIComponent(key) + '=' + encodeURIComponent(data[key]);
-      }).join('&');
-  
-    console.log(encodedDataUser)
-    
     axios
-      .post(`/api/submitPolls/`, data,{
+      .post(`/api/submitPolls/`, this.encodedData(dataForSubmit),{
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
           'Cache-Control': 'no-cache',
-          'x-access-token': this.state.AUTH_TOKEN
+          'x-access-token': this.state.NEW_AUTH_TOKEN
         }
       })
       .then(res => {
-        console.log(res);
+        console.log(res.data);
+        const dataSubmitPoll = res.data
+        const submitMessage = dataSubmitPoll.message
+        const submitSuccess = dataSubmitPoll.submitPolls
+        const pollingResults = dataSubmitPoll.result_polling
+        const pollingPoint = this.state.activePolling.point
+        const totalPoint = parseInt(pollingPoint + localStorage.getItem('currentPoint'))
+
+        this.setState({
+          submitMessage: submitMessage,
+          pollingResults: pollingResults
+        });
+
+        if(submitSuccess){
+          console.log("SUCCESS!")
+          this.setState({
+            modalResultsShow: true,
+            polled: true
+          });   
+          
+          // localStorage.setItem('sisaPoint', totalPoint)
+          // document.getElementById("showModalPollResultsBtn").click();
+        }else{
+          console.log("GAK BERHASIL")
+          this.notifyError()
+        }
+        console.log(this.state.submitMessage)
+
         this.setState({
           loadingSubmitPoll: false,
-        });
-        document.getElementById("showModalPollResultsBtn").click();
+        });        
       })
       .catch(err => {
-        console.log(err);
         this.setState({
           loadingSubmitPoll: false,
+          submitMessage: "Maaf terjadi kesalahan.. Silahkan periksa kembali Kode Sandi!"
         });
+        this.notifyError()
+        console.log(err.message);
       });
+  }
+
+  submitPoll(ev){
+    ev.preventDefault();
+    if(this.state.idChoice !== "" && this.state.captchaText !== ""){
+      console.log("ISIII")
+      this.handleSubmit(ev)
+    }else{
+      this.setState({
+        submitMessage: "Maaf, Pilihan dan Kode Sandi tidak boleh kosong!"
+      });
+      this.notifyError()
+    }
+  }
+
+  notify = () => {
+    toast(this.state.submitMessage, {
+      position: toast.POSITION.TOP_CENTER,
+      className: 'pipipol-notify',
+      autoClose: 7000
+    });
+  };
+  notifyError = () => {
+    toast.error(this.state.submitMessage, {
+      position: toast.POSITION.TOP_CENTER,
+      className: 'pipipol-notify',
+      autoClose: 7000
+    });
+  };
+
+  toggleModalCaptchaShow() {
+    this.setState({
+      modalCaptchaShow: !this.state.modalCaptchaShow
+    });
+  }
+  toggleModalResultsShow() {
+    this.setState({
+      modalResultsShow: !this.state.modalResultsShow
+    });
+  }
+  toggleModalResultsOnlyShow() {
+    this.setState({
+      modalResultsOnlyShow: !this.state.modalResultsOnlyShow
+    });
   }
 
   render() {
@@ -187,8 +259,7 @@ class Polling extends Component {
 
     return (
       <section>
-        <Header />
-        <form onSubmit={this.handleSubmit}>
+        
           <div
             className="site-content container-fluid"
             style={{
@@ -277,12 +348,9 @@ class Polling extends Component {
                               onClick={this.getCaptcha}
                               className="btn btn-outline"
                             >
-                              {this.state.loadingCaptcha && (
-                              <i className="fas fa-spinner fa-spin mr-2" />
-                            )}
-                              <i className="fas fa-search" /> Cari Kode Sandi
+                              {this.state.loadingCaptcha ? <i className="fas fa-spinner fa-spin" /> : <i className="fas fa-search" />} Cari Kode Sandi
                             </div>
-                            <a id="showModalCaptcha"data-toggle="modal"data-target="#modalPollImageCaptcha"></a>
+                            <a id="showModalCaptcha" data-toggle="modal" data-target="#modalPollImageCaptcha"></a>
                           </label>
                           <input
                             name="captchaText"
@@ -293,17 +361,22 @@ class Polling extends Component {
                           />
                         </div>
                         <div className="col col-sm-12 col-md-4">
-                          <button type="submit" className="btn btn-danger">
-                            {this.state.loadingSubmitPoll && (
-                              <i className="fas fa-spinner fa-spin mr-2" />
-                            )}
-                            Kirim
-                          </button>
-                          <a
-                            id="showModalPollResultsBtn"
-                            data-toggle="modal"
-                            data-target="#modalPollResults"
-                          />
+                          { this.state.polled 
+                            ?
+                            <button onClick={this.toggleModalResultsShow} className="btn btn-danger">
+                              {this.state.loadingSubmitPoll && (
+                                <i className="fas fa-spinner fa-spin mr-2" />
+                              )}
+                              Hasil
+                            </button>
+                            :
+                            <button onClick={this.submitPoll} className="btn btn-danger">
+                              {this.state.loadingSubmitPoll && (
+                                <i className="fas fa-spinner fa-spin mr-2" />
+                              )}
+                              Kirim
+                            </button>
+                          }
                         </div>
                       </div>
                       {/* <!-- /END POLL CAPTCHA --> */}
@@ -324,135 +397,60 @@ class Polling extends Component {
           </div>
 
           {/* <!-- MODAL IMAGE CAPTCHA --> */}
-          <div className="modal fade" id="modalPollImageCaptcha">
-            <div className="modal-dialog modal-dialog-centered">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h4 className="modal-title text-center w-100">
-                    Cari dan temukan kode sandi!
-                  </h4>
-                </div>
-
-                <div className="modal-body text-center">
-                  <img
-                    className="img-fluid"
-                    src={"http://pipipol.btoz.co.id" + captcha.imgUrl}
-                    alt={polling.title}
-                  />
-                </div>
-
-                <div className="modal-footer">
-                  <button
-                    type="button"
-                    className="btn btn-dark"
-                  >
-                    {this.state.loadingCaptcha && <i className="fas fa-spinner fa-spin mr-2" />}
-                    <i className="fas fa-sync-alt mr-1"></i> Captcha
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-danger"
-                    data-dismiss="modal"
-                  >
-                    <i className="fas fa-window-close"></i> Tutup
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+          <Modal isOpen={this.state.modalCaptchaShow} toggle={this.toggleModalCaptchaShow} centered={true} className={this.props.className}>
+            <ModalHeader toggle={this.toggleModalCaptchaShow}>
+              Cari dan temukan kode sandi!
+            </ModalHeader>
+            <ModalBody>
+              {captcha.imgUrl 
+              ?
+              <img className="img-fluid" src={"http://pipipol.btoz.co.id" + captcha.imgUrl} alt="Cari dan temukan kode sandi!" />
+              :
+              <span><i className="fas fa-spinner fa-spin text-center mr-1" /> Loading kode sandi..</span>
+              }
+            </ModalBody>
+            <ModalFooter>
+              <button onClick={this.getCaptcha} className="btn btn-dark">
+                <i className= { this.state.loadingCaptcha ? "fas fa-sync mr-2 fa-spin" : "fas fa-sync mr-2"} />
+                Captcha
+              </button>
+              <button onClick={this.toggleModalCaptchaShow} className="btn btn-danger">
+                Tutup
+              </button>
+            </ModalFooter>
+          </Modal>
           {/* <!-- /END MODAL IMAGE CAPTCHA --> */}
 
           {/* <!-- MODAL POLL RESULTS --> */}
-          <div className="modal fade" id="modalPollResults">
-            <div className="modal-dialog modal-dialog-centered">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h4 className="modal-title">
-                    Terimakasih, Data Berhasil Terkirim!
-                  </h4>
-                </div>
+          <Modal isOpen={this.state.modalResultsShow} toggle={this.toggleModalResultsShow} centered={true} className={this.props.className}>
+            <ModalHeader toggle={this.toggleModalResultsShow}>
+              Terimakasih Sudah Mengikuti Polling!
+            </ModalHeader>
+            <ModalBody>
+              <p>
+                Poinmu bertambah: <strong>{polling.point} poin.</strong>
+              </p>
+              <p>
+                Pilihanmu: <strong>{choosenAnswer}</strong>
+              </p>
+              <br />
+              <h5>Hasil Saat Ini</h5>
 
-                <div className="modal-body">
-                  <p>
-                    Poinmu bertambah: <strong>{polling.point}</strong>
-                  </p>
-                  <p>
-                    Pilihanmu: <strong>{choosenAnswer}</strong>
-                  </p>
-                  <br />
-                  <h5>Hasil Saat Ini</h5>
-                  <div className="row">
-                    <div className="col-4">Jokowi:</div>
-                    <div className="col-6">
-                      <div className="progress">
-                        <div
-                          className="progress-bar progress-bar-striped bg-danger"
-                          style={{ width: "30%" }}
-                        />
-                      </div>
-                    </div>
-                    <div className="col-2 text-right">
-                      <strong>33%</strong>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-4">Soeharto:</div>
-                    <div className="col-6">
-                      <div className="progress">
-                        <div
-                          className="progress-bar progress-bar-striped bg-danger"
-                          style={{ width: "67%" }}
-                        />
-                      </div>
-                    </div>
-                    <div className="col-2 text-right">
-                      <strong>33%</strong>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-4">Soekarno:</div>
-                    <div className="col-6">
-                      <div className="progress">
-                        <div
-                          className="progress-bar progress-bar-striped bg-danger"
-                          style={{ width: "21%" }}
-                        />
-                      </div>
-                    </div>
-                    <div className="col-2 text-right">
-                      <strong>33%</strong>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-4">Tidak tahu:</div>
-                    <div className="col-6">
-                      <div className="progress">
-                        <div
-                          className="progress-bar progress-bar-striped bg-danger"
-                          style={{ width: "70%" }}
-                        />
-                      </div>
-                    </div>
-                    <div className="col-2 text-right">
-                      <strong>33%</strong>
-                    </div>
-                  </div>
-                </div>
+              <PollingResults pollingResults={this.state.pollingResults} />
 
-                <div className="modal-footer">
-                  <button
-                    type="button"
-                    className="btn btn-danger"
-                    data-dismiss="modal"
-                  >
-                    Tutup
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+            </ModalBody>
+            <ModalFooter>
+              <NavLink to="/" className="btn btn-dark">
+                <i className="fas fa-arrow-alt-circle-left mr-1" />{" "}
+                <span>Polling Lainnya</span>
+              </NavLink>
+              <button onClick={this.toggleModalResultsShow} className="btn btn-danger">Tutup</button>
+            </ModalFooter>
+          </Modal>
           {/* <!-- /END MODAL POLL RESULTS --> */}
-        </form>
+
+        {/* NOTIFY */}
+        <ToastContainer />
       </section>
     );
   }

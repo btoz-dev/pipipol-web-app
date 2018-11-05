@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Loader from "./Loader";
 import { Link } from "react-router-dom";
-import Header from "../components/Header"
 import Pollings from "./Pollings";
 import Feed from "./Feed";
 
@@ -14,15 +13,11 @@ class Home extends Component {
     loading: true
   };
   componentDidMount = async () => {
-    // const title = this.props.location.state.recipe;
     const api_get_polls = await fetch(BaseURL + "/api/getPolls");
-
     const data = await api_get_polls.json();
     const datafirst = data.list_polls[0];
     this.setState({ pollings: data.list_polls, loading: false });
     this.setState({ firstpoll: datafirst });
-    console.log("ALL POLLINGS =============")
-    console.log(this.state.pollings);
   };
 
   render() {
@@ -33,8 +28,6 @@ class Home extends Component {
     }
 
     return (
-      <div>
-        <Header />
       <div className="site-content">
         <div className="bg-container">
           <div className="poll-grids container-fluid">
@@ -101,7 +94,6 @@ class Home extends Component {
         </div>
 
         {/* <Form getPolling={this.getPolling} /> */}
-      </div>
       </div>
     );
   }

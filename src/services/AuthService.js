@@ -5,7 +5,7 @@ const BaseURL = "http://pipipol.btoz.co.id";
 export default class AuthService {
     // Initializing important variables
     constructor(domain) {
-        this.domain = domain || 'http://pipipol.btoz.co.id/api' // API server domain
+        this.domain = domain || BaseURL // API server domain
         this.fetch = this.fetch.bind(this) // React binding stuff
         this.login = this.login.bind(this)
         this.getProfile = this.getProfile.bind(this)
@@ -13,7 +13,7 @@ export default class AuthService {
 
     login(username, password) {
         // Get a token from api server using the fetch api
-        return this.fetch(`${this.domain}/userLogin`, {
+        return this.fetch(`${this.domain}/api/userLogin`, {
             method: 'POST',
             body: JSON.stringify({
                 username,
@@ -47,7 +47,7 @@ export default class AuthService {
         .then(res => {
             
             let userDetails = JSON.stringify(res.data.user_details[0])
-            console.log(userDetails)
+            // console.log(userDetails)
             localStorage.setItem('userDetails', userDetails)
         })
     }
@@ -92,6 +92,8 @@ export default class AuthService {
         localStorage.removeItem('userDetails');
         localStorage.removeItem('userid');
         localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('sisaPoint');
+        localStorage.removeItem('currentPoint');
         sessionStorage.removeItem('userData');
 
         // REDIRECT TO
@@ -108,7 +110,8 @@ export default class AuthService {
         // performs api calls sending the required authentication headers
         const headers = {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'x-access-token': this.getToken()
         }
 
         console.log(this.loggedIn())
@@ -116,10 +119,11 @@ export default class AuthService {
         // Setting Authorization header
         // Authorization: Bearer xxxxxxx.xxxxxxxx.xxxxxx
         if (this.loggedIn()) {
-            console.log("LOGIN NIHHHHHH")
-            headers['Authorization'] = 'Bearer ' + this.getToken()
+            console.log("MASIH LOGIN NIHHHHHH")
+            headers['x-access-token'] = this.getToken()
+            // headers['Authorization'] = 'Bearer ' + this.getToken()
         }else{
-            console.log("GAKKKKKKK LOGIN NIHHHHHH")
+            console.log("LOGIN NIHHHHHH")
         }
 
         return fetch(url, {

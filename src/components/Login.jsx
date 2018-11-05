@@ -38,10 +38,10 @@ class Login extends Component {
             .then((res) => {
                 // console.log(res)
                 const userid = res.userid
-                console.log("ZZZZZZZZZZ")
+                console.log("USER ID")
                 console.log(userid)
-                // getUserDetails(userid)
-                this.props.history.replace('/');
+                this.getUserDetails(userid)
+                
             })
             .catch(err =>{
                 alert(err);
@@ -52,10 +52,12 @@ class Login extends Component {
     getUserDetails(userid){
         axios.get(`/api/getUserDetails/`+userid)
         .then(res => {
-            const userDetails = res.data;
-            console.log("USER DETAILS:")
+            const userDetails = JSON.stringify(res.data.user_details[0])
+            console.log("USER DETAILS DAPAT PAS LOGIN:")
             console.log(userDetails)
             localStorage.setItem('userDetails', userDetails)
+            this.props.history.replace('/');
+            
         })
     }
 

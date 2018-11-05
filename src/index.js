@@ -3,6 +3,9 @@ import ReactDOM from "react-dom";
 import Router from "./components/Router";
 import registerServiceWorker from "./registerServiceWorker";
 import axios from "axios";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/js/bootstrap.bundle.min";
+import "./_html/css/style.css";
 
 const AUTH_TOKEN = localStorage.getItem('id_token');
 

@@ -20,6 +20,12 @@
    .modal-footer{
        padding: 1rem 2rem;
    }
+   .modal-header .close {
+    display:none;
+  }
+  .modal-body{
+      text-align: center;
+  }
    .modal-title{
        text-align: center;
        width: 100%;
@@ -42,16 +48,19 @@
    .progress-bar{
         position: relative;
         height: 13px;
-        margin-top: 10px;
+        margin-top: 8px;
         border-radius: 10px;
         &:after{
             content: "\f164";
             font-family: "FontAwesome";
             position: absolute;
-            top: -15px;
-            right: -26px;
+            top: -11px;
+            right: 0;
+            padding-right: 3px;
             color: #cc3333;
             font-size: 1.5rem;
+            border-left: solid 1px #fff;
+            background-color: #fff;
        }
    }
 
@@ -76,6 +85,35 @@
     color: #333;
   }
 
+
+  .loader {
+    color: #fff;
+    min-height: 70vh;
+    text-align: center;
+    position: relative;
+    background-color: #333;
+  }
+  .loader-txt {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: block;
+    text-align: center;
+    margin-top: -1rem;
+  }
+  .poll-single-body .poll-image img {
+    width: 100%;
+  }
+  
+  .loader.bg-white {
+    background-color: #fff;
+    color: #333;
+  }
+  
+  .redeem .modal {
+    color: #000;
+  }
+  
 
 /*
  * Hide visually and from screen readers

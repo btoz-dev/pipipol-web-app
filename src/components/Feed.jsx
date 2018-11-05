@@ -34,7 +34,6 @@ class Feed extends React.Component {
           pollings: res.list_polls,
           loading: false
         });
-        console.log(this.state.pollings);
       })
       .catch(error => {
         console.error(error);

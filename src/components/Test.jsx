@@ -11,30 +11,40 @@ class Test extends Component {
         super(props);
        
         this.state = {
-            username: 'silver.perak',
-            idVoucher: 16,
+            AUTH_TOKEN: localStorage.getItem("id_token"),
+            userDetails: JSON.parse(localStorage.getItem("userDetails"))
         };
         this.submitTestRedeem = this.submitTestRedeem.bind(this);
         this.submitTestChangePassword = this.submitTestChangePassword.bind(this);
     }
 
     submitTestRedeem() {
-
-        const dataForSubmit = this.state
-        console.log(dataForSubmit)
+        console.log(this.state.userDetails)
         
-        if(this.state.username && this.state.idVoucher){
-            PostData('redeem', dataForSubmit)
-                .then((result) => {
-                let responseJson = result;
-                if(responseJson){
-                    // console.log("success")
-                }
-                else{
-                    console.log("error")
-                }
-            });
+        let dataForSubmit = { 
+            username: this.state.userDetails.username, 
+            idVoucher: 16
         }
+
+        console.log("=== DATA YANG DISUBMIT ===")
+        console.log(dataForSubmit)
+
+        axios
+        .post(BaseURL+`/redeem`, dataForSubmit,{
+            headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+            'Cache-Control': 'no-cache',
+            'x-access-token': this.state.AUTH_TOKEN
+            }
+        })
+        .then(res => {
+            console.log("=== RESPONSE ===")
+            console.log(res);
+            console.log(res.data);
+        })
+        .catch(err => {
+            console.log(err);
+        });
     }
 
     submitTestChangePassword() {
@@ -43,17 +53,14 @@ class Test extends Component {
         let passwordNew = md5("tester12new");
 
         let dataForSubmit = { 'username':'tester12', 'oldPassword': passwordOld, 'newPassword': passwordNew }
-
         console.log(dataForSubmit)
-        
-        const AUTH_TOKEN = localStorage.getItem("id_token");
-
+    
         axios
         .post(BaseURL+`/changePassword`, dataForSubmit,{
             headers: {
             'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
             'Cache-Control': 'no-cache',
-            'x-access-token': AUTH_TOKEN
+            'x-access-token': this.state.AUTH_TOKEN
             }
         })
         .then(res => {

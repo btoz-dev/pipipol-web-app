@@ -39,24 +39,24 @@
             border: none;
             margin-bottom: 1.3rem;
             &-poin{
-                float: left;
-                width: auto;
-                height: 50px;
-                border-radius: 38px;
-                background-color: #f26522;
-                text-align: center;
-                font-size: 2rem;
-                line-height: 1.5;
-                padding: 0 1rem;
-                font-style: italic;
+                color:#f26522;
                 font-weight: 700;
-                color: #fff;
-                em{
+                line-height: 2.2;
+                // float: left;
+                // width: auto;
+                // height: 50px;
+                // border-radius: 38px;
+                // background-color: #f26522;
+                // text-align: center;
+                // font-size: 2rem;
+                // line-height: 1.5;
+                // padding: 0 1rem;
+                // font-style: italic;
+                // font-weight: 700;
+                // color: #fff;
+                small{
                     position: relative;
-                    top: -7px;
-                    margin-left: -3px;
                     line-height: 0.9;
-                    font-size: 0.75rem;
                     font-weight: 300;
                 }
             }
@@ -94,7 +94,6 @@
                         }
                     }
                     &.checkbox-danger {
-                        background-color: 
                         input[type="checkbox"]:checked + label::before{
                             border-color: #ec2828;
                         }
@@ -131,7 +130,7 @@
 }
 
 
-#modalRedeemSuccess{
+#modalRedeem{
     .fas{
         font-size: 7rem;
         color: #ec2828;

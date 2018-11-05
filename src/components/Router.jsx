@@ -9,13 +9,15 @@ import Profil from "./Profil";
 import Redeem from "./Redeem";
 import Error from "./Error";
 import Polling from "./Polling";
+import Header from "./Header";
 import Footer from "./Footer";
 import Test from "./Test";
 
-const Router = () => (
+const Router = (props) => (
   <div>
     <BrowserRouter>
       <div>
+        <Header />
         <Switch>
           <Route path="/" component={App} exact />
           <Route path="/daftar" component={Daftar} />

@@ -101,8 +101,6 @@ class Profil extends Component {
         console.log(localUserDetails)
 
         return (
-            <div>
-                <Header />
             <div
                 className="site-content container-fluid"
                 style={{
@@ -117,7 +115,7 @@ class Profil extends Component {
                                 <div className="login-form">
                                     <div className="row">
                                         <h2 className="text-center w-100 mb-5 font-700">PROFILKU</h2>
-                                        <div className="col-sm-12 col-md-3 mb-1">
+                                        <div className="col-sm-12 col-md-12 col-lg-3 mb-1">
                                             <div
                                                 className="user-avatar"
                                                 style={{
@@ -128,7 +126,7 @@ class Profil extends Component {
                                                 <h4>{}</h4>
                                             </div>
                                         </div>
-                                        <div className="col-sm-12 col-md-5 mb-5">
+                                        <div className="col-sm-12 col-md-6 col-lg-5 mb-5">
                                             <div className="input-container">
                                                 <i className="fa fa-user icon"></i>
                                                 <input defaultValue={localUserDetails.username} onChange={this.onChange} className="input-field" type="text" placeholder="Username" name="username" />
@@ -163,7 +161,7 @@ class Profil extends Component {
                                             
                                             <button onClick={this.signup} type="submit" className="btn btn-lg btn-danger">Update Profil</button>
                                         </div>
-                                        <div className="col-sm-12 col-md-4 mb-5">
+                                        <div className="col-sm-12 col-md-6 col-lg-4 mb-5">
                                             <div className="input-container">
                                                 <i className="fa fa-key icon"></i>
                                                 <input onChange={this.onChangePassword} className="input-field" type="password" placeholder="Password Baru" name="password" />
@@ -180,7 +178,6 @@ class Profil extends Component {
                         </div>
                     </section>
                 </div>
-            </div>
             </div>
         )
 

@@ -134,3 +134,13 @@
         
     }
 }
+
+
+.poll-result{
+    border-bottom: solid 1px #e9ecef;
+    &-item{
+        line-height: 1.2;
+        padding: 0.35rem 0;
+        text-align: left;
+    }
+}

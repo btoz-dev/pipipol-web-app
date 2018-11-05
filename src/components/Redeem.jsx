@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import Header from "../components/Header"
+const queryString = require('query-string');
 
 const BaseURL = "http://pipipol.btoz.co.id";
 
@@ -8,76 +8,86 @@ class Redeem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userDetails: [],
+      AUTH_TOKEN: localStorage.getItem("id_token"),
+      userDetails: JSON.parse(localStorage.getItem("userDetails")),
       redeem: [],
       username: "",
       idVoucher: "",
+      nameVoucher: "",
+      pointVoucher: "",
+      modalTitle: "",
+      modalMessage: "",
       loading: true,
-      loadingSubmitRedeem: false
+      loadingSubmitRedeem: false,
+      redeemStatus: false,
+      sisaPoint: ""
     };
-    this.handleChangeChoice = this.handleChangeChoice.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.submitRedeem = this.submitRedeem.bind(this);
   }
   componentDidMount = async () => {
     const req = await fetch(BaseURL + "/api/getVouchers/");
     const res = await req.json();
     this.setState({ redeem: res.list_vouchers, loading: false });
-
-    const localUserDetails = this.getUserDetails()
-    this.setState({
-      userDetails: JSON.parse(localUserDetails)
-    })
     console.log("REDEEM - USERDETAILS LOCALSTORAGE")
     console.log(this.state.userDetails)
   };
 
-  getUserDetails() {
-    return localStorage.getItem('userDetails')
-  }
-
-  handleChangeChoice(ev){
+  submitRedeem(id, name, point) {
     this.setState({
-      username: "XXX",
-      idVoucher: ev.target.value,
-    })
-  }
-
-  handleSubmit(ev){
-    ev.preventDefault();
-
-    const username = this.state.username
-    const idVoucher = this.state.idVoucher
-
-    this.setState({
-      loadingSubmitRedeem: true
+      idVoucher: id,
+      nameVoucher: name,
+      pointVoucher: point
     })
 
-    const data = {
-      username,
-      idVoucher
+
+    let dataForSubmit = { 
+        idUsers: localStorage.getItem("userid"), 
+        'idVoucher[]': [id]
     }
 
-    console.log(data)
+    console.log("=== DATA YANG DISUBMIT ===")
+    console.log(dataForSubmit)
 
-    axios.post(BaseURL + `/api/redeeem/`, data)
+    let dataForSubmitEncoded = queryString.stringify(dataForSubmit);
+
+    axios
+    .post(BaseURL+`/api/redeem`, dataForSubmitEncoded,{
+        headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        'Cache-Control': 'no-cache',
+        'x-access-token': this.state.AUTH_TOKEN
+        }
+    })
     .then(res => {
-      console.log(res)
-      console.log(res.data)
-
-      this.setState({
-        loadingSubmitRedeem: false,
-        message: res.data
-      })
-      document.getElementById("showModalRedeemBtn").click();
+        console.log("=== RESPONSE ===")
+        console.log(res);
+        console.log(res.data);
+        let msg = res.data.message
+        let sisaPoint = res.data.sisa_point
+        console.log(msg)
+        if(msg === "Point anda tidak cukup"){
+          this.setState({
+            redeemStatus: false,
+            modalTitle: "Maaf.. "+ msg,
+          });
+        }else{
+          this.setState({
+            redeemStatus: true,
+            modalTitle: "Terimakasih, redeem berhasil!",
+            sisaPoint: sisaPoint
+          });
+          localStorage.setItem("sisaPoint", sisaPoint)
+          localStorage.setItem("currentPoint", sisaPoint)
+          this.setState({
+            sisaPoint: "99999"
+          })
+        }
+        
+        document.getElementById("showModalRedeemBtn").click();
     })
     .catch(err => {
-      console.log(err)
-      this.setState({
-        loadingSubmitRedeem: false,
-        message: err.data
-      })
-    })
-
+        console.log(err);
+    });
   }
 
   render() {
@@ -97,22 +107,26 @@ class Redeem extends Component {
           />
         </div>
         <div className="card-footer">
-          <div className="card-poin">
-            {item.point} <em>poin</em>
+          <div className="card-poin float-left">
+          < i className="fas fa-coins"></i> {item.point} <small>pts</small>
           </div>
-          <div className="card-checkbox">
-            <div className="checkbox checkbox-danger">
-              <input type="checkbox" value={item.id} id={"prize" + item.id} onChange={this.handleChangeChoice} />
+          <div className="float-right">
+            <button onClick={()=>{this.submitRedeem(item.id, item.voucher_name, item.point)}} className="btn btn-danger pl-3 pr-3">
+              Tukar {item.id}
+            </button>
+          </div>
+          {/* <div className="card-checkbox">
+            <div className="radio radio-danger">
+              <input type="radio" name="voucher" value={item.id} id={"prize" + item.id} onChange={this.handleChangeChoice} />
               <label htmlFor={"prize" + item.id} />
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     ));
 
     return (
-      <div>
-        <Header />
+
       <div
         className="site-content container-fluid"
         style={{
@@ -144,9 +158,7 @@ class Redeem extends Component {
                 </div>
                 <div className="col-md-4 order-3 my-auto">
                   <div className="user-badge">
-                    <i className="fas fa-award" />
-                    <i className="fas fa-award" />
-                    <i className="fas fa-award" />
+                  { !userDetails.badge_img ? <i className="fas fa-award" /> : <img src={BaseURL+userDetails.badge_img} /> }
                   </div>
                 </div>
               </div>
@@ -154,9 +166,10 @@ class Redeem extends Component {
 
             <div className="redeem-prizes">
               <h2 className="text-center mb-5 font-700">Hadiah</h2>
-              <form role="form" onSubmit={this.handleSubmit}>
-                <div className="card-columns">{redeemItems}</div>
-                <div className="card-columns-footer">
+                <div className="card-columns">
+                  {redeemItems}
+                </div>
+                {/* <div className="card-columns-footer">
                   <button type="submit" className="btn btn-lg btn-danger">
                     Redeem
                   </button>
@@ -165,26 +178,31 @@ class Redeem extends Component {
                     data-target="#modalRedeemSuccess"
                   >
                   </a>
-                </div>
-              </form>
+                </div> */}
             </div>
 
-            {/* <!-- MODAL POLL RESULTS --> */}
-            <div className="modal fade" id="modalRedeemSuccess">
+            {/* <!-- MODAL REDEEM --> */}
+            <a id="showModalRedeemBtn"
+              data-toggle="modal"
+              data-target="#modalRedeem"
+            />
+            <div className="modal fade" id="modalRedeem">
               <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content text-center">
                   <div className="modal-header text-center">
                     <h4 className="modal-title w-100">
-                      Terimakasih, redeem berhasil!
+                      { this.state.modalTitle }
                     </h4>
                   </div>
 
-                  <div className="modal-body">
+                  <div className="modal-body pl-5 pr-5">
                     <i className="fas fa-box-open mt-2 mb-2" />
-                    <p>
-                      Anda telah berhasil menukarkan poin Anda dengan hadiah
-                      XXXXXXXX sebesar 70 poin.
-                    </p>
+                      { this.state.modalMessage 
+                        ? 
+                        "Ikuti polling lebih banyak dan dapatkan poin lebih banyak lagi"
+                        :
+                        <p>Anda telah berhasil menukarkan poin Anda dengan hadiah <strong>{this.state.nameVoucher}</strong> sebesar <strong>{this.state.pointVoucher} poin.</strong></p>
+                      }
                   </div>
 
                   <div className="modal-footer">
@@ -203,7 +221,7 @@ class Redeem extends Component {
           </section>
         </div>
       </div>
-      </div>
+
     );
   }
 }
