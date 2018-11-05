@@ -51,7 +51,7 @@ class Header extends Component {
     if(this.isLoggedIn()){
 
       localStorage.setItem('currentPoint', userDetails.point)
-      
+
       return (
         <div>
           <nav className="navbar navbar-expand-sm navbar-dark bg-tr">
@@ -102,8 +102,8 @@ class Header extends Component {
                         backgroundImage: "url("+BaseURL+userDetails.avatar+")" 
                       }}
                     />
-                    <strong>{ !userDetails.point ? 0 : userDetails.point }</strong> poin <i className="fas fa-angle-down ml-1"></i>
-                    { this.state.sisaPoint }
+                    <strong>{ !userDetails.point ? 0 : ""} { !this.state.sisaPoint ? userDetails.point : this.state.sisaPoint }</strong> poin <i className="fas fa-angle-down ml-1"></i>
+                    {/* { this.state.sisaPoint } */}
                   </NavLink>
                   <div className="dropdown-menu">
                     <NavLink to="/profil" className="dropdown-item" href="#">
