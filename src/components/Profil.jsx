@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { NavLink, Redirect } from "react-router-dom";
 import {PostData} from '../services/PostData';
 import withAuth from '../services/withAuth'; 
-import Header from "../components/Header"
 import md5 from "md5";
+import userProfileImgDefault  from'./../img/ic-user.png';
+
 
 const BaseURL = "http://apipipipol.btoz.co.id";
 
@@ -97,12 +97,14 @@ class Profil extends Component {
     render() {
 
         const localUserDetails = JSON.parse(localStorage.getItem('userDetails'))
+        const userAvatar = localUserDetails.avatar
+        const userBadge = localUserDetails.badge_img
         console.log("PROFIL - USERDETAILS LOCALSTORAGE")
         console.log(localUserDetails)
 
         return (
             <div
-                className="site-content container-fluid"
+                className="site-content profil container-fluid"
                 style={{
                 backgroundImage:
                     "url(https://uploads.codesandbox.io/uploads/user/8a33cde4-3c2b-460f-8e6a-0515dce90c12/0pF0-bg-redeem.jpg)"
@@ -115,15 +117,17 @@ class Profil extends Component {
                                 <div className="login-form">
                                     <div className="row">
                                         <h2 className="text-center w-100 mb-5 font-700">PROFILKU</h2>
-                                        <div className="col-sm-12 col-md-12 col-lg-3 mb-1">
+                                        <div className="col-sm-12 col-md-12 col-lg-3 mb-5">
                                             <div
                                                 className="user-avatar"
                                                 style={{
-                                                backgroundImage: "url("+BaseURL+localUserDetails.avatar+")"
+                                                backgroundImage: "url("+BaseURL+userAvatar+")"
                                                 }}
-                                            />
-                                            <div className="user-name">
-                                                <h4>{}</h4>
+                                            >
+                                                { !userAvatar ? <img className="img-fluid" src={userProfileImgDefault} /> : "" }
+                                            </div>
+                                            <div className="user-badge text-center">
+                                                {!userBadge ? <i className="ic fas fa-award" /> : <img src={ BaseURL+userBadge } />}
                                             </div>
                                         </div>
                                         <div className="col-sm-12 col-md-6 col-lg-5 mb-5">

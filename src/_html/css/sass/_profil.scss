@@ -1,10 +1,16 @@
-.user-avatar{
-    margin: 0 auto 1rem;
-    width: 160px;
-    height: 160px;
-    border-radius: 80px;
-    background-position: center;
-    background-size: cover;
-    background-color: #000;
-    
+.profil{
+    .user-avatar{
+        margin: 0 auto 1rem;
+        width: 160px;
+        height: 160px;
+        border-radius: 80px;
+        background-position: center;
+        background-size: cover;
+        background-color: #000;
+    }
+    .user-badge{
+        .ic{
+            font-size: 3rem !important;
+        }
+    }
 }
