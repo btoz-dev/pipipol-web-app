@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
+import userProfileImgDefault  from'./../img/ic-user.png';
+import bgRedeem  from'./../img/bg-redeem.jpg';
+
 const queryString = require('query-string');
 
 const BaseURL = "http://apipipipol.btoz.co.id";
@@ -91,6 +94,7 @@ class Redeem extends Component {
   render() {
     const redeem = this.state.redeem;
     const userDetails = this.state.userDetails;
+    const userAvatar = this.state.userDetails.avatar;
 
     const redeemItems = redeem.map(item => (
       <div key={item.id} className="card">
@@ -129,7 +133,7 @@ class Redeem extends Component {
         className="site-content container-fluid"
         style={{
           backgroundImage:
-            "url(https://uploads.codesandbox.io/uploads/user/8a33cde4-3c2b-460f-8e6a-0515dce90c12/0pF0-bg-redeem.jpg)"
+            "url("+bgRedeem+")"
         }}
       >
         <div className="bg-container container-fluid">
@@ -142,7 +146,9 @@ class Redeem extends Component {
                     style={{
                       backgroundImage: "url("+BaseURL+userDetails.avatar+")"
                     }}
-                  />
+                  >
+                    { !userAvatar ? <img className="img-fluid" src={userProfileImgDefault} /> : "" }
+                  </div>
                   <div className="user-name">
                     <h1 className="font-700">{userDetails.firstname}</h1>
                   </div>

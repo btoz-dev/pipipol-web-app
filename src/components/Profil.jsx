@@ -3,6 +3,7 @@ import {PostData} from '../services/PostData';
 import withAuth from '../services/withAuth'; 
 import md5 from "md5";
 import userProfileImgDefault  from'./../img/ic-user.png';
+import bgRedeem  from'./../img/bg-redeem.jpg';
 
 
 const BaseURL = "http://apipipipol.btoz.co.id";
@@ -107,7 +108,7 @@ class Profil extends Component {
                 className="site-content profil container-fluid"
                 style={{
                 backgroundImage:
-                    "url(https://uploads.codesandbox.io/uploads/user/8a33cde4-3c2b-460f-8e6a-0515dce90c12/0pF0-bg-redeem.jpg)"
+                    "url("+bgRedeem+")"
                 }}
             >
                 <div className="bg-container container-fluid">

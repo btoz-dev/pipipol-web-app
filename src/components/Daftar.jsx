@@ -3,6 +3,8 @@ import { NavLink, Redirect } from "react-router-dom";
 import {PostData} from '../services/PostData';
 import Header from "../components/Header"
 import md5 from "md5";
+import bgRedeem  from'./../img/bg-redeem.jpg';
+import logoPipipol  from'./../img/logo-pipipol.png';
 
 class Daftar extends Component {
 
@@ -99,7 +101,7 @@ class Daftar extends Component {
                 className="site-content container-fluid"
                 style={{
                 backgroundImage:
-                    "url(https://uploads.codesandbox.io/uploads/user/8a33cde4-3c2b-460f-8e6a-0515dce90c12/0pF0-bg-redeem.jpg)"
+                    "url("+bgRedeem+")"
                 }}
             >
                 <div className="bg-container container-fluid">
@@ -107,7 +109,7 @@ class Daftar extends Component {
                         <div className="row">
                             <div className="col-sm-12 col-md-12 col-lg-6 my-auto">
                                 <div className="login-copy text-center">
-                                    <div className="mb-3"><a href="#"><img src="https://uploads.codesandbox.io/uploads/user/8a33cde4-3c2b-460f-8e6a-0515dce90c12/DDRA-logo-pipipol.png" /></a></div>
+                                    <div className="mb-3"><a href="#"><img src={logoPipipol} /></a></div>
                                     <p>Lorem ipsum dolor sit amet, quaestio philosophia eu quo, eum movet delectus deterruisset no. Soluta civibus patrioque et nec. Qui alii doming postulant ex. Fuisset honestatis ut eam, illud voluptatum per et. Ut sit iusto virtute, sea ad quando libris tractatos. Vim mucius percipit laboramus ad, ex vitae urbanitas vel, dicat inani suscipiantur at vix.</p>
                                 </div>
                             </div>

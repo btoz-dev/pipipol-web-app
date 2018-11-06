@@ -1,4 +1,5 @@
 import React from "react";
+import logoPipipol  from'./../img/logo-pipipol.png';
 
 const Footer = () => {
   return (
@@ -6,7 +7,7 @@ const Footer = () => {
       <div className="container-fluid">
         <div className="footer-logo-pipipol">
           <a href="#">
-            <img src="https://uploads.codesandbox.io/uploads/user/8a33cde4-3c2b-460f-8e6a-0515dce90c12/DDRA-logo-pipipol.png" />
+            <img src={logoPipipol} />
           </a>
         </div>
         <div className="sosmed">
