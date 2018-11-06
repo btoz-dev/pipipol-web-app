@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import axios from "axios";
 import AuthService from '../services/AuthService';
 import md5 from "md5";
+import { ToastContainer, toast } from 'react-toastify';
 import bgRedeem  from'./../img/bg-redeem.jpg';
 import logoPipipol  from'./../img/logo-pipipol.png';
 
@@ -13,6 +14,7 @@ class Login extends Component {
     constructor(props){
         super(props);
         this.state = {
+            loginMessage: "",
             loading: false
         }
         this.handleChange = this.handleChange.bind(this);
@@ -46,12 +48,19 @@ class Login extends Component {
             .then((res) => {
                 // console.log(res)
                 const userid = res.userid
-                console.log("USER ID")
-                console.log(userid)
-                this.getUserDetails(userid)
+                const loggedIn = res.login
+                const msg = res.message
                 this.setState({
-                    loading: false
+                    loginMessage: msg
                 })
+                if(loggedIn){
+                    this.getUserDetails(userid)
+                }else{
+                    this.notifyError();
+                    this.setState({
+                        loading: false
+                    })
+                }
             })
             .catch(err =>{
                 alert(err);
@@ -69,15 +78,29 @@ class Login extends Component {
             localStorage.setItem('userDetails', userDetails)
             localStorage.setItem('currentPoint', currentPoint)
             window.updateTopMostParent(userDetails, currentPoint); 
+
+            this.setState({
+                loading: false
+            })
+
             this.props.history.replace('/');
-            
         })
     }
+
+    notifyError = () => {
+        toast.error(this.state.loginMessage, {
+            position: toast.POSITION.TOP_CENTER,
+            className: 'pipipol-notify',
+            autoClose: 7000
+        });
+    };
 
     render() {
 
         return (
             <div>
+                {/* NOTIFY */}
+                <ToastContainer />
             <div
                 className="site-content container-fluid"
                 style={{

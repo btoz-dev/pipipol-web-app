@@ -97,7 +97,7 @@ export default class AuthService {
         sessionStorage.removeItem('userData');
 
         // REDIRECT TO
-        this.props.history.replace('/');
+        // this.props.history.replace('/');
     }
 
     getProfile() {

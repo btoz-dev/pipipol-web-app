@@ -266,7 +266,9 @@ class Polling extends Component {
 
     return (
       <section>
-        
+          {/* NOTIFY */}
+          <ToastContainer />
+
           <div
             className="site-content container-fluid"
             style={{
@@ -460,9 +462,6 @@ class Polling extends Component {
             </ModalFooter>
           </Modal>
           {/* <!-- /END MODAL POLL RESULTS --> */}
-
-        {/* NOTIFY */}
-        <ToastContainer />
       </section>
     );
   }

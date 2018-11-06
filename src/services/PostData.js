@@ -17,7 +17,7 @@ export function PostData(type, encodedDataUser) {
             },
             body: encodedDataUser
           })
-          .then((response) => response.json())
+          .then((response) => response)
           .then((res) => {
             console.log("=== RESPONSE DARI POSTDATA ===")
             console.log(res)
