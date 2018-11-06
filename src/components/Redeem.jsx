@@ -20,7 +20,7 @@ class Redeem extends Component {
       loading: true,
       loadingSubmitRedeem: false,
       redeemStatus: false,
-      sisaPoint: ""
+      sisaPoint: localStorage.getItem("currentPoint")
     };
     this.submitRedeem = this.submitRedeem.bind(this);
   }
@@ -77,6 +77,7 @@ class Redeem extends Component {
             sisaPoint: sisaPoint
           });
           localStorage.setItem("currentPoint", sisaPoint)
+          localStorage.setItem("sisaPoint", sisaPoint)
           window.updateTopMostParent("", sisaPoint); 
         }
         
@@ -150,7 +151,7 @@ class Redeem extends Component {
                 <div className="col-md-4 order-2 order-md-1 my-auto">
                   <div className="user-poin">
                     <div className="user-poin-label">Jumlah Poin</div>
-                    <div className="user-poin-total">{ !userDetails.point && 0 } {userDetails.point}</div>
+                    <div className="user-poin-total">{ !this.state.sisaPoint ? this.state.sisaPoint : this.state.sisaPoint }</div>
                   </div>
                 </div>
                 <div className="col-md-4 order-3 my-auto">
