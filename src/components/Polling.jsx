@@ -7,8 +7,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import PollingResults from '../components/PollingResults';
+const queryString = require('query-string');
 
-const BaseURL = `https://cors-anywhere.herokuapp.com/http://pipipol.btoz.co.id`;
+const BaseURL = `https://cors-anywhere.herokuapp.com/http://apipipipol.btoz.co.id`;
 
 class Polling extends Component {
   constructor(props) {
@@ -32,7 +33,7 @@ class Polling extends Component {
       modalResultsOnlyShow: false,
       modalCaptchaShow: false,
       pollingResults: [],
-      polled: false 
+      polled: false,
     };
     this.Auth = new AuthService();
     this.handleChangeChoice = this.handleChangeChoice.bind(this);
@@ -152,8 +153,14 @@ class Polling extends Component {
         const submitMessage = dataSubmitPoll.message
         const submitSuccess = dataSubmitPoll.submitPolls
         const pollingResults = dataSubmitPoll.result_polling
-        const pollingPoint = this.state.activePolling.point
-        const totalPoint = parseInt(pollingPoint + localStorage.getItem('currentPoint'))
+        const pollingPoint = parseInt(this.state.activePolling.point)
+        const currentPoint = parseInt(localStorage.getItem('currentPoint'))
+        const totalPoint = parseInt(pollingPoint + currentPoint)
+
+        console.log("HITUNG POINT")
+        console.log(pollingPoint)
+        console.log(currentPoint)
+        console.log(totalPoint)
 
         this.setState({
           submitMessage: submitMessage,
@@ -162,13 +169,13 @@ class Polling extends Component {
 
         if(submitSuccess){
           console.log("SUCCESS!")
+          
+          window.updateTopMostParent("", totalPoint); 
+
           this.setState({
             modalResultsShow: true,
             polled: true
-          });   
-          
-          // localStorage.setItem('sisaPoint', totalPoint)
-          // document.getElementById("showModalPollResultsBtn").click();
+          });
         }else{
           console.log("GAK BERHASIL")
           this.notifyError()
@@ -264,7 +271,7 @@ class Polling extends Component {
             className="site-content container-fluid"
             style={{
               backgroundImage:
-                "url(http://pipipol.btoz.co.id" + polling.image + ")"
+                "url(http://apipipipol.btoz.co.id" + polling.image + ")"
             }}
           >
             <div className="bg-container container-fluid p-3">
@@ -311,7 +318,7 @@ class Polling extends Component {
                     <div className="poll-image">
                       <img
                         className="img-fluid"
-                        src={"http://pipipol.btoz.co.id" + polling.image}
+                        src={"http://apipipipol.btoz.co.id" + polling.image}
                         alt={polling.title}
                       />
                     </div>
@@ -342,6 +349,10 @@ class Polling extends Component {
                       {/* <!-- /END POLL QUESTION --> */}
                       {/* <!-- POLL CAPTCHA --> */}
                       <div className="poll-captcha row no-gutters">
+                      { this.state.polled 
+                        ?
+                        <div></div>
+                        :
                         <div className="col col-sm-12 col-md-8">
                           <label>
                             <div
@@ -350,7 +361,6 @@ class Polling extends Component {
                             >
                               {this.state.loadingCaptcha ? <i className="fas fa-spinner fa-spin" /> : <i className="fas fa-search" />} Cari Kode Sandi
                             </div>
-                            <a id="showModalCaptcha" data-toggle="modal" data-target="#modalPollImageCaptcha"></a>
                           </label>
                           <input
                             name="captchaText"
@@ -360,6 +370,8 @@ class Polling extends Component {
                             placeholder="Masukan kode sandi.."
                           />
                         </div>
+                      }
+
                         <div className="col col-sm-12 col-md-4">
                           { this.state.polled 
                             ?
@@ -404,7 +416,7 @@ class Polling extends Component {
             <ModalBody>
               {captcha.imgUrl 
               ?
-              <img className="img-fluid" src={"http://pipipol.btoz.co.id" + captcha.imgUrl} alt="Cari dan temukan kode sandi!" />
+              <img className="img-fluid" src={"http://apipipipol.btoz.co.id" + captcha.imgUrl} alt="Cari dan temukan kode sandi!" />
               :
               <span><i className="fas fa-spinner fa-spin text-center mr-1" /> Loading kode sandi..</span>
               }

@@ -3,15 +3,21 @@ import Loader from "./Loader";
 import { Link } from "react-router-dom";
 import Pollings from "./Pollings";
 import Feed from "./Feed";
+import Router from "./Router";
 
-const BaseURL = "http://pipipol.btoz.co.id";
+const BaseURL = "http://apipipipol.btoz.co.id";
 
 class Home extends Component {
-  state = {
-    pollings: [],
-    firstpoll: [],
-    loading: true
-  };
+  
+  constructor(props){
+    super(props);
+    this.state = {
+      pollings: [],
+      firstpoll: [],
+      loading: true
+    };
+    this.updatePoint = this.updatePoint.bind(this);
+  }
   componentDidMount = async () => {
     const api_get_polls = await fetch(BaseURL + "/api/getPolls");
     const data = await api_get_polls.json();
@@ -19,6 +25,15 @@ class Home extends Component {
     this.setState({ pollings: data.list_polls, loading: false });
     this.setState({ firstpoll: datafirst });
   };
+
+ updatePoint(){
+  Router.setState({ currentPoint: 9999999999 });
+ }
+ updateTopMostParent() {
+   let someValue = 9999999999
+  // Call this method with the state value to update
+  window.updateTopMostParent(someValue); 
+}
 
   render() {
     const firstpoll = this.state.firstpoll;
@@ -29,6 +44,8 @@ class Home extends Component {
 
     return (
       <div className="site-content">
+      <button onClick={ this.updateTopMostParent.bind(this) } className="btn btn-lg btn-danger w-100 mt-3 mb-3">UPDATE POINT</button>
+      {/* <button onClick={this.props.parentFn} className="btn btn-lg btn-danger w-100 mt-3 mb-3">Hitung Home</button> */}
         <div className="bg-container">
           <div className="poll-grids container-fluid">
             <div className="row no-gutters">
@@ -39,7 +56,7 @@ class Home extends Component {
                   className="poll-card featured"
                   style={{
                     backgroundImage:
-                      "url(http://pipipol.btoz.co.id" + firstpoll.image + ")"
+                      "url(http://apipipipol.btoz.co.id" + firstpoll.image + ")"
                   }}
                 >
                   <div className="poll-overlay" />

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 const queryString = require('query-string');
 
-const BaseURL = "http://pipipol.btoz.co.id";
+const BaseURL = "http://apipipipol.btoz.co.id";
 
 class Redeem extends Component {
   constructor(props) {
@@ -76,11 +76,8 @@ class Redeem extends Component {
             modalTitle: "Terimakasih, redeem berhasil!",
             sisaPoint: sisaPoint
           });
-          localStorage.setItem("sisaPoint", sisaPoint)
           localStorage.setItem("currentPoint", sisaPoint)
-          this.setState({
-            sisaPoint: "99999"
-          })
+          window.updateTopMostParent("", sisaPoint); 
         }
         
         document.getElementById("showModalRedeemBtn").click();
@@ -102,7 +99,7 @@ class Redeem extends Component {
         <div className="card-body">
           <img
             className="card-img-top"
-            src={"http://pipipol.btoz.co.id" + item.voucher_img}
+            src={"http://apipipipol.btoz.co.id" + item.voucher_img}
             alt={item.voucher_name}
           />
         </div>
@@ -112,7 +109,7 @@ class Redeem extends Component {
           </div>
           <div className="float-right">
             <button onClick={()=>{this.submitRedeem(item.id, item.voucher_name, item.point)}} className="btn btn-danger pl-3 pr-3">
-              Tukar {item.id}
+              Tukar
             </button>
           </div>
           {/* <div className="card-checkbox">

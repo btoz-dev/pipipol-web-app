@@ -13,7 +13,7 @@ const Pollings = props => (
             className="poll-card"
             style={{
               backgroundImage:
-                "url(http://pipipol.btoz.co.id" + polling.image + ")"
+                "url(http://apipipipol.btoz.co.id" + polling.image + ")"
             }}
           >
             <div className="poll-overlay" />

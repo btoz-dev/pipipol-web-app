@@ -3,7 +3,7 @@ import {PostData} from '../services/PostData';
 import axios from "axios";
 import md5 from "md5";
 
-const BaseURL = `http://pipipol.btoz.co.id/api`;
+const BaseURL = `http://apipipipol.btoz.co.id/api`;
 
 class Test extends Component {
 
@@ -16,6 +16,7 @@ class Test extends Component {
         };
         this.submitTestRedeem = this.submitTestRedeem.bind(this);
         this.submitTestChangePassword = this.submitTestChangePassword.bind(this);
+        this.hitung = this.hitung.bind(this);
     }
 
     submitTestRedeem() {
@@ -72,11 +73,21 @@ class Test extends Component {
         });
     }
 
+
+    hitung(){
+        let pollingPoint = parseInt("10")
+        let currentPoint = parseInt("20")
+        const totalPoint = parseInt(pollingPoint + currentPoint)
+        console.log(totalPoint)
+
+    }
+
     render() {
         return(
             <div>
                 <button onClick={this.submitTestRedeem} type="submit" className="btn btn-lg btn-danger w-100 mt-3 mb-3">Submit Test Redeem</button>
                 <button onClick={this.submitTestChangePassword} type="submit" className="btn btn-lg btn-danger w-100 mt-3 mb-3">Submit Test Change Password</button>
+                <button onClick={this.hitung} type="submit" className="btn btn-lg btn-danger w-100 mt-3 mb-3">Hitung</button>
             </div>
         )
     }

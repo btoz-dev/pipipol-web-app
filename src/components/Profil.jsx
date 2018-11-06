@@ -5,7 +5,7 @@ import withAuth from '../services/withAuth';
 import Header from "../components/Header"
 import md5 from "md5";
 
-const BaseURL = "http://pipipol.btoz.co.id";
+const BaseURL = "http://apipipipol.btoz.co.id";
 
 class Profil extends Component {
 

@@ -1,16 +1,18 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
-import Header from "../components/Header"
 import axios from "axios";
 import AuthService from '../services/AuthService';
 import md5 from "md5";
 
-const BaseURL = "http://pipipol.btoz.co.id";
+const BaseURL = "http://apipipipol.btoz.co.id";
 
 class Login extends Component {
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
+        this.state = {
+            loading: false
+        }
         this.handleChange = this.handleChange.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
         this.Auth = new AuthService();
@@ -32,6 +34,10 @@ class Login extends Component {
     handleFormSubmit(e){
         e.preventDefault();
 
+        this.setState({
+            loading: true
+        })
+
         let passwordMD5 = md5(this.state.password);
       
         this.Auth.login(this.state.username, passwordMD5)
@@ -41,7 +47,9 @@ class Login extends Component {
                 console.log("USER ID")
                 console.log(userid)
                 this.getUserDetails(userid)
-                
+                this.setState({
+                    loading: false
+                })
             })
             .catch(err =>{
                 alert(err);
@@ -53,9 +61,12 @@ class Login extends Component {
         axios.get(`/api/getUserDetails/`+userid)
         .then(res => {
             const userDetails = JSON.stringify(res.data.user_details[0])
+            const currentPoint = JSON.stringify(res.data.user_details[0].point)
             console.log("USER DETAILS DAPAT PAS LOGIN:")
             console.log(userDetails)
             localStorage.setItem('userDetails', userDetails)
+            localStorage.setItem('currentPoint', currentPoint)
+            window.updateTopMostParent(userDetails, currentPoint); 
             this.props.history.replace('/');
             
         })
@@ -65,7 +76,6 @@ class Login extends Component {
 
         return (
             <div>
-            <Header />
             <div
                 className="site-content container-fluid"
                 style={{
@@ -98,7 +108,9 @@ class Login extends Component {
                                         </div>
                                         
                                         <div className="text-lupa-password"><a href="#">Lupa password?</a></div>
-                                        <button type="submit" className="btn btn-lg btn-danger">Login</button>
+                                        <button type="submit" className="btn btn-lg btn-danger">
+                                            {this.state.loading && (<i className="fas fa-spinner fa-spin mr-2" />)} Login
+                                        </button>
                                         <div className="text-daftar">Belum memiliki akun? 
                                             <strong>
                                                 <NavLink to="/daftar" className="ml-1">

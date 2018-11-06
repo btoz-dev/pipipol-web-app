@@ -3,7 +3,7 @@ import { NavLink, Link } from "react-router-dom";
 import logo from "./../img/logo-pipipol_black.png";
 import AuthService from '../services/AuthService';
 const Auth = new AuthService();
-const BaseURL = "http://pipipol.btoz.co.id";
+const BaseURL = "http://apipipipol.btoz.co.id";
 
 class Header extends Component {
   
@@ -54,6 +54,7 @@ class Header extends Component {
 
       return (
         <div>
+          {/* <h1>TEST: {this.props.test}</h1> */}
           <nav className="navbar navbar-expand-sm navbar-dark bg-tr">
             <NavLink to="/" className="navbar-brand">
               <img src={logo} alt="" />

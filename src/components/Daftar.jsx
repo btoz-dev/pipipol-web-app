@@ -16,7 +16,8 @@ class Daftar extends Component {
             phone: '',
             password: '',
             passwordConfirm: '',
-            redirectToReferrer: false
+            redirectToReferrer: false,
+            login: false
         };
         
     
@@ -53,6 +54,10 @@ class Daftar extends Component {
         console.log(this.state.password)
         console.log(this.state.redirectToReferrer)
 
+        this.setState({
+            loading: true
+        })
+
         const encodedDataUser = Object.keys(this.state).map((key) => {
             return encodeURIComponent(key) + '=' + encodeURIComponent(this.state[key]);
             }).join('&');
@@ -64,8 +69,12 @@ class Daftar extends Component {
                 let responseJson = result;
                 if(responseJson){         
                     sessionStorage.setItem('userData',JSON.stringify(responseJson));
-                    this.setState({redirectToReferrer: true});
+                    this.setState({
+                        redirectToReferrer: true,
+                        loading: true
+                    });
                     console.log(sessionStorage.userData)
+                    
                 }
                 else{
                     console.log("login error")
@@ -136,7 +145,7 @@ class Daftar extends Component {
                                             <input onChange={this.onChangePasswordConfirm} className="input-field" type="password" placeholder="Confirm Password" name="confirmPassword" />
                                         </div>
                                         
-                                        <button onClick={this.signup} type="submit" className="btn btn-lg btn-danger">Daftar</button>
+                                        <button onClick={this.signup} type="submit" className="btn btn-lg btn-danger">{this.state.loading && (<i className="fas fa-spinner fa-spin mr-2" />)} Daftar</button>
                                         <div className="text-daftar">Sudah memiliki akun? 
                                             <strong>
                                                 <NavLink to="/login" className="ml-1">

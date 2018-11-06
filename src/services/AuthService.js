@@ -1,6 +1,6 @@
 import decode from 'jwt-decode';
 import axios from "axios";
-const BaseURL = "http://pipipol.btoz.co.id";
+const BaseURL = "http://apipipipol.btoz.co.id";
 
 export default class AuthService {
     // Initializing important variables
