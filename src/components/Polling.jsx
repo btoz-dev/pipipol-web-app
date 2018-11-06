@@ -170,7 +170,8 @@ class Polling extends Component {
         if(submitSuccess){
           console.log("SUCCESS!")
           
-          window.updateTopMostParent("", totalPoint); 
+          // KIRIM STATE KE PARENT PALING ATAS
+          window.updateTopMostParent("", "", totalPoint); 
 
           this.setState({
             modalResultsShow: true,

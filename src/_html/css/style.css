@@ -393,6 +393,8 @@ a:hover {
   width: 100%;
   padding: 0rem;
   background-color: #fff;
+  -webkit-box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
+          box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.15);
 }
 
 .navbar .navbar-brand {
@@ -425,6 +427,13 @@ a:hover {
   background-size: cover;
 }
 
+@media only screen and (max-width: 575px) {
+  .navbar-nav .nav-item.nav-profile .avatar {
+    float: none;
+    margin: auto;
+  }
+}
+
 .navbar-nav .nav-item.nav-redeem {
   background-color: #ec2828;
 }
@@ -450,6 +459,12 @@ a:hover {
 
 .navbar-nav .dropdown-item:hover {
   color: #ec2828;
+}
+
+@media only screen and (max-width: 575px) {
+  .navbar-nav .dropdown-item {
+    text-align: center;
+  }
 }
 
 .navbar-nav .dropdown-toggle .fas {
@@ -1011,6 +1026,10 @@ a:hover {
   line-height: 1.2;
   padding: 0.35rem 0;
   text-align: left;
+}
+
+.poll-result:last-child {
+  border: none;
 }
 
 .redeem {

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import  { Redirect } from 'react-router-dom'
+
 import AuthService from '../services/AuthService';
 
 import App from "./../App";
@@ -30,6 +32,7 @@ class Router extends Component {
       categories: [],
       sisaPoint: localStorage.getItem('sisaPoint'),
       currentPoint: localStorage.getItem('currentPoint'),
+      isLoggedIn: false,
       loading: true
     };
   }
@@ -67,11 +70,17 @@ class Router extends Component {
       </option>
     ));
 
+    console.log("IS LOGGED IN ????????")
+    console.log(this.state.isLoggedIn)
 
-    if(this.isLoggedIn()){
+    const isLoggedIn = localStorage.getItem('isLoggedIn')
+
+
+    if( isLoggedIn ){
 
       console.log("LOGGED IN")
 
+      localStorage.setItem('isLoggedIn', true)
       localStorage.setItem('currentPoint', currentPoint)
 
       return (
@@ -133,7 +142,7 @@ class Router extends Component {
                         <NavLink to="/profil" className="dropdown-item" href="#">
                           <i className="fas fa-id-card mr-1"></i> Profil
                         </NavLink>
-                        <NavLink to="/login" onClick={this.handleLogout.bind(this)} className="dropdown-item">
+                        <NavLink to="/logout"  className="dropdown-item">
                           <i className="fas fa-sign-out-alt mr-1"></i> Logout 
                         </NavLink>
                       </div>
@@ -147,51 +156,61 @@ class Router extends Component {
                 </div>
               </nav>
 
+                    
               <div id="pollToolbar" className="poll-toolbar collapse">
-            <div className="container">
-              <div className="row">
-                <div className="col-md-8 col-sm-12">
-                  <div className="input-group mt-3">
-                    <select className="custom-select" id="inputGroupSelect01">
-                      {listCategories}
-                    </select>
-                  </div>
-                </div>
-                <div className="col-md-4 col-sm-12">
-                  <div className="row">
-                    <div className="col-6">
-                      <NavLink
-                        to="#"
-                        className="btn btn-red mb-3 mt-3"
-                        href="#"
-                        role="button"
-                      >
-                        Populer
-                      </NavLink>
+                <div className="container">
+                <div className="row">
+                  <div className="col-md-8 col-sm-12">
+                    <div className="input-group mt-3">
+                      <select className="custom-select" id="inputGroupSelect01">
+                        {listCategories}
+                      </select>
                     </div>
-                    <div className="col-6">
-                      <NavLink
-                        to="#"
-                        className="btn btn-outline mb-3 mt-3"
-                        href="#"
-                        role="button"
-                      >
-                        Terbaru
-                      </NavLink>
+                  </div>
+                  <div className="col-md-4 col-sm-12">
+                    <div className="row">
+                      <div className="col-6">
+                        <NavLink
+                          to="#"
+                          className="btn btn-red mb-3 mt-3"
+                          href="#"
+                          role="button"
+                        >
+                          Populer
+                        </NavLink>
+                      </div>
+                      <div className="col-6">
+                        <NavLink
+                          to="#"
+                          className="btn btn-outline mb-3 mt-3"
+                          href="#"
+                          role="button"
+                        >
+                          Terbaru
+                        </NavLink>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
+              </div>
+
               <Switch>
                 <Route path="/" component={App} exact />
-                <Route path="/daftar" component={Daftar} />
+                <Route path="/daftar" render={() => {
+                    Auth.logout();
+                  }}
+                />
                 <Route path="/login" component={Login} />
                 <Route path="/profil" component={Profil} />
                 <Route path="/redeem" component={Redeem} />
                 <Route path="/polling/:id" component={Polling} />
                 <Route path="/test" component={Test} />
+                <Route path="/logout" render={() => {
+                    Auth.logout();
+                    return <Redirect to='/login'  />;
+                  }}
+                />
                 <Route component={Error} />
               </Switch>
               <Footer />
@@ -201,7 +220,7 @@ class Router extends Component {
       );
       
     }
-    else{
+    else if(!isLoggedIn){
       console.log("KELUAAAAARRRRRRR")
       return (
         <div>
@@ -224,12 +243,17 @@ class Router extends Component {
               </nav>
               <Switch>
                 <Route path="/" component={App} exact />
+                <Route path="/polling/:id" render={() => {
+                    return <Redirect to='/login'  />;
+                  }}
+                />
                 <Route path="/daftar" component={Daftar} />
                 <Route path="/login" component={Login} />
-                <Route path="/profil" component={Profil} />
-                <Route path="/redeem" component={Redeem} />
-                <Route path="/polling/:id" component={Polling} />
-                <Route path="/test" component={Test} />
+                <Route path="/logout" render={() => {
+                    Auth.logout();
+                    return <Redirect to='/login'  />;
+                    }}
+                />
                 <Route component={Error} />
               </Switch>
               <Footer />

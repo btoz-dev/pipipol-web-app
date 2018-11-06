@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import userProfileImgDefault  from'./../img/ic-user.png';
 import bgRedeem  from'./../img/bg-redeem.jpg';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { ToastContainer, toast } from 'react-toastify';
 
 const queryString = require('query-string');
 
@@ -23,9 +25,12 @@ class Redeem extends Component {
       loading: true,
       loadingSubmitRedeem: false,
       redeemStatus: false,
-      sisaPoint: localStorage.getItem("currentPoint")
+      sisaPoint: localStorage.getItem("currentPoint"),
+      modalRedeemShow: false,
+      redeemMessage: ""
     };
     this.submitRedeem = this.submitRedeem.bind(this);
+    this.toggleModalRedeemShow = this.toggleModalRedeemShow.bind(this);
   }
   componentDidMount = async () => {
     const req = await fetch(BaseURL + "/api/getVouchers/");
@@ -71,30 +76,47 @@ class Redeem extends Component {
         if(msg === "Point anda tidak cukup"){
           this.setState({
             redeemStatus: false,
-            modalTitle: "Maaf.. "+ msg,
+            redeemMessage: "Maaf.. "+ msg
           });
+          this.notifyError()
         }else{
           this.setState({
             redeemStatus: true,
             modalTitle: "Terimakasih, redeem berhasil!",
-            sisaPoint: sisaPoint
+            sisaPoint: sisaPoint,
+            modalRedeemShow: !this.state.modalRedeemShow
           });
           localStorage.setItem("currentPoint", sisaPoint)
           localStorage.setItem("sisaPoint", sisaPoint)
-          window.updateTopMostParent("", sisaPoint); 
+          window.updateTopMostParent("", "", sisaPoint); 
         }
         
-        document.getElementById("showModalRedeemBtn").click();
+        // document.getElementById("showModalRedeemBtn").click();
     })
     .catch(err => {
         console.log(err);
     });
   }
 
+  toggleModalRedeemShow() {
+    this.setState({
+      modalRedeemShow: !this.state.modalRedeemShow
+    });
+  }
+
+  notifyError = () => {
+    toast.error(this.state.redeemMessage, {
+      position: toast.POSITION.TOP_CENTER,
+      className: 'pipipol-notify',
+      autoClose: 7000
+    });
+  };
+
   render() {
     const redeem = this.state.redeem;
     const userDetails = this.state.userDetails;
     const userAvatar = this.state.userDetails.avatar;
+    console.log(this.state.redeem[3])
 
     const redeemItems = redeem.map(item => (
       <div key={item.id} className="card">
@@ -170,60 +192,34 @@ class Redeem extends Component {
 
             <div className="redeem-prizes">
               <h2 className="text-center mb-5 font-700">Hadiah</h2>
-                <div className="card-columns">
-                  {redeemItems}
-                </div>
-                {/* <div className="card-columns-footer">
-                  <button type="submit" className="btn btn-lg btn-danger">
-                    Redeem
-                  </button>
-                  <a id="showModalRedeemBtn"
-                    data-toggle="modal"
-                    data-target="#modalRedeemSuccess"
-                  >
-                  </a>
-                </div> */}
-            </div>
-
-            {/* <!-- MODAL REDEEM --> */}
-            <a id="showModalRedeemBtn"
-              data-toggle="modal"
-              data-target="#modalRedeem"
-            />
-            <div className="modal fade" id="modalRedeem">
-              <div className="modal-dialog modal-dialog-centered">
-                <div className="modal-content text-center">
-                  <div className="modal-header text-center">
-                    <h4 className="modal-title w-100">
-                      { this.state.modalTitle }
-                    </h4>
-                  </div>
-
-                  <div className="modal-body pl-5 pr-5">
-                    <i className="fas fa-box-open mt-2 mb-2" />
-                      { this.state.modalMessage 
-                        ? 
-                        "Ikuti polling lebih banyak dan dapatkan poin lebih banyak lagi"
-                        :
-                        <p>Anda telah berhasil menukarkan poin Anda dengan hadiah <strong>{this.state.nameVoucher}</strong> sebesar <strong>{this.state.pointVoucher} poin.</strong></p>
-                      }
-                  </div>
-
-                  <div className="modal-footer">
-                    <button
-                      type="button"
-                      className="btn btn-danger"
-                      data-dismiss="modal"
-                    >
-                      Tutup
-                    </button>
-                  </div>
-                </div>
+              <div className="card-columns">
+                {redeemItems}
               </div>
             </div>
-            {/* <!-- /END MODAL POLL RESULTS --> */}
+
+            {/* <!-- MODAL IMAGE CAPTCHA --> */}
+            <Modal id="modalRedeem" isOpen={this.state.modalRedeemShow} toggle={this.toggleModalRedeemShow} centered={true} className={this.props.className}>
+              <ModalHeader toggle={this.toggleModalRedeemShow}>
+                { this.state.modalTitle }
+              </ModalHeader>
+              <ModalBody className="p-5">
+                {/* <img className="card-img-top" src={"http://apipipipol.btoz.co.id" + redeem[3].voucher_img} alt="" /> */}
+                <i className="fas fa-box-open mt-2 mb-2" />
+                <p>Anda telah berhasil menukarkan poin Anda dengan hadiah <strong>{this.state.nameVoucher}</strong> sebesar <strong>{this.state.pointVoucher} poin.</strong></p>
+              </ModalBody>
+              <ModalFooter>
+                <button onClick={this.toggleModalRedeemShow} className="btn btn-danger pl-5 pr-5">
+                  OK
+                </button>
+              </ModalFooter>
+            </Modal>
+            {/* <!-- /END MODAL IMAGE CAPTCHA --> */}
+
           </section>
         </div>
+
+        {/* NOTIFY */}
+        <ToastContainer />
       </div>
 
     );

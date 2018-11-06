@@ -15,18 +15,26 @@ axios.defaults.headers.common['x-access-token'] = AUTH_TOKEN;
 // axios.defaults.headers.common['Authorization'] = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTksI…jM4fQ.n0eQWET-FjzCdpjNh79zIf_lPX_fxpH5XpVLideknrQ';
 
 const TopMostParent = ReactDOM.render(<Router />, document.getElementById("root"));
-window.updateTopMostParent = (userDetails, currentPoint) => {
+window.updateTopMostParent = (isLoggedIn, userDetails, currentPoint) => {
     // Update state of topmost parent when this method is called 
-    if(userDetails === ""){
+    if(isLoggedIn === "" && userDetails === "" ){
+        console.log("1")
         TopMostParent.setState({ 
             currentPoint: currentPoint 
         }); 
-    }else{
+    }else if(userDetails === "" && currentPoint === ""){
+        console.log("2")
         TopMostParent.setState({ 
+            isLoggedIn: isLoggedIn
+        }); 
+    }else{
+        console.log("3")
+        TopMostParent.setState({ 
+            isLoggedIn: isLoggedIn,
             userDetails: userDetails,
             currentPoint: currentPoint 
         }); 
     }
-
+    
 };
 registerServiceWorker();

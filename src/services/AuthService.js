@@ -37,9 +37,9 @@ export default class AuthService {
         return !!token && !this.isTokenExpired(token) // handwaiving here
     }
 
-    isLoggedIn(status) {
+    isLoggedIn(token) {
         // Saves user data to localStorage
-        localStorage.setItem('isLoggedIn', status)
+        localStorage.setItem('isLoggedIn', token)
     }
 
     getSetUserDetails(userid){
@@ -95,6 +95,9 @@ export default class AuthService {
         localStorage.removeItem('sisaPoint');
         localStorage.removeItem('currentPoint');
         sessionStorage.removeItem('userData');
+
+        // KASIH TAU SI ROUTER KLO UDAH SIGN OUT
+        window.updateTopMostParent(false, "", ""); 
 
         // REDIRECT TO
         // this.props.history.replace('/');

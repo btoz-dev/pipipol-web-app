@@ -77,7 +77,9 @@ class Login extends Component {
             console.log(userDetails)
             localStorage.setItem('userDetails', userDetails)
             localStorage.setItem('currentPoint', currentPoint)
-            window.updateTopMostParent(userDetails, currentPoint); 
+
+            // KIRIM STATES KE TOP MOST PARENT PARAMNYA: (isLoggedIn, userDetails, currentPoint)
+            window.updateTopMostParent("true", userDetails, currentPoint); 
 
             this.setState({
                 loading: false
