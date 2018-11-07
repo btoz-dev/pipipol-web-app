@@ -123,11 +123,11 @@ class Router extends Component {
                         Polling
                       </NavLink>
                     </li>
-                    <li className="nav-item hide">
+                    {/* <li className="nav-item hide">
                       <NavLink to="/test" className="nav-link">
                         Test
                       </NavLink>
-                    </li>
+                    </li> */}
                     <li className="nav-item nav-profile dropdown">
                       <NavLink to="/profil" className="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                         <div
