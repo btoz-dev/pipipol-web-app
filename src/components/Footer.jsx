@@ -6,24 +6,24 @@ const Footer = () => {
     <footer className="footer">
       <div className="container-fluid">
         <div className="footer-logo-pipipol">
-          <a href="#">
-            <img src={logoPipipol} />
+          <a href="./">
+            <img src={logoPipipol} alt="Pipipol" />
           </a>
         </div>
         <div className="sosmed">
-          <a href="#">
+          <a href="./">
             <i className="fab fa-facebook-f" />
           </a>
-          <a href="#">
+          <a href="./">
             <i className="fab fa-twitter" />
           </a>
-          <a href="#">
+          <a href="./">
             <i className="fab fa-instagram" />
           </a>
-          <a href="#">
+          <a href="./">
             <i className="fab fa-youtube" />
           </a>
-          <a href="#">
+          <a href="./">
             <i className="fab fa-linkedin" />
           </a>
         </div>

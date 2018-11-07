@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import userProfileImgDefault  from'./../img/ic-user.png';
 import bgRedeem  from'./../img/bg-redeem.jpg';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { ToastContainer, toast } from 'react-toastify';
 
 const queryString = require('query-string');
@@ -116,6 +116,7 @@ class Redeem extends Component {
     const redeem = this.state.redeem;
     const userDetails = this.state.userDetails;
     const userAvatar = this.state.userDetails.avatar;
+    const username = this.state.userDetails.username;
     console.log(this.state.redeem[3])
 
     const redeemItems = redeem.map(item => (
@@ -158,6 +159,7 @@ class Redeem extends Component {
             "url("+bgRedeem+")"
         }}
       >
+        <ToastContainer />
         <div className="bg-container container-fluid">
           <section className="redeem container">
             <div className="redeem-header">
@@ -169,7 +171,7 @@ class Redeem extends Component {
                       backgroundImage: "url("+BaseURL+userDetails.avatar+")"
                     }}
                   >
-                    { !userAvatar ? <img className="img-fluid" src={userProfileImgDefault} /> : "" }
+                    { !userAvatar ? <img className="img-fluid" src={userProfileImgDefault} alt={username} /> : "" }
                   </div>
                   <div className="user-name">
                     <h1 className="font-700">{userDetails.firstname}</h1>
@@ -184,7 +186,7 @@ class Redeem extends Component {
                 </div>
                 <div className="col-md-4 order-3 my-auto">
                   <div className="user-badge">
-                  { !userDetails.badge_img ? <i className="fas fa-award" /> : <img src={BaseURL+userDetails.badge_img} /> }
+                  { !userDetails.badge_img ? <i className="fas fa-award" /> : <img src={BaseURL+userDetails.badge_img} alt="" /> }
                   </div>
                 </div>
               </div>
@@ -217,9 +219,6 @@ class Redeem extends Component {
 
           </section>
         </div>
-
-        {/* NOTIFY */}
-        <ToastContainer />
       </div>
 
     );

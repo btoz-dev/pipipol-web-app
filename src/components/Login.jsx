@@ -7,8 +7,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import bgRedeem  from'./../img/bg-redeem.jpg';
 import logoPipipol  from'./../img/logo-pipipol.png';
 
-const BaseURL = "https://apipipipol.btoz.co.id";
-
 class Login extends Component {
 
     constructor(props){
@@ -107,12 +105,13 @@ class Login extends Component {
                     "url("+bgRedeem+")"
                 }}
             >
+                <ToastContainer />
                 <div className="bg-container container-fluid">
                     <section className="login container">
                         <div className="row">
                             <div className="col-sm-12 col-md-12 col-lg-6 my-auto">
                                 <div className="login-copy text-center">
-                                    <div className="mb-3"><a href="#"><img src={logoPipipol} /></a></div>
+                                    <div className="mb-3"><a href="./"><img src={logoPipipol} alt="Pipipol" /></a></div>
                                     <p>Lorem ipsum dolor sit amet, quaestio philosophia eu quo, eum movet delectus deterruisset no. Soluta civibus patrioque et nec. Qui alii doming postulant ex. Fuisset honestatis ut eam, illud voluptatum per et. Ut sit iusto virtute, sea ad quando libris tractatos. Vim mucius percipit laboramus ad, ex vitae urbanitas vel, dicat inani suscipiantur at vix.</p>
                                 </div>
                             </div>
@@ -131,7 +130,7 @@ class Login extends Component {
                                             <input onChange={this.handleChange} className="input-field" type="password" placeholder="Password" name="password" />
                                         </div>
                                         
-                                        <div className="text-lupa-password"><a href="#">Lupa password?</a></div>
+                                        <div className="text-lupa-password"><a href="./">Lupa password?</a></div>
                                         <button type="submit" className="btn btn-lg btn-danger">
                                             {this.state.loading && (<i className="fas fa-spinner fa-spin mr-2" />)} Login
                                         </button>
@@ -142,8 +141,8 @@ class Login extends Component {
                                                 </NavLink>
                                             </strong>
                                         </div>
-                                        <a href="#" className="btn btn-lg btn-facebook"><i className="fab fa-facebook-f mr-2"></i> Facebook</a>
-                                        <a href="#" className="btn btn-lg btn-danger"><i className="fab fa-google mr-2"></i> Google</a>
+                                        <button href="#" className="btn btn-lg btn-facebook"><i className="fab fa-facebook-f mr-2"></i> Facebook</button>
+                                        <button href="#" className="btn btn-lg btn-danger"><i className="fab fa-google mr-2"></i> Google</button>
                                     </form>
                                 </div>
                             </div>

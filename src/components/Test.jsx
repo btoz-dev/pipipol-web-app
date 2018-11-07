@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import {PostData} from '../services/PostData';
 import axios from "axios";
 import md5 from "md5";
 const qs = require('query-string');

@@ -5,9 +5,8 @@ import Loader from "./Loader";
 import AuthService from '../services/AuthService';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import PollingResults from '../components/PollingResults';
-const queryString = require('query-string');
 
 const BaseURL = `https://apipipipol.btoz.co.id`;
 
@@ -267,9 +266,7 @@ class Polling extends Component {
 
     return (
       <section>
-          {/* NOTIFY */}
           <ToastContainer />
-
           <div
             className="site-content container-fluid"
             style={{
@@ -332,18 +329,17 @@ class Polling extends Component {
                       <div className="poll-question">
                         <div className="poll-body-right-mobile row mb-3 d-flex d-sm-none">
                           <div className="col">
-                            <a
-                              href="#"
+                            <div
                               className="poin-mobile btn btn-outline btn-lg"
                             >
                               {polling.point} poin
-                            </a>
+                            </div>
                           </div>
                           <div className="col text-right">
-                            <a href="#" className="lapor-mobile btn btn-sm">
+                            <div className="lapor-mobile btn btn-sm">
                               <i className="fas fa-exclamation-circle" />{" "}
                               Laporkan
-                            </a>
+                            </div>
                           </div>
                         </div>
                         <h2>{polling.question}</h2>
@@ -402,9 +398,9 @@ class Polling extends Component {
                       <span className="value">{polling.point}</span>{" "}
                       <small>poin</small>
                     </div>
-                    <a href="#" className="lapor">
+                    <div href="#" className="lapor">
                       <i className="fas fa-exclamation-circle" /> Laporkan
-                    </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -426,6 +422,7 @@ class Polling extends Component {
               <div className="row mt-3">
                 <div className="col">
                   <input
+                    className="text-center"
                     name="captchaText"
                     value={this.state.captchaText}
                     onChange={this.handleChangeCaptchaText}

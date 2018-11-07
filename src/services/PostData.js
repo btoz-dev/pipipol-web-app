@@ -19,12 +19,12 @@ export function PostData(type, encodedDataUser) {
           })
           .then((response) => response)
           .then((res) => {
-            console.log("=== RESPONSE DARI POSTDATA ===")
+            console.log("=== RESPONSE SUCCESS DARI POSTDATA ===")
             console.log(res)
             resolve(res);
           })
           .catch((error) => {
-            console.log("=== RESPONSE DARI POSTDATA ===")
+            console.log("=== RESPONSE ERROR DARI POSTDATA ===")
             console.log(error)
             reject(error);
           });

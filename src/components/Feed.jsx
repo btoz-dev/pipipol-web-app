@@ -99,12 +99,12 @@ class Feed extends React.Component {
           })}
 
         {this.state.visible < this.state.pollings.length && (
-          <a
+          <button
             onClick={this.loadMore}
             className="btn btn-lg btn-danger loadmore pl-5 pr-5 mt-5 mb-5 mx-auto"
           >
             Tampilkan lebih banyak
-          </a>
+          </button>
         )}
       </div>
     );

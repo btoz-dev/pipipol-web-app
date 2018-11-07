@@ -143,7 +143,6 @@ class Profil extends Component {
 
         let userid = this.state.userid;
         let password = this.state.password;
-        let address = this.state.address;
         let phone = this.state.phone;
         let firstname = this.state.firstname;
         let lastname = this.state.lastname;
@@ -214,6 +213,7 @@ class Profil extends Component {
         const userDetails = this.state.userDetails
         const userAvatar = userDetails.avatar
         const userBadge = userDetails.badge_img
+        const username = userDetails.username
         console.log("PROFIL - USERDETAILS LOCALSTORAGE")
         console.log(userDetails)
 
@@ -225,6 +225,7 @@ class Profil extends Component {
                     "url("+bgRedeem+")"
                 }}
             >
+                <ToastContainer />
                 <div className="bg-container container-fluid">
                     <section className="login container">
                         <div className="row">
@@ -239,10 +240,10 @@ class Profil extends Component {
                                                 backgroundImage: "url("+BaseURL+userAvatar+")"
                                                 }}
                                             >
-                                                { !userAvatar ? <img className="img-fluid" src={userProfileImgDefault} /> : "" }
+                                                { !userAvatar ? <img className="img-fluid" src={userProfileImgDefault} alt={username} /> : "" }
                                             </div>
                                             <div className="user-badge text-center">
-                                                {!userBadge ? <i className="ic fas fa-award" /> : <img src={ BaseURL+userBadge } />}
+                                                {!userBadge ? <i className="ic fas fa-award" /> : <img src={ BaseURL+userBadge } alt="" />}
                                             </div>
                                         </div>
                                         <div className="col-sm-12 col-md-6 col-lg-5 mb-5">
