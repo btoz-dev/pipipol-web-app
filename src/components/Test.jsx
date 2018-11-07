@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import {PostData} from '../services/PostData';
 import axios from "axios";
 import md5 from "md5";
+const qs = require('query-string');
 
-const BaseURL = `http://apipipipol.btoz.co.id/api`;
+const BaseURL = `https://apipipipol.btoz.co.id/api`;
 
 class Test extends Component {
 
@@ -57,7 +58,7 @@ class Test extends Component {
         console.log(dataForSubmit)
     
         axios
-        .post(BaseURL+`/changePassword`, dataForSubmit,{
+        .post(BaseURL+`/changePassword`, qs.stringify(dataForSubmit),{
             headers: {
             'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
             'Cache-Control': 'no-cache',
