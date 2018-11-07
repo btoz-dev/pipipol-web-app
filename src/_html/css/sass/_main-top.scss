@@ -96,8 +96,11 @@ textarea {
 /* ==========================================================================
    Header
    ========================================================================== */
+body, html, #root, #outer-container{
+    height: 100%;;
+}
 body{
-    padding-top: 88px;
+    padding-top: 0;
     font-family: 'Exo 2', sans-serif;
 }
 

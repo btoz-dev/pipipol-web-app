@@ -16,6 +16,8 @@ import Test from "./Test";
 import { NavLink } from "react-router-dom";
 import logo from "./../img/logo-pipipol_black.png";
 
+import { slide as Menu } from 'react-burger-menu'
+
 const Auth = new AuthService();
 
 const BaseURL = "https://apipipipol.btoz.co.id";
@@ -23,6 +25,10 @@ const BaseURL = "https://apipipipol.btoz.co.id";
 
 
 class Router extends Component {
+
+  showSettings (event) {
+    event.preventDefault();
+  }
 
   constructor(props) {
     super(props);
@@ -83,25 +89,15 @@ class Router extends Component {
       localStorage.setItem('currentPoint', currentPoint)
 
       return (
-        <div>
+          
+        <div id="outer-container">
           <BrowserRouter>
             <div>
-              {/* <h1>TEST: {this.props.test}</h1> */}
               <nav className="navbar navbar-expand-sm navbar-dark bg-tr">
                 <NavLink to="/" className="navbar-brand">
                   <img src={logo} alt="" />
                 </NavLink>
-                <button
-                  className="navbar-toggler"
-                  type="button"
-                  data-toggle="collapse"
-                  data-target="#navbar"
-                  aria-controls="navbar"
-                  aria-expanded="false"
-                  aria-label="Toggle navigation"
-                >
-                  <span className="navbar-toggler-icon" />
-                </button>
+                
 
                 <div className="collapse navbar-collapse" id="navbar">
                   <ul className="navbar-nav ml-auto">
@@ -135,7 +131,7 @@ class Router extends Component {
                             backgroundImage: "url("+BaseURL+userDetails.avatar+")" 
                           }}
                         />
-                        <strong>{ this.state.currentPoint === "null" ? 0 : this.state.currentPoint }</strong> poin <i className="fas fa-angle-down ml-1"></i>
+                        <strong>{ this.state.currentPoint === "null" ? 0 : this.state.currentPoint }</strong> <small>pts</small> <i className="fas fa-angle-down ml-1"></i>
                       </NavLink>
                       <div className="dropdown-menu">
                         <NavLink to="/profil" className="dropdown-item" href="#">
@@ -148,14 +144,13 @@ class Router extends Component {
                     </li>
                     <li className="nav-item nav-redeem">
                       <NavLink to="/redeem" className="nav-link">
-                        Redeem
+                      <i className="fas fa-exchange-alt mr-1"></i> Redeem
                       </NavLink>
                     </li>
                   </ul>
                 </div>
               </nav>
-
-                    
+   
               <div id="pollToolbar" className="poll-toolbar collapse">
                 <div className="container">
                 <div className="row">
@@ -194,52 +189,65 @@ class Router extends Component {
               </div>
               </div>
 
-              <Switch>
-                <Route path="/" component={App} exact />
-                <Route path="/daftar" render={() => {
-                    Auth.logout();
-                  }}
+              {/* MOBILE MENU     */}
+              <NavLink to="/profil" className="profile-point-mobile">
+                <div className="avatar" style={{backgroundImage: "url("+BaseURL+userDetails.avatar+")" }}
                 />
-                <Route path="/login" component={Login} />
-                <Route path="/profil" component={Profil} />
-                <Route path="/redeem" component={Redeem} />
-                <Route path="/polling/:id" component={Polling} />
-                <Route path="/test" component={Test} />
-                <Route path="/logout" render={() => {
-                    Auth.logout();
-                    return <Redirect to='/login'  />;
-                  }}
-                />
-                <Route component={Error} />
-              </Switch>
-              <Footer />
+                <strong>{ this.state.currentPoint === "null" ? 0 : this.state.currentPoint }</strong> <small>pts</small>
+              </NavLink>
+              <div className="bg-burger-menu"></div>
+              <Menu right pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } >
+                <NavLink to="/" className="menu-item"><i className="fas fa-home mr-1"></i> Home</NavLink>
+                <NavLink to="/profil" className="menu-item"><i className="fas fa-user-alt mr-1"></i> Profile</NavLink>
+                <NavLink to="/redeem" className="menu-item"><i className="fas fa-exchange-alt mr-1"></i> Redeem</NavLink>
+                <NavLink to="/logout" className="menu-item"><i className="fas fa-sign-out-alt mr-1"></i> Logout</NavLink>
+              </Menu>
+
+              <main id="page-wrap">                 
+                <Switch>
+                  <Route path="/" component={App} exact />
+                  <Route path="/daftar" render={() => {
+                      Auth.logout();
+                    }}
+                  />
+                  <Route path="/login" component={Login} />
+                  <Route path="/profil" component={Profil} />
+                  <Route path="/redeem" component={Redeem} />
+                  <Route path="/polling/:id" component={Polling} />
+                  <Route path="/test" component={Test} />
+                  <Route path="/logout" render={() => {
+                      Auth.logout();
+                      return <Redirect to='/login'  />;
+                    }}
+                  />
+                  <Route component={Error} />
+                </Switch>
+                <Footer />
+              </main>
+
             </div>
           </BrowserRouter>
-        </div>
+      </div>
       );
       
     }
     else if(!isLoggedIn){
       console.log("KELUAAAAARRRRRRR")
       return (
-        <div>
+    <div>
+
           <BrowserRouter>
             <div>
+
               <nav className="navbar navbar-expand-sm navbar-dark bg-tr">
                 <NavLink to="/" className="navbar-brand">
                   <img src={logo} alt="" />
                 </NavLink>
-
-                <div className="collapse navbar-collapse" id="navbar">
-                  <ul className="navbar-nav ml-auto">
-                    <li className="nav-item nav-redeem">
-                      <NavLink to="/login" className="nav-link">
-                        <i className="fas fa-lock mr-1" /> Login
-                      </NavLink>
-                    </li>
-                  </ul>
-                </div>
+                <NavLink to="/login" className="nav-login-mobile hidden-sm-up">
+                  <i className="fas fa-lock mr-1" /> Login
+                </NavLink>
               </nav>
+
               <Switch>
                 <Route path="/" component={App} exact />
                 <Route path="/polling/:id" render={() => {
@@ -255,10 +263,14 @@ class Router extends Component {
                 />
                 <Route component={Error} />
               </Switch>
+
               <Footer />
+
             </div>
           </BrowserRouter>
-        </div>
+
+
+  </div>
       );
     }
   }
