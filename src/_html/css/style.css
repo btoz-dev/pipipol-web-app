@@ -705,12 +705,20 @@ a:hover {
   color: #fff;
 }
 
+.bm-item-list .bm-item:first-child {
+  color: #fff;
+}
+
 /* Individual item */
 .bm-item {
   display: block;
   line-height: 3;
   padding-left: 2rem;
   font-size: 1.25rem;
+}
+
+.bm-item:hover, .bm-item.active {
+  color: #000;
 }
 
 /* Styling of overlay */

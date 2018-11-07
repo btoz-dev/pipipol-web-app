@@ -273,6 +273,9 @@ box-shadow: -7px 0px 13px 0px rgba(0,0,0,0.25);
   /* Wrapper for item list */
   .bm-item-list {
     color: #fff;
+    .bm-item:first-child{
+        color: #fff;
+    }
   }
    
   /* Individual item */
@@ -281,6 +284,10 @@ box-shadow: -7px 0px 13px 0px rgba(0,0,0,0.25);
     line-height: 3;
     padding-left: 2rem;
     font-size: 1.25rem;
+    &:hover,
+    &.active{
+        color: #000;
+    }
   }
    
   /* Styling of overlay */

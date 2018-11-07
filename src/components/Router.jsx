@@ -197,10 +197,10 @@ class Router extends Component {
               </NavLink>
               <div className="bg-burger-menu"></div>
               <Menu right pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } >
-                <NavLink to="/" className="menu-item"><i className="fas fa-home mr-1"></i> Home</NavLink>
-                <NavLink to="/profil" className="menu-item"><i className="fas fa-user-alt mr-1"></i> Profile</NavLink>
-                <NavLink to="/redeem" className="menu-item"><i className="fas fa-exchange-alt mr-1"></i> Redeem</NavLink>
-                <NavLink to="/logout" className="menu-item"><i className="fas fa-sign-out-alt mr-1"></i> Logout</NavLink>
+                <NavLink to="/"><i className="fas fa-home mr-1"></i> Home</NavLink>
+                <NavLink to="/profil"><i className="fas fa-user-alt mr-1"></i> Profile</NavLink>
+                <NavLink to="/redeem"><i className="fas fa-exchange-alt mr-1"></i> Redeem</NavLink>
+                <NavLink to="/logout"><i className="fas fa-sign-out-alt mr-1"></i> Logout</NavLink>
               </Menu>
 
               <main id="page-wrap">                 
