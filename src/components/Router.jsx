@@ -243,7 +243,17 @@ class Router extends Component {
                 <NavLink to="/" className="navbar-brand">
                   <img src={logo} alt="" />
                 </NavLink>
-                <NavLink to="/login" className="nav-login-mobile hidden-sm-up">
+                <button
+                  className="navbar-toggler"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#navbar"
+                  aria-controls="navbar"
+                  aria-expanded="false"
+                  aria-label="Toggle navigation">
+                  <span className="navbar-toggler-icon"><i className="fas fa-bars" /></span>
+                </button>
+                <NavLink to="/login" className="nav-login-mobile ">
                   <i className="fas fa-lock mr-1" /> Login
                 </NavLink>
               </nav>

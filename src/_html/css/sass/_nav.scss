@@ -124,6 +124,8 @@
 
 // POLL TOOLBAR
 .poll-toolbar{
+    position: relative;
+    top: 88px;
     background-color: #272c2e;
     padding: 1rem 0;
     .btn,
@@ -152,7 +154,6 @@
 }
 
 .nav-login-mobile{
-    display: none;
     position: absolute;
     right: 0;
     top: 0;
@@ -164,7 +165,7 @@
 
 
 #page-wrap{
-    padding-top: 88px;
+    // padding-top: 88px;
     height: 100%; overflow: auto;
 }
 

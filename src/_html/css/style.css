@@ -534,6 +534,8 @@ a:hover {
 }
 
 .poll-toolbar {
+  position: relative;
+  top: 88px;
   background-color: #272c2e;
   padding: 1rem 0;
 }
@@ -567,7 +569,6 @@ a:hover {
 }
 
 .nav-login-mobile {
-  display: none;
   position: absolute;
   right: 0;
   top: 0;
@@ -578,7 +579,6 @@ a:hover {
 }
 
 #page-wrap {
-  padding-top: 88px;
   height: 100%;
   overflow: auto;
 }
@@ -838,7 +838,7 @@ a:hover {
   z-index: 999999;
   background-size: cover;
   background-color: #272c2e;
-  padding: 0;
+  padding: 88px 0 0 0;
 }
 
 .site-content .bg-container {
