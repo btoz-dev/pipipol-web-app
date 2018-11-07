@@ -63,8 +63,14 @@
                 input[type="text"]{
                     border: none;
                     border-bottom: solid 1px #e1e1e1;
+                    border-radius: 0;
                     background: none;
                     color: #fff;
+                    padding: inherit;
+                }
+                ::placeholder {
+                    color: #fff;
+                    opacity: 0.5;
                 }
                 .btn{
                     width: 100%;
@@ -145,5 +151,20 @@
     }
     &:last-child{
         border: none;
+    }
+}
+
+.poll-captcha{
+    input[type="text"]{
+        border: none;
+        border: solid 1px #e1e1e1;
+        border-radius: 25px;
+        padding: 0.5rem 1rem;
+        background: none;
+        color: #000;
+    }
+    ::placeholder {
+        color: #000;
+        opacity: 0.5;
     }
 }

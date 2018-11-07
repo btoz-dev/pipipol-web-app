@@ -416,13 +416,24 @@ class Polling extends Component {
             <ModalHeader toggle={this.toggleModalCaptchaShow}>
               Cari dan temukan kode sandi!
             </ModalHeader>
-            <ModalBody>
+            <ModalBody className="poll-captcha">
               {captcha.imgUrl 
               ?
               <img className="img-fluid" src={"http://apipipipol.btoz.co.id" + captcha.imgUrl} alt="Cari dan temukan kode sandi!" />
               :
               <span><i className="fas fa-spinner fa-spin text-center mr-1" /> Loading kode sandi..</span>
               }
+              <div className="row mt-3">
+                <div className="col">
+                  <input
+                    name="captchaText"
+                    value={this.state.captchaText}
+                    onChange={this.handleChangeCaptchaText}
+                    type="text"
+                    placeholder="Masukan kode sandi.."
+                  />
+                </div>
+              </div>
             </ModalBody>
             <ModalFooter>
               <button onClick={this.getCaptcha} className="btn btn-dark">

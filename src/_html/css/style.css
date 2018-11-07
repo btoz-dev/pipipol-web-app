@@ -950,8 +950,30 @@ a:hover {
 .poll-single-body .poll-body-center .poll-captcha input[type="text"] {
   border: none;
   border-bottom: solid 1px #e1e1e1;
+  border-radius: 0;
   background: none;
   color: #fff;
+  padding: inherit;
+}
+
+.poll-single-body .poll-body-center .poll-captcha ::-webkit-input-placeholder {
+  color: #fff;
+  opacity: 0.5;
+}
+
+.poll-single-body .poll-body-center .poll-captcha :-ms-input-placeholder {
+  color: #fff;
+  opacity: 0.5;
+}
+
+.poll-single-body .poll-body-center .poll-captcha ::-ms-input-placeholder {
+  color: #fff;
+  opacity: 0.5;
+}
+
+.poll-single-body .poll-body-center .poll-captcha ::placeholder {
+  color: #fff;
+  opacity: 0.5;
 }
 
 .poll-single-body .poll-body-center .poll-captcha .btn {
@@ -1030,6 +1052,35 @@ a:hover {
 
 .poll-result:last-child {
   border: none;
+}
+
+.poll-captcha input[type="text"] {
+  border: none;
+  border: solid 1px #e1e1e1;
+  border-radius: 25px;
+  padding: 0.5rem 1rem;
+  background: none;
+  color: #000;
+}
+
+.poll-captcha ::-webkit-input-placeholder {
+  color: #000;
+  opacity: 0.5;
+}
+
+.poll-captcha :-ms-input-placeholder {
+  color: #000;
+  opacity: 0.5;
+}
+
+.poll-captcha ::-ms-input-placeholder {
+  color: #000;
+  opacity: 0.5;
+}
+
+.poll-captcha ::placeholder {
+  color: #000;
+  opacity: 0.5;
 }
 
 .redeem {
