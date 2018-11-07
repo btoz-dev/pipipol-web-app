@@ -7,7 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import bgRedeem  from'./../img/bg-redeem.jpg';
 import logoPipipol  from'./../img/logo-pipipol.png';
 
-const BaseURL = "http://apipipipol.btoz.co.id";
+const BaseURL = "https://apipipipol.btoz.co.id";
 
 class Login extends Component {
 

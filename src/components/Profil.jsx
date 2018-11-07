@@ -10,7 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 const qs = require('query-string');
 
-const BaseURL = `https://cors-anywhere.herokuapp.com/https://apipipipol.btoz.co.id`;
+const BaseURL = `https://apipipipol.btoz.co.id`;
 
 class Profil extends Component {
 

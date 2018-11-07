@@ -3,7 +3,7 @@ import { NavLink, Redirect } from "react-router-dom";
 import {PostData} from '../services/PostData';
 import md5 from "md5";
 
-const BaseURL = "http://apipipipol.btoz.co.id";
+const BaseURL = "https://apipipipol.btoz.co.id";
 
 class Login extends Component {
 

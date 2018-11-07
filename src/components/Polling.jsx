@@ -9,7 +9,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import PollingResults from '../components/PollingResults';
 const queryString = require('query-string');
 
-const BaseURL = `https://cors-anywhere.herokuapp.com/http://apipipipol.btoz.co.id`;
+const BaseURL = `https://apipipipol.btoz.co.id`;
 
 class Polling extends Component {
   constructor(props) {
@@ -274,7 +274,7 @@ class Polling extends Component {
             className="site-content container-fluid"
             style={{
               backgroundImage:
-                "url(http://apipipipol.btoz.co.id" + polling.image + ")"
+                "url(https://apipipipol.btoz.co.id" + polling.image + ")"
             }}
           >
             <div className="bg-container container-fluid p-3">
@@ -321,7 +321,7 @@ class Polling extends Component {
                     <div className="poll-image">
                       <img
                         className="img-fluid"
-                        src={"http://apipipipol.btoz.co.id" + polling.image}
+                        src={"https://apipipipol.btoz.co.id" + polling.image}
                         alt={polling.title}
                       />
                     </div>
@@ -419,7 +419,7 @@ class Polling extends Component {
             <ModalBody className="poll-captcha">
               {captcha.imgUrl 
               ?
-              <img className="img-fluid" src={"http://apipipipol.btoz.co.id" + captcha.imgUrl} alt="Cari dan temukan kode sandi!" />
+              <img className="img-fluid" src={"https://apipipipol.btoz.co.id" + captcha.imgUrl} alt="Cari dan temukan kode sandi!" />
               :
               <span><i className="fas fa-spinner fa-spin text-center mr-1" /> Loading kode sandi..</span>
               }

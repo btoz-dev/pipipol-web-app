@@ -3,7 +3,7 @@ import { NavLink, Link } from "react-router-dom";
 import logo from "./../img/logo-pipipol_black.png";
 import AuthService from '../services/AuthService';
 const Auth = new AuthService();
-const BaseURL = "http://apipipipol.btoz.co.id";
+const BaseURL = "https://apipipipol.btoz.co.id";
 
 class Header extends Component {
   

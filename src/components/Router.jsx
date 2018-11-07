@@ -19,7 +19,7 @@ import { isNull } from "util";
 
 const Auth = new AuthService();
 
-const BaseURL = "http://apipipipol.btoz.co.id";
+const BaseURL = "https://apipipipol.btoz.co.id";
 
 
 

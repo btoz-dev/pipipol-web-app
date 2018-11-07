@@ -7,7 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 
 const queryString = require('query-string');
 
-const BaseURL = "http://apipipipol.btoz.co.id";
+const BaseURL = "https://apipipipol.btoz.co.id";
 
 class Redeem extends Component {
   constructor(props) {
@@ -126,7 +126,7 @@ class Redeem extends Component {
         <div className="card-body">
           <img
             className="card-img-top"
-            src={"http://apipipipol.btoz.co.id" + item.voucher_img}
+            src={"https://apipipipol.btoz.co.id" + item.voucher_img}
             alt={item.voucher_name}
           />
         </div>
@@ -203,7 +203,7 @@ class Redeem extends Component {
                 { this.state.modalTitle }
               </ModalHeader>
               <ModalBody className="p-5">
-                {/* <img className="card-img-top" src={"http://apipipipol.btoz.co.id" + redeem[3].voucher_img} alt="" /> */}
+                {/* <img className="card-img-top" src={"https://apipipipol.btoz.co.id" + redeem[3].voucher_img} alt="" /> */}
                 <i className="fas fa-box-open mt-2 mb-2" />
                 <p>Anda telah berhasil menukarkan poin Anda dengan hadiah <strong>{this.state.nameVoucher}</strong> sebesar <strong>{this.state.pointVoucher} poin.</strong></p>
               </ModalBody>
