@@ -360,7 +360,7 @@ class Polling extends Component {
                           <label>
                             <div
                               onClick={this.getCaptcha}
-                              className="btn btn-outline"
+                              className="btn btn-outline mb-2"
                             >
                               {this.state.loadingCaptcha ? <i className="fas fa-spinner fa-spin" /> : <i className="fas fa-search" />} Cari Kode Sandi
                             </div>

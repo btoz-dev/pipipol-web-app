@@ -100,9 +100,6 @@ class Login extends Component {
     render() {
 
         return (
-            <div>
-                {/* NOTIFY */}
-                <ToastContainer />
             <div
                 className="site-content container-fluid"
                 style={{
@@ -153,7 +150,6 @@ class Login extends Component {
                         </div>
                     </section>
                 </div>
-            </div>
             </div>
         )
     }

@@ -15,7 +15,7 @@ import Footer from "./Footer";
 import Test from "./Test";
 import { NavLink, Link } from "react-router-dom";
 import logo from "./../img/logo-pipipol_black.png";
-import { isNull } from "util";
+import { ToastContainer, toast } from 'react-toastify';
 
 const Auth = new AuthService();
 
@@ -224,6 +224,8 @@ class Router extends Component {
       console.log("KELUAAAAARRRRRRR")
       return (
         <div>
+          {/* NOTIFY */}
+          <ToastContainer />
           <BrowserRouter>
             <div>
               <nav className="navbar navbar-expand-sm navbar-dark bg-tr">

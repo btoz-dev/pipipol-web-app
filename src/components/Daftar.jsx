@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { NavLink, Redirect } from "react-router-dom";
 import {PostData} from '../services/PostData';
-import Header from "../components/Header"
 import md5 from "md5";
+import { ToastContainer, toast } from 'react-toastify';
 import bgRedeem  from'./../img/bg-redeem.jpg';
 import logoPipipol  from'./../img/logo-pipipol.png';
 
@@ -19,7 +19,8 @@ class Daftar extends Component {
             password: '',
             passwordConfirm: '',
             redirectToReferrer: false,
-            login: false
+            login: false,
+            notifMsg: ''
         };
         
     
@@ -27,7 +28,6 @@ class Daftar extends Component {
         this.onChangePassword = this.onChangePassword.bind(this);
         this.onChangePasswordConfirm = this.onChangePasswordConfirm.bind(this);
         this.signup = this.signup.bind(this);
-    
     }
 
     onChange(e){
@@ -64,26 +64,54 @@ class Daftar extends Component {
             return encodeURIComponent(key) + '=' + encodeURIComponent(this.state[key]);
             }).join('&');
         
-            console.log(encodedDataUser)
+        console.log(encodedDataUser)
 
         if(this.state.username && this.state.firstname && this.state.email && this.state.phone && this.state.password && this.state.passwordConfirm){
-            PostData('register', encodedDataUser).then((result) => {
-                let responseJson = result;
-                if(responseJson){         
-                    sessionStorage.setItem('userData',JSON.stringify(responseJson));
-                    this.setState({
-                        redirectToReferrer: true,
-                        loading: true
-                    });
-                    console.log(sessionStorage.userData)
-                    
-                }
-                else{
-                    console.log("login error")
-                }
-            });
+            
+            if(this.state.password === this.state.passwordConfirm){
+                PostData('register', encodedDataUser).then((result) => {
+                    let responseJson = result;
+                    if(responseJson){  
+                        console.log("DAFTAR SUKSES") 
+                        console.log(responseJson)       
+                        this.setState({
+                            redirectToReferrer: true,
+                            loading: false
+                        });
+                        // return (<Redirect to={'/login'}/>)
+                    }
+                    else{
+                        console.log("DAFTAR ERROR")
+                        this.setState({loading: false})
+                        this.notifyError("Terjadi kesalahan, silahkan mengulangi lagi.")
+                    }
+                });
+            }else{
+                console.log("PASSWORD BEDA!!!!")
+                this.notifyError("PASSWORD BEDA!!!!")
+                this.setState({loading: false})
+            }
+        }else{
+            console.log("ELSE DAFTAR ERROR")
+            this.setState({loading: false,})
+            this.notifyError("Semua fields wajib di isi.")
         }
     }
+
+    notify = () => {
+        toast(this.state.notifMsg, {
+            position: toast.POSITION.TOP_CENTER,
+            className: 'pipipol-notify',
+            autoClose: 7000
+        });
+    };
+    notifyError = (msg) => {
+        toast.error(msg, {
+            position: toast.POSITION.TOP_CENTER,
+            className: 'pipipol-notify',
+            autoClose: 7000
+        });
+    };
 
     render() {
 
@@ -95,8 +123,6 @@ class Daftar extends Component {
         }
 
         return (
-            <div>
-                <Header />
             <div
                 className="site-content container-fluid"
                 style={{
@@ -162,7 +188,6 @@ class Daftar extends Component {
                         </div>
                     </section>
                 </div>
-            </div>
             </div>
         )
 

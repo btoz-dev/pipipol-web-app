@@ -225,9 +225,6 @@ class Profil extends Component {
                     "url("+bgRedeem+")"
                 }}
             >
-                {/* NOTIFY */}
-                <ToastContainer />
-
                 <div className="bg-container container-fluid">
                     <section className="login container">
                         <div className="row">
