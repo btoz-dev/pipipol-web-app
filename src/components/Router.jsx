@@ -228,16 +228,16 @@ class Router extends Component {
               <main id="page-wrap">                 
                 <Switch>
                   <Route path="/" component={App} exact />
-                  <Route path="/daftar" render={() => {
+                  <Route path="/#/daftar" render={() => {
                       Auth.logout();
                     }}
                   />
-                  <Route path="/login" component={Login} />
-                  <Route path="/profil" component={Profil} />
-                  <Route path="/redeem" component={Redeem} />
-                  <Route path="/polling/:id" component={Polling} />
-                  <Route path="/test" component={Test} />
-                  <Route path="/logout" render={() => {
+                  <Route path="/#/login" component={Login} />
+                  <Route path="/#/profil" component={Profil} />
+                  <Route path="/#/redeem" component={Redeem} />
+                  <Route path="/#/polling/:id" component={Polling} />
+                  <Route path="/#/test" component={Test} />
+                  <Route path="/#/logout" render={() => {
                       Auth.logout();
                       return <Redirect to='/login'  />;
                     }}
@@ -282,13 +282,13 @@ class Router extends Component {
 
               <Switch>
                 <Route path="/" component={App} exact />
-                <Route path="/polling/:id" render={() => {
+                <Route path="/#/polling/:id" render={() => {
                     return <Redirect to='/login'  />;
                   }}
                 />
-                <Route path="/daftar" component={Daftar} />
-                <Route path="/login" component={Login} />
-                <Route path="/logout" render={() => {
+                <Route path="/#/daftar" component={Daftar} />
+                <Route path="/#/login" component={Login} />
+                <Route path="/#/logout" render={() => {
                     Auth.logout();
                     return <Redirect to='/login'  />;
                     }}
