@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { HashRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
 import  { Redirect } from 'react-router-dom'
 
 import AuthService from '../services/AuthService';
@@ -104,7 +104,7 @@ class Router extends Component {
       return (
           
         <div id="outer-container">
-          <HashRouter>
+          <BrowserRouter>
             <div>
               <nav className="navbar navbar-expand-sm navbar-dark bg-tr">
                 <NavLink to="/" className="navbar-brand">
@@ -228,16 +228,16 @@ class Router extends Component {
               <main id="page-wrap">                 
                 <Switch>
                   <Route path="/" component={App} exact />
-                  <Route path="/#/daftar" render={() => {
+                  <Route path="/daftar" render={() => {
                       Auth.logout();
                     }}
                   />
-                  <Route path="/#/login" component={Login} />
-                  <Route path="/#/profil" component={Profil} />
-                  <Route path="/#/redeem" component={Redeem} />
-                  <Route path="/#/polling/:id" component={Polling} />
-                  <Route path="/#/test" component={Test} />
-                  <Route path="/#/logout" render={() => {
+                  <Route path="/login" component={Login} />
+                  <Route path="/profil" component={Profil} />
+                  <Route path="/redeem" component={Redeem} />
+                  <Route path="/polling/:id" component={Polling} />
+                  <Route path="/test" component={Test} />
+                  <Route path="/logout" render={() => {
                       Auth.logout();
                       return <Redirect to='/login'  />;
                     }}
@@ -248,7 +248,7 @@ class Router extends Component {
               </main>
 
             </div>
-          </HashRouter>
+          </BrowserRouter>
       </div>
       );
       
@@ -258,7 +258,7 @@ class Router extends Component {
       return (
     <div>
 
-          <HashRouter>
+          <BrowserRouter>
             <div>
 
               <nav className="navbar navbar-expand-sm navbar-dark bg-tr">
@@ -282,13 +282,13 @@ class Router extends Component {
 
               <Switch>
                 <Route path="/" component={App} exact />
-                <Route path="/#/polling/:id" render={() => {
+                <Route path="/polling/:id" render={() => {
                     return <Redirect to='/login'  />;
                   }}
                 />
-                <Route path="/#/daftar" component={Daftar} />
-                <Route path="/#/login" component={Login} />
-                <Route path="/#/logout" render={() => {
+                <Route path="/daftar" component={Daftar} />
+                <Route path="/login" component={Login} />
+                <Route path="/logout" render={() => {
                     Auth.logout();
                     return <Redirect to='/login'  />;
                     }}
@@ -299,7 +299,7 @@ class Router extends Component {
               <Footer />
 
             </div>
-          </HashRouter>
+          </BrowserRouter>
 
 
   </div>
