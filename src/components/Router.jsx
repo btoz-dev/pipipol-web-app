@@ -37,6 +37,7 @@ class Router extends Component {
       categories: [],
       sisaPoint: localStorage.getItem('sisaPoint'),
       currentPoint: localStorage.getItem('currentPoint'),
+      menuOpen: false,
       isLoggedIn: false,
       loading: true
     };
@@ -59,6 +60,18 @@ class Router extends Component {
     // Retrieves the user token from localStorage
     return localStorage.getItem('id_token')
     
+  }
+
+  handleStateChange (state) {
+    this.setState({menuOpen: state.isOpen})  
+  }
+
+  closeMenu () {
+    this.setState({menuOpen: false})
+  }
+
+  toggleMenu () {
+    this.setState({menuOpen: !this.state.menuOpen})
   }
   
   render() {
@@ -196,11 +209,21 @@ class Router extends Component {
                 <strong>{ this.state.currentPoint === "null" ? 0 : this.state.currentPoint }</strong> <small>pts</small>
               </NavLink>
               <div className="bg-burger-menu"></div>
-              <Menu right pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } >
-                <NavLink to="/"><i className="fas fa-home mr-1"></i> Home</NavLink>
-                <NavLink to="/profil"><i className="fas fa-user-alt mr-1"></i> Profile</NavLink>
-                <NavLink to="/redeem"><i className="fas fa-exchange-alt mr-1"></i> Redeem</NavLink>
-                <NavLink to="/logout"><i className="fas fa-sign-out-alt mr-1"></i> Logout</NavLink>
+              <Menu isOpen={this.state.menuOpen} onStateChange={(state) => this.handleStateChange(state)} right pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } >
+                <a
+                  href="#pollToolbar"
+                  className="nav-link"
+                  data-toggle="collapse"
+                  role="button"
+                  aria-expanded="false"
+                  aria-controls="pollToolbar"
+                  to="/" onClick={() => this.closeMenu()}><i className="fas fa-search mr-1"></i> 
+                  Cari Polling
+                </a>
+                <NavLink to="/" onClick={() => this.closeMenu()}><i className="fas fa-home mr-1"></i> Home</NavLink>
+                <NavLink to="/profil" onClick={() => this.closeMenu()}><i className="fas fa-user-alt mr-1"></i> Profile</NavLink>
+                <NavLink to="/redeem" onClick={() => this.closeMenu()}><i className="fas fa-exchange-alt mr-1"></i> Redeem</NavLink>
+                <NavLink to="/logout" onClick={() => this.closeMenu()}><i className="fas fa-sign-out-alt mr-1"></i> Logout</NavLink>
               </Menu>
 
               <main id="page-wrap">                 
