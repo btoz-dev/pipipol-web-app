@@ -214,7 +214,6 @@ class Router extends Component {
               <Menu isOpen={this.state.menuOpen} onStateChange={(state) => this.handleStateChange(state)} right pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } >
                 <a
                   href="#pollToolbar"
-                  className="nav-link"
                   data-toggle="collapse"
                   role="button"
                   aria-expanded="false"
