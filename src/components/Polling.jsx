@@ -367,6 +367,7 @@ class Polling extends Component {
                             onChange={this.handleChangeCaptchaText}
                             type="text"
                             placeholder="Masukan kode sandi.."
+                            autocomplete="off"
                           />
                         </div>
                       }
@@ -428,6 +429,7 @@ class Polling extends Component {
                     onChange={this.handleChangeCaptchaText}
                     type="text"
                     placeholder="Masukan kode sandi.."
+                    autocomplete="off"
                   />
                 </div>
               </div>
