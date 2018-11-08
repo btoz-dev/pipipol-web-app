@@ -219,8 +219,7 @@ class Router extends Component {
                   role="button"
                   aria-expanded="false"
                   aria-controls="pollToolbar"
-                  to="/" onClick={() => this.closeMenu()}><i className="fas fa-search mr-1"></i> 
-                  Cari Polling
+                  to="/" onClick={() => this.closeMenu()}><i className="fas fa-search mr-1"></i> Cari Polling
                 </a>
                 <NavLink to="/" onClick={() => this.closeMenu()}><i className="fas fa-home mr-1"></i> Home</NavLink>
                 <NavLink to="/profil" onClick={() => this.closeMenu()}><i className="fas fa-user-alt mr-1"></i> Profile</NavLink>

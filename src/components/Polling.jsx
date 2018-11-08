@@ -442,6 +442,12 @@ class Polling extends Component {
               <button onClick={this.toggleModalCaptchaShow} className="btn btn-danger">
                 Tutup
               </button>
+              {/* <button onClick={this.submitPoll} className="btn btn-danger">
+                {this.state.loadingSubmitPoll && (
+                  <i className="fas fa-spinner fa-spin mr-2" />
+                )}
+                Kirim
+              </button> */}
             </ModalFooter>
           </Modal>
           {/* <!-- /END MODAL IMAGE CAPTCHA --> */}
