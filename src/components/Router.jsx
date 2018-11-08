@@ -206,7 +206,9 @@ class Router extends Component {
               <NavLink to="/profil" className="profile-point-mobile">
                 <div className="avatar" style={{backgroundImage: "url("+BaseURL+userDetails.avatar+")" }}
                 />
-                <strong>{ this.state.currentPoint === "null" ? 0 : this.state.currentPoint }</strong> <small>pts</small>
+                <div className="point-value">
+                  <strong>{ this.state.currentPoint === "null" ? 0 : this.state.currentPoint }</strong> <small>pts</small>
+                </div>
               </NavLink>
               <div className="bg-burger-menu"></div>
               <Menu isOpen={this.state.menuOpen} onStateChange={(state) => this.handleStateChange(state)} right pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } >

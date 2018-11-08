@@ -180,21 +180,24 @@
     top: 0;
     right: 88px;
     z-index: 1000;
-    line-height: 73px;
+    line-height: 1;
     color: #000;
-    padding: 0.5rem;
+    padding: 0.5rem 1.5rem 0.5rem 0;
+    text-align: center;
     @media (min-width: 576px){
         display: none!important;
     }
     .avatar{
-        float: right;
-        width: 60px;
-        height: 60px;
-        border-radius: 30px;
-        margin: 0.4rem 0.6rem 0 0.6rem;
+        width: 48px;
+        height: 48px;
+        border-radius: 24px;
+        margin: 0.3rem auto 0;
         background-color: #000;
         background-position: center;
         background-size: cover;
+    }
+    .point-value{
+        margin-top: 3px;
     }
 }
 .bg-burger-menu{
