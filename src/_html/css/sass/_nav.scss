@@ -34,12 +34,25 @@
                 height: 60px;
                 border-radius: 30px;
                 margin: 0.4rem 0.6rem 0 0;
-                background-color: #000;
                 background-position: center;
                 background-size: cover;
                 @media only screen and (max-width: 575px) {
                     float: none;
                     margin: auto;
+                }
+                &::before{
+                    font-family: "Font Awesome 5 Free"; 
+                    font-weight: 900; 
+                    content: "\f2bd";
+                    color: #000;
+                    position: absolute;
+                    width: 60px;
+                    height: 60px;
+                    text-align: center;
+                    font-size: 60px;
+                    line-height: 60px;
+                    background-color: #fff;
+                    // z-index: -1;
                 }
             }
         }
@@ -192,9 +205,23 @@
         height: 48px;
         border-radius: 24px;
         margin: 0.3rem auto 0;
-        background-color: #000;
         background-position: center;
         background-size: cover;
+        &::before{
+            font-family: "Font Awesome 5 Free"; 
+            font-weight: 900; 
+            content: "\f2bd";
+            color: #000;
+            position: absolute;
+            left: 0;
+            width: 48px;
+            height: 48px;
+            text-align: center;
+            font-size: 48px;
+            line-height: 48px;
+            background-color: #fff;
+            z-index: -1;
+        }
     }
     .point-value{
         margin-top: 3px;
