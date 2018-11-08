@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { HashRouter, Switch, Route } from "react-router-dom";
 import  { Redirect } from 'react-router-dom'
 
 import AuthService from '../services/AuthService';
@@ -104,7 +104,7 @@ class Router extends Component {
       return (
           
         <div id="outer-container">
-          <BrowserRouter>
+          <HashRouter>
             <div>
               <nav className="navbar navbar-expand-sm navbar-dark bg-tr">
                 <NavLink to="/" className="navbar-brand">
@@ -248,7 +248,7 @@ class Router extends Component {
               </main>
 
             </div>
-          </BrowserRouter>
+          </HashRouter>
       </div>
       );
       
@@ -258,7 +258,7 @@ class Router extends Component {
       return (
     <div>
 
-          <BrowserRouter>
+          <HashRouter>
             <div>
 
               <nav className="navbar navbar-expand-sm navbar-dark bg-tr">
@@ -299,7 +299,7 @@ class Router extends Component {
               <Footer />
 
             </div>
-          </BrowserRouter>
+          </HashRouter>
 
 
   </div>
