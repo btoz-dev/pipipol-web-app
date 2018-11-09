@@ -1376,6 +1376,10 @@ input:disabled, textarea:disabled {
   font-size: 4rem;
 }
 
+.redeem-header .user-badge img {
+  width: 96px;
+}
+
 .redeem-prizes {
   margin-top: 3rem;
 }
