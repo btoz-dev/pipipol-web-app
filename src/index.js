@@ -9,13 +9,13 @@ import "./_html/css/style.css";
 
 const AUTH_TOKEN = localStorage.getItem('id_token');
 
-axios.defaults.baseURL = 'https://apipipipol.btoz.co.id';
+axios.defaults.baseURL = 'https://cors-anywhere.herokuapp.com/https://apipipipol.btoz.co.id';
 axios.defaults.headers.common['x-access-token'] = AUTH_TOKEN;
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 // axios.defaults.headers.common['Authorization'] = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTksI…jM4fQ.n0eQWET-FjzCdpjNh79zIf_lPX_fxpH5XpVLideknrQ';
 
 const TopMostParent = ReactDOM.render(<Router />, document.getElementById("root"));
-window.updateTopMostParent = (isLoggedIn, userDetails, currentPoint) => {
+window.updateTopMostParent = (isLoggedIn, userDetails, currentPoint, userAvatarUrl) => {
     // Update state of topmost parent when this method is called 
     if(isLoggedIn === "" && userDetails === "" ){
         console.log("1")
@@ -28,11 +28,12 @@ window.updateTopMostParent = (isLoggedIn, userDetails, currentPoint) => {
             isLoggedIn: isLoggedIn
         }); 
     }else{
-        console.log("3")
+        console.log("4")
         TopMostParent.setState({ 
             isLoggedIn: isLoggedIn,
             userDetails: userDetails,
-            currentPoint: currentPoint 
+            currentPoint: currentPoint,
+            userAvatarUrl: userAvatarUrl
         }); 
     }
     

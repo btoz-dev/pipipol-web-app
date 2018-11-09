@@ -94,7 +94,11 @@ export default class AuthService {
         localStorage.removeItem('isLoggedIn');
         localStorage.removeItem('sisaPoint');
         localStorage.removeItem('currentPoint');
+        localStorage.removeItem('userAvatar');
+
+
         sessionStorage.removeItem('userData');
+        
 
         // KASIH TAU SI ROUTER KLO UDAH SIGN OUT
         window.updateTopMostParent(false, "", ""); 

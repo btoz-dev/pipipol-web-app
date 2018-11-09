@@ -34,7 +34,9 @@ class Profil extends Component {
             loadingProfile: false,
             loadingPassword: false,
             selectedFile: null,
-            progressBar: '0%'
+            progressBar: '0%',
+            file: '',
+            imagePreviewUrl: ''
         };
         this.onChange = this.onChange.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
@@ -43,6 +45,7 @@ class Profil extends Component {
         this.onChangePasswordConfirm = this.onChangePasswordConfirm.bind(this);
         this.changePassword = this.changePassword.bind(this);
         this.updateProfile = this.updateProfile.bind(this);
+        this.changeAvatar = this.changeAvatar.bind(this);
     }
 
     onChange(e){
@@ -136,66 +139,22 @@ class Profil extends Component {
 
         this.setState({loadingProfile: true})
 
-        let userid = this.state.userid;
-        let password = this.state.password;
         let phone = this.state.phone;
         let firstname = this.state.firstname;
         let lastname = this.state.lastname;
         let email = this.state.email;
 
-        if(firstname !== "" || email !== "" || phone !== "" || password !== ""){
-
-            let dataForSubmit = { 
-                // 'idUsers':userid, 
-                'password': password, 
-                'firstname': firstname, 
-                'lastname': lastname, 
-                'email': email,
-                'phone': phone
-            }
-            console.log(dataForSubmit)
-        
-            axios
-            .post(`/api/updateProfile`, qs.stringify(dataForSubmit))
-            .then(res => {
-                console.log(res);
-                console.log(res.data);
-                let msg = res.data.message
-                console.log(msg)
-                this.notify(msg)
-                this.setState({loadingProfile: false})
-                this.getUserDetails()
-            })
-            .catch(err => {
-                console.log(err);
-                this.notifyError(err)
-                this.setState({loadingProfile: false})
-            });
-        }else{
-            this.notifyError("Semua input wajib diisi!")
-            this.setState({loadingProfile: false})
+        let dataForSubmit = { 
+            // 'idUsers':userid, 
+            'firstname': firstname, 
+            'lastname': lastname, 
+            'email': email,
+            'phone': phone
         }
-    }
-
-    fileChangedHandler = (event) => {
-        this.setState({selectedFile: event.target.files[0]})
-    }
-
-    changeAvatar = () => { 
-        this.setState({loadingProfile: true})
-
-        const formData = new FormData()
-        formData.append('password', this.state.password)
-        formData.append('file', this.state.selectedFile, this.state.selectedFile.name)
+        console.log(dataForSubmit)
+    
         axios
-        .post(`/api/updateAvatar`, formData, {
-            onUploadProgress: progressEvent => {
-                this.setState({
-                    progressBar: (Math.round(progressEvent.loaded / progressEvent.total * 100) + "%")
-                })
-              console.log(Math.round(progressEvent.loaded / progressEvent.total * 100) + "%")
-            }
-        })
+        .post(`/api/updateProfile`, qs.stringify(dataForSubmit))
         .then(res => {
             console.log(res);
             console.log(res.data);
@@ -210,7 +169,47 @@ class Profil extends Component {
             this.notifyError(err)
             this.setState({loadingProfile: false})
         });
+
     }
+
+    // fileChangedHandler = (event) => {
+    //     console.log("INPUT FILE AKTIF")
+    //     this.setState({selectedFile: event.target.files[0]})
+    //     if(this.state.selectedFile){
+    //         this.fileInputBtn.click()
+    //         // this.changeAvatar()
+    //     }
+    // }
+
+    // changeAvatar = () => { 
+    //     this.setState({loadingProfile: true})
+
+    //     const formData = new FormData()
+    //     formData.append('file', this.state.selectedFile, this.state.selectedFile.name)
+    //     axios
+    //     .post(`/api/updateAvatar`, formData, {
+    //         onUploadProgress: progressEvent => {
+    //             this.setState({
+    //                 progressBar: (Math.round(progressEvent.loaded / progressEvent.total * 100) + "%")
+    //             })
+    //           console.log(Math.round(progressEvent.loaded / progressEvent.total * 100) + "%")
+    //         }
+    //     })
+    //     .then(res => {
+    //         console.log(res);
+    //         console.log(res.data);
+    //         let msg = res.data.message
+    //         console.log(msg)
+    //         this.notify(msg)
+    //         this.setState({loadingProfile: false})
+    //         this.getUserDetails()
+    //     })
+    //     .catch(err => {
+    //         console.log(err);
+    //         this.notifyError(err)
+    //         this.setState({loadingProfile: false})
+    //     });
+    // }
 
     getUserDetails(){
         console.log("GET USER DETAIL")
@@ -220,12 +219,12 @@ class Profil extends Component {
             const userDetails = JSON.stringify(res.data.user_details[0])
             const currentPoint = JSON.stringify(res.data.user_details[0].point)
             console.log("USER DETAILS SEHABIS UPDATE PROFILE:")
-            console.log(userDetails)
+            console.log(currentPoint)
             localStorage.setItem('userDetails', userDetails)
             localStorage.setItem('currentPoint', currentPoint)
 
             // KIRIM STATES KE TOP MOST PARENT PARAMNYA: (isLoggedIn, userDetails, currentPoint)
-            window.updateTopMostParent("true", userDetails, currentPoint); 
+            window.updateTopMostParent(true, userDetails, currentPoint, localStorage.getItem("userAvatar")); 
 
             this.setState({
                 loading: false,
@@ -249,6 +248,54 @@ class Profil extends Component {
         });
     };
 
+    changeAvatar = e => {
+        e.preventDefault();
+        // TODO: do something with -> this.state.file
+        this.setState({loadingProfile: true})
+
+        const formData = new FormData()
+        formData.append('file', this.state.file, this.state.file.name)
+        axios
+        .post(`/api/updateAvatar`, formData, {
+            onUploadProgress: progressEvent => {
+                this.setState({
+                    progressBar: (Math.round(progressEvent.loaded / progressEvent.total * 100) + "%")
+                })
+              console.log(Math.round(progressEvent.loaded / progressEvent.total * 100) + "%")
+            }
+        })
+        .then(res => {
+            console.log(res);
+            console.log(res.data);
+            let msg = res.data.message
+            console.log(msg)
+            this.notify(msg)
+            this.setState({loadingProfile: false})
+            this.setState({imagePreviewUrl: null})
+            // this.getUserDetails()
+        })
+        .catch(err => {
+            console.log(err);
+            this.notifyError(err)
+            this.setState({loadingProfile: false})
+        });
+    }
+  
+    fileChangedHandler = e =>{
+        e.preventDefault();
+  
+        let reader = new FileReader();
+        let file = e.target.files[0];
+        reader.onloadend = () => {
+            this.setState({ file: file, imagePreviewUrl: reader.result });
+            window.updateTopMostParent(true, JSON.parse(localStorage.getItem('userDetails')), localStorage.getItem("currentPoint"), localStorage.getItem("userAvatar")); 
+
+        }
+        reader.readAsDataURL(file)
+
+        // KIRIM STATES KE TOP MOST PARENT PARAMNYA: (isLoggedIn, userDetails, currentPoint)
+    }
+
     render() {
 
         const userDetails = this.state.userDetails
@@ -258,6 +305,22 @@ class Profil extends Component {
         // console.log("PROFIL - USERDETAILS LOCALSTORAGE")
         // console.log(userDetails)
 
+        let {imagePreviewUrl} = this.state;
+        let $userAvatarUrl = null;
+
+        if (imagePreviewUrl) {
+            $userAvatarUrl = imagePreviewUrl;
+            localStorage.setItem("userAvatar", imagePreviewUrl)
+        }else{
+            if(localStorage.getItem("userAvatar")){
+                $userAvatarUrl = localStorage.getItem("userAvatar");
+            }else{
+                $userAvatarUrl = BaseURL+userAvatar;
+            }
+        }
+        
+        let $avatarLoader = (<div><i className="fas fa-circle-notch fa-spin"></i><span className="progress-upload">{this.state.progressBar}</span></div>);
+        let $avatarUploadBtn = (<button className="btn-upload-avatar btn btn-dark btn-sm" onClick={this.changeAvatar} ref={fileInputBtn => this.fileInputBtn = fileInputBtn}><i class="fas fa-upload mr-1"></i> Upload</button>)
         return (
             <div
                 className="site-content profil container-fluid"
@@ -267,6 +330,15 @@ class Profil extends Component {
                 }}
             >
                 <ToastContainer />
+                
+                {/* <form onSubmit={this._handleSubmit}>
+                    <input type="file" onChange={this._handleImageChange} />
+                    <button type="submit" onClick={this._handleSubmit}>Upload Image</button>
+                </form>
+                {!$imagePreview && <img src={imagePreviewUrl} />} */}
+
+                
+
                 <div className="bg-container container-fluid">
                     <section className="login container">
                         <div className="row">
@@ -275,22 +347,21 @@ class Profil extends Component {
                                     <div className="row">
                                         <h2 className="text-center w-100 mb-5 font-700">PROFILKU</h2>
                                         <div className="col-sm-12 col-md-12 col-lg-3 mb-5">
-                                            <div
-                                                className="user-avatar"
-                                                style={{
-                                                backgroundImage: "url("+BaseURL+userAvatar+")"
-                                                }}
-                                            >
+                                            
+                                            <div className="user-avatar" style={{backgroundImage: "url("+$userAvatarUrl+")"}}>
+
                                                 { !userAvatar ? <img className="img-fluid" src={userProfileImgDefault} alt={username} /> : "" }
-                                                <button style={{display: "none"}} onClick={() => this.fileInput.click()} className="btn-change-avatar">Ubah Foto</button>
-                                                <div style={{display: "none"}} className="progress">
-                                                    <div style={{width: this.state.progressBar}} className="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">{this.state.progressBar}</div>
-                                                </div>
-                                            </div>
-                                            <div>
+
+                                                <button onClick={() => this.fileInput.click()} className={this.state.loadingProfile ? "btn-change-avatar anim show" : "btn-change-avatar anim" }>
+                                                    {this.state.loadingProfile ? $avatarLoader : <i className="fas fa-camera"></i> }
+                                                </button>
+
                                                 <input style={{display: "none"}} type="file" onChange={this.fileChangedHandler} ref={fileInput => this.fileInput = fileInput} />
-                                                <button style={{display: "none"}} onClick={this.changeAvatar}>Upload!</button>
+                                            
                                             </div>
+                                            
+                                            {this.state.imagePreviewUrl && ($avatarUploadBtn)}
+
                                             <div className="user-badge text-center">
                                                 {!userBadge ? <i className="ic fas fa-award" /> : <img src={ BaseURL+userBadge } alt="" />}
                                             </div>
@@ -323,10 +394,10 @@ class Profil extends Component {
                                                 <input defaultValue={userDetails.phone} onChange={this.onChange} className="input-field" type="text" placeholder="Nomor Handphone" name="phone" />
                                             </div>
 
-                                            <div className="input-container">
+                                            {/* <div className="input-container">
                                                 <i className="fa fa-key icon"></i>
                                                 <input onChange={this.onChangePassword} className="input-field" type="password" placeholder="Password" name="password" required />
-                                            </div>
+                                            </div> */}
 
                                             <button onClick={this.updateProfile} type="submit" className="btn btn-lg btn-danger w-auto ml-0 mr-0 pl-4 pr-4">{this.state.loadingProfile && (<i className="fas fa-spinner fa-spin mr-1" />)} Update Profil</button>
                                         </div>

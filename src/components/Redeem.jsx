@@ -45,8 +45,22 @@ class Redeem extends Component {
         console.log(this.state.userDetails)
       }
     )
-    
   };
+
+  getVouchers(){
+    axios
+      .get(`/api/getVouchers`)
+        .then(res => {
+          console.log(res.data)
+          this.setState({ 
+            redeem: res.data.list_vouchers, 
+            loading: false 
+          });
+          console.log("REDEEM - USERDETAILS LOCALSTORAGE")
+          console.log(this.state.userDetails)
+        }
+      )
+  }
 
   submitRedeem(id, name, point) {
     this.setState({
@@ -90,6 +104,7 @@ class Redeem extends Component {
           localStorage.setItem("currentPoint", sisaPoint)
           localStorage.setItem("sisaPoint", sisaPoint)
           window.updateTopMostParent("", "", sisaPoint); 
+          this.getVouchers()
         }
     })
     .catch(err => {
@@ -114,9 +129,17 @@ class Redeem extends Component {
   render() {
     const redeem = this.state.redeem;
     const userDetails = this.state.userDetails;
-    const userAvatar = this.state.userDetails.avatar;
     const username = this.state.userDetails.username;
     // console.log(this.state.redeem[3])
+
+    const userAvatar = this.state.userDetails.avatar;
+    let $userAvatarUrl = null
+
+    if(localStorage.getItem("userAvatar")){
+      $userAvatarUrl = localStorage.getItem("userAvatar");
+    }else{
+      $userAvatarUrl = BaseURL+userAvatar;
+    }
 
     const redeemItems = redeem.map(item => (
       <div key={item.id} className="card">
@@ -167,7 +190,7 @@ class Redeem extends Component {
                   <div
                     className="user-avatar"
                     style={{
-                      backgroundImage: "url("+BaseURL+userDetails.avatar+")"
+                      backgroundImage: "url("+$userAvatarUrl+")"
                     }}
                   >
                     { !userAvatar ? <img className="img-fluid" src={userProfileImgDefault} alt={username} /> : "" }

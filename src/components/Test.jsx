@@ -14,7 +14,10 @@ class Test extends Component {
        
         this.state = {
             AUTH_TOKEN: localStorage.getItem("id_token"),
-            userDetails: JSON.parse(localStorage.getItem("userDetails"))
+            userDetails: JSON.parse(localStorage.getItem("userDetails")),
+
+            file: '',
+            imagePreviewUrl: ''
         };
         this.submitTestRedeem = this.submitTestRedeem.bind(this);
         this.submitTestChangePassword = this.submitTestChangePassword.bind(this);
@@ -128,10 +131,40 @@ class Test extends Component {
 
     }
 
+    _handleSubmit = e => {
+        e.preventDefault();
+        // TODO: do something with -> this.state.file
+    }
+  
+    _handleImageChange = e =>{
+        e.preventDefault();
+  
+        let reader = new FileReader();
+        let file = e.target.files[0];
+        reader.onloadend = () => {
+            this.setState({ file: file, imagePreviewUrl: reader.result });
+        }
+        reader.readAsDataURL(file)
+    }
+
     render() {
+
+        let {imagePreviewUrl} = this.state;
+        let $imagePreview = null;
+  
         return(
             <div>
+                
+
                 <Search />
+
+                <form onSubmit={this._handleSubmit}>
+                    <input type="file" onChange={this._handleImageChange} />
+                    <button type="submit" onClick={this._handleSubmit}>Upload Image</button>
+                </form>
+                {!$imagePreview && <img src={imagePreviewUrl} />}
+
+
                 <button onClick={this.testGet} type="submit" className="btn btn-lg btn-danger w-100 mt-3 mb-3">Test Get API Data</button>
                 <button onClick={this.uploadHandler} type="submit" className="btn btn-lg btn-danger w-100 mt-3 mb-3">Upload Avatar</button>
                 <button onClick={this.submitTestRedeem} type="submit" className="btn btn-lg btn-danger w-100 mt-3 mb-3">Submit Test Redeem</button>

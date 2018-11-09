@@ -39,7 +39,8 @@ class Router extends Component {
       currentPoint: localStorage.getItem('currentPoint'),
       menuOpen: false,
       isLoggedIn: false,
-      loading: true
+      loading: true,
+      userAvatarUrl: localStorage.getItem('userAvatar')
     };
   }
 
@@ -141,7 +142,7 @@ class Router extends Component {
                         
                         <div
                           className="avatar"
-                          style={{backgroundImage: "url("+BaseURL+userDetails.avatar+")" }}
+                          style={{backgroundImage: "url("+this.state.userAvatarUrl+")" }}
                         />
                         <strong>{ this.state.currentPoint === "null" ? 0 : this.state.currentPoint }</strong> <small>pts</small> <i className="fas fa-angle-down ml-1"></i>
                       </NavLink>

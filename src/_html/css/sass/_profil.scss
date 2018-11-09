@@ -1,5 +1,6 @@
 .profil{
     .user-avatar{
+        position: relative;
         margin: 0 auto 1rem;
         width: 160px;
         height: 160px;
@@ -8,9 +9,54 @@
         background-size: cover;
         background-color: #000;
     }
+    .avatar-preview{
+        position: absolute;
+        top: 0;
+        left:0;
+    }
     .user-badge{
+        img{
+            width: 64px;
+        }
         .ic{
             font-size: 3rem !important;
         }
+    }
+    .btn-change-avatar{
+        position: relative;
+        margin: auto;
+        display: block;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(0,0,0,0.5);
+        color: #fff;
+        font-size: 5rem;
+        border-radius: 50%;
+        opacity: 0;
+        cursor: pointer;
+        &:hover,
+        &.show{
+           opacity: 1;
+        }
+        .fa-camera{
+            font-size: 2rem !important;
+        }
+        .progress-upload,
+        .fa-camera{
+            position: absolute;
+            top: 50%;
+            left: 0;
+            margin-top: -10px;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            width: 100%;
+            font-size: 1.25rem;
+        }
+    }
+    .btn-upload-avatar{
+        width: auto !important;
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 }

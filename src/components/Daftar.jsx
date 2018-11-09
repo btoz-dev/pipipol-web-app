@@ -137,7 +137,7 @@ class Daftar extends Component {
                             <div className="col-sm-12 col-md-12 col-lg-6 my-auto">
                                 <div className="login-copy text-center">
                                     <div className="mb-3"><a href="./"><img src={logoPipipol} alt="Pipipol" /></a></div>
-                                    <p>Lorem ipsum dolor sit amet, quaestio philosophia eu quo, eum movet delectus deterruisset no. Soluta civibus patrioque et nec. Qui alii doming postulant ex. Fuisset honestatis ut eam, illud voluptatum per et. Ut sit iusto virtute, sea ad quando libris tractatos. Vim mucius percipit laboramus ad, ex vitae urbanitas vel, dicat inani suscipiantur at vix.</p>
+                                    {/* <p>Lorem ipsum dolor sit amet, quaestio philosophia eu quo, eum movet delectus deterruisset no. Soluta civibus patrioque et nec. Qui alii doming postulant ex. Fuisset honestatis ut eam, illud voluptatum per et. Ut sit iusto virtute, sea ad quando libris tractatos. Vim mucius percipit laboramus ad, ex vitae urbanitas vel, dicat inani suscipiantur at vix.</p> */}
                                 </div>
                             </div>
                             <div className="col-sm-12 col-md-12 col-lg-6">

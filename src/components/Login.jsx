@@ -7,6 +7,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import bgRedeem  from'./../img/bg-redeem.jpg';
 import logoPipipol  from'./../img/logo-pipipol.png';
 
+const BaseURL = "https://apipipipol.btoz.co.id";
+
 class Login extends Component {
 
     constructor(props){
@@ -71,13 +73,15 @@ class Login extends Component {
         .then(res => {
             const userDetails = JSON.stringify(res.data.user_details[0])
             const currentPoint = JSON.stringify(res.data.user_details[0].point)
+            const userAvatarUrl = JSON.stringify(BaseURL+res.data.user_details[0].avatar)
             console.log("USER DETAILS DAPAT PAS LOGIN:")
             console.log(userDetails)
             localStorage.setItem('userDetails', userDetails)
             localStorage.setItem('currentPoint', currentPoint)
+            localStorage.setItem('userAvatar', userAvatarUrl)
 
             // KIRIM STATES KE TOP MOST PARENT PARAMNYA: (isLoggedIn, userDetails, currentPoint)
-            window.updateTopMostParent("true", userDetails, currentPoint); 
+            window.updateTopMostParent("true", userDetails, currentPoint, userAvatarUrl); 
 
             this.setState({
                 loading: false
@@ -112,7 +116,7 @@ class Login extends Component {
                             <div className="col-sm-12 col-md-12 col-lg-6 my-auto">
                                 <div className="login-copy text-center">
                                     <div className="mb-3"><a href="./"><img src={logoPipipol} alt="Pipipol" /></a></div>
-                                    <p>Lorem ipsum dolor sit amet, quaestio philosophia eu quo, eum movet delectus deterruisset no. Soluta civibus patrioque et nec. Qui alii doming postulant ex. Fuisset honestatis ut eam, illud voluptatum per et. Ut sit iusto virtute, sea ad quando libris tractatos. Vim mucius percipit laboramus ad, ex vitae urbanitas vel, dicat inani suscipiantur at vix.</p>
+                                    {/* <p>Lorem ipsum dolor sit amet, quaestio philosophia eu quo, eum movet delectus deterruisset no. Soluta civibus patrioque et nec. Qui alii doming postulant ex. Fuisset honestatis ut eam, illud voluptatum per et. Ut sit iusto virtute, sea ad quando libris tractatos. Vim mucius percipit laboramus ad, ex vitae urbanitas vel, dicat inani suscipiantur at vix.</p> */}
                                 </div>
                             </div>
                             <div className="col-sm-12 col-md-12 col-lg-6">
