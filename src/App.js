@@ -5,6 +5,7 @@ import Loader from "./components/Loader";
 import Pollings from "./components/Pollings";
 import Feed from "./components/Feed";
 
+
 const BaseURL = "https://apipipipol.btoz.co.id";
 
 class App extends Component {
@@ -25,14 +26,15 @@ class App extends Component {
     this.setState({ firstpoll: datafirst });
   };
 
- updateTopMostParent() {
-  console.log("TopMostValue")
-  let someValue = 9999999999
-  window.updateTopMostParent(someValue); 
-}
+  updateTopMostParent() {
+    console.log("TopMostValue")
+    let someValue = 9999999999
+    window.updateTopMostParent(someValue); 
+  }
 
   render() {
     const firstpoll = this.state.firstpoll;
+    
     const { loading } = this.state;
     if (loading) {
       return <Loader />;
@@ -43,6 +45,7 @@ class App extends Component {
         <div className="bg-container">
           <div className="poll-grids container-fluid">
             <div className="row no-gutters">
+
               <div className="col-md-5 col-sm-12">
                 {/* POLL FEATURED */}
                 {/* <FeaturedPolling firstpoll={this.state.firstpoll} /> */}
@@ -103,6 +106,10 @@ class App extends Component {
             <Feed />
           </div>
         </div>
+
+
+        {/* <Search /> */}
+        
 
         {/* <Form getPolling={this.getPolling} /> */}
       </div>

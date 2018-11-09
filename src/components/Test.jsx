@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
 import md5 from "md5";
+import Search from "./Search";
+
 const qs = require('query-string');
 
-const BaseURL = `https://apipipipol.btoz.co.id/api`;
+const BaseURL = `https://apipipipol.btoz.co.id`;
 
 class Test extends Component {
 
@@ -17,6 +19,19 @@ class Test extends Component {
         this.submitTestRedeem = this.submitTestRedeem.bind(this);
         this.submitTestChangePassword = this.submitTestChangePassword.bind(this);
         this.hitung = this.hitung.bind(this);
+        this.testGet = this.testGet.bind(this);
+    }
+
+    testGet (){
+        axios
+        .get(`/api/redeemHistory`)
+        .then(res => {
+            console.log("TEST : redeemHistory")
+            console.log(res.data)
+        })
+        .catch(err => {
+            console.log(err);
+        });
     }
 
     submitTestRedeem() {
@@ -74,6 +89,37 @@ class Test extends Component {
     }
 
 
+    uploadHandler = () => { 
+        console.log(this.state.password)
+        console.log(this.state.selectedFile)
+
+        this.setState({loadingProfile: true})
+
+        const formData = new FormData()
+        formData.append('username', this.state.username)
+        formData.append('password', this.state.password)
+        formData.append('file', this.state.selectedFile, this.state.selectedFile.name)
+        axios.post(BaseURL+`/api/updateAvatar`, formData, {
+            onUploadProgress: progressEvent => {
+              console.log(progressEvent.loaded / progressEvent.total)
+            }
+        })
+        .then(res => {
+            console.log(res);
+            console.log(res.data);
+            let msg = res.data.message
+            console.log(msg)
+            this.notify(msg)
+            this.setState({loadingProfile: false})
+        })
+        .catch(err => {
+            console.log(err);
+            this.notifyError(err)
+            this.setState({loadingProfile: false})
+        });
+    }
+
+
     hitung(){
         let pollingPoint = parseInt("10")
         let currentPoint = parseInt("20")
@@ -85,6 +131,9 @@ class Test extends Component {
     render() {
         return(
             <div>
+                <Search />
+                <button onClick={this.testGet} type="submit" className="btn btn-lg btn-danger w-100 mt-3 mb-3">Test Get API Data</button>
+                <button onClick={this.uploadHandler} type="submit" className="btn btn-lg btn-danger w-100 mt-3 mb-3">Upload Avatar</button>
                 <button onClick={this.submitTestRedeem} type="submit" className="btn btn-lg btn-danger w-100 mt-3 mb-3">Submit Test Redeem</button>
                 <button onClick={this.submitTestChangePassword} type="submit" className="btn btn-lg btn-danger w-100 mt-3 mb-3">Submit Test Change Password</button>
                 <button onClick={this.hitung} type="submit" className="btn btn-lg btn-danger w-100 mt-3 mb-3">Hitung</button>

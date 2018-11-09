@@ -172,3 +172,11 @@
     border-color: #5cb85c; }
   .radio-success input[type="radio"]:checked + label::after {
     background-color: #5cb85c; }
+
+
+
+  input:disabled, textarea:disabled {
+      color: #ec2828;
+      cursor: not-allowed;
+      background-color: #fff;
+  }

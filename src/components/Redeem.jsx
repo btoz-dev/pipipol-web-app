@@ -33,11 +33,19 @@ class Redeem extends Component {
     this.toggleModalRedeemShow = this.toggleModalRedeemShow.bind(this);
   }
   componentDidMount = async () => {
-    const req = await fetch(BaseURL + "/api/getVouchers/");
-    const res = await req.json();
-    this.setState({ redeem: res.list_vouchers, loading: false });
-    console.log("REDEEM - USERDETAILS LOCALSTORAGE")
-    console.log(this.state.userDetails)
+    axios
+    .get(`/api/getVouchers`)
+      .then(res => {
+        console.log(res.data)
+        this.setState({ 
+          redeem: res.data.list_vouchers, 
+          loading: false 
+        });
+        console.log("REDEEM - USERDETAILS LOCALSTORAGE")
+        console.log(this.state.userDetails)
+      }
+    )
+    
   };
 
   submitRedeem(id, name, point) {
@@ -59,13 +67,7 @@ class Redeem extends Component {
     let dataForSubmitEncoded = queryString.stringify(dataForSubmit);
 
     axios
-    .post(BaseURL+`/api/redeem`, dataForSubmitEncoded,{
-        headers: {
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-        'Cache-Control': 'no-cache',
-        'x-access-token': this.state.AUTH_TOKEN
-        }
-    })
+    .post(`/api/redeem`, dataForSubmitEncoded)
     .then(res => {
         console.log("=== RESPONSE ===")
         console.log(res);
@@ -73,12 +75,11 @@ class Redeem extends Component {
         let msg = res.data.message
         let sisaPoint = res.data.sisa_point
         console.log(msg)
-        if(msg === "Point anda tidak cukup"){
+        if(msg === "Point anda tidak cukup" || msg === "System error"){
           this.setState({
             redeemStatus: false,
-            redeemMessage: "Maaf.. "+ msg
           });
-          this.notifyError()
+          this.notifyError(msg)
         }else{
           this.setState({
             redeemStatus: true,
@@ -90,8 +91,6 @@ class Redeem extends Component {
           localStorage.setItem("sisaPoint", sisaPoint)
           window.updateTopMostParent("", "", sisaPoint); 
         }
-        
-        // document.getElementById("showModalRedeemBtn").click();
     })
     .catch(err => {
         console.log(err);
@@ -104,8 +103,8 @@ class Redeem extends Component {
     });
   }
 
-  notifyError = () => {
-    toast.error(this.state.redeemMessage, {
+  notifyError = (msg) => {
+    toast.error(msg, {
       position: toast.POSITION.TOP_CENTER,
       className: 'pipipol-notify',
       autoClose: 7000
@@ -117,7 +116,7 @@ class Redeem extends Component {
     const userDetails = this.state.userDetails;
     const userAvatar = this.state.userDetails.avatar;
     const username = this.state.userDetails.username;
-    console.log(this.state.redeem[3])
+    // console.log(this.state.redeem[3])
 
     const redeemItems = redeem.map(item => (
       <div key={item.id} className="card">

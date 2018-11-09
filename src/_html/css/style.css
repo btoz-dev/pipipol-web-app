@@ -387,6 +387,12 @@ a:hover {
   background-color: #5cb85c;
 }
 
+input:disabled, textarea:disabled {
+  color: #ec2828;
+  cursor: not-allowed;
+  background-color: #fff;
+}
+
 .navbar {
   z-index: 999;
   position: fixed;

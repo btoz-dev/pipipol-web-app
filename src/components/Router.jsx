@@ -78,8 +78,8 @@ class Router extends Component {
     
     const userDetails = this.state.userDetails;
     const currentPoint = this.state.currentPoint
-    console.log("USER DETAIL HEADER")
-    console.log(userDetails)
+    // console.log("USER DETAIL HEADER")
+    // console.log(userDetails)
 
     const categories = this.state.categories;
     const listCategories = categories.map(cat => (
@@ -88,15 +88,15 @@ class Router extends Component {
       </option>
     ));
 
-    console.log("IS LOGGED IN ????????")
-    console.log(this.state.isLoggedIn)
+    // console.log("IS LOGGED IN ????????")
+    // console.log(this.state.isLoggedIn)
 
     const isLoggedIn = localStorage.getItem('isLoggedIn')
 
 
     if( isLoggedIn ){
 
-      console.log("LOGGED IN")
+      // console.log("LOGGED IN")
 
       localStorage.setItem('isLoggedIn', true)
       localStorage.setItem('currentPoint', currentPoint)

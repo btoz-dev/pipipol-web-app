@@ -31,7 +31,10 @@ class Profil extends Component {
             passwordNew: '',
             passwordConfirm: '',
             redirectToReferrer: false,
-            notifyMessage: "Input Password tidak boleh kosong!"
+            loadingProfile: false,
+            loadingPassword: false,
+            selectedFile: null,
+            progressBar: '0%'
         };
         this.onChange = this.onChange.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
@@ -80,6 +83,8 @@ class Profil extends Component {
 
     changePassword() {
 
+        this.setState({loadingPassword: true})
+
         let username = this.state.userDetails.username
         let passwordOld = this.state.passwordOld;
         let passwordNew = this.state.passwordNew;
@@ -93,7 +98,7 @@ class Profil extends Component {
                 console.log(dataForSubmit)
             
                 axios
-                .post(BaseURL+`/api/changePassword`, qs.stringify(dataForSubmit),{
+                .post(`/api/changePassword`, qs.stringify(dataForSubmit),{
                     headers: {
                     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
                     'Cache-Control': 'no-cache',
@@ -105,33 +110,21 @@ class Profil extends Component {
                     console.log(res.data);
                     let msg = res.data.message
                     console.log(msg)
-                    if(msg === "wrong old password"){
-                        this.setState({
-                            notifyMessage: "Password lama salah!"
-                        })
-                        this.notifyError()
-                    }else{
-                        this.setState({
-                            notifyMessage: "Password berhasil dirubah!"
-                        })
-                        this.notify()
-                    }
-                    
+                    this.notify(msg)  
+                    this.setState({loadingPassword: false})    
                 })
                 .catch(err => {
                     console.log(err);
+                    this.notifyError(err)
+                    this.setState({loadingPassword: false})  
                 });
             }else{
-                this.setState({
-                    notifyMessage: "Konfirmasi Password Baru tidak sama"
-                })
-                this.notifyError()
+                this.notifyError("Konfirmasi Password Baru tidak sama")
+                this.setState({loadingPassword: false})  
             }
         }else{
-            this.setState({
-                notifyMessage: "Input Password tidak boleh kosong!"
-            })
-            this.notifyError()
+            this.notifyError("Semua input wajib diisi!")
+            this.setState({loadingPassword: false})  
         }
     }
 
@@ -140,6 +133,8 @@ class Profil extends Component {
     // add headers variable => x-access-token isinya token yg didapat ketika login
 
     updateProfile() {
+
+        this.setState({loadingProfile: true})
 
         let userid = this.state.userid;
         let password = this.state.password;
@@ -151,7 +146,7 @@ class Profil extends Component {
         if(firstname !== "" || email !== "" || phone !== "" || password !== ""){
 
             let dataForSubmit = { 
-                'idUsers':userid, 
+                // 'idUsers':userid, 
                 'password': password, 
                 'firstname': firstname, 
                 'lastname': lastname, 
@@ -161,47 +156,93 @@ class Profil extends Component {
             console.log(dataForSubmit)
         
             axios
-            .post(BaseURL+`/api/updateProfile`, qs.stringify(dataForSubmit),{
-                headers: {
-                'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-                'Cache-Control': 'no-cache',
-                'x-access-token': this.state.AUTH_TOKEN
-                }
-            })
+            .post(`/api/updateProfile`, qs.stringify(dataForSubmit))
             .then(res => {
                 console.log(res);
                 console.log(res.data);
                 let msg = res.data.message
                 console.log(msg)
-                this.setState({
-                    notifyMessage: msg
-                })
-                this.notify()
+                this.notify(msg)
+                this.setState({loadingProfile: false})
+                this.getUserDetails()
             })
             .catch(err => {
                 console.log(err);
-                this.setState({
-                    notifyMessage: err
-                })
-                this.notifyError()
+                this.notifyError(err)
+                this.setState({loadingProfile: false})
             });
         }else{
-            this.setState({
-                notifyMessage: "Input Password tidak boleh kosong!"
-            })
-            this.notifyError()
+            this.notifyError("Semua input wajib diisi!")
+            this.setState({loadingProfile: false})
         }
     }
+
+    fileChangedHandler = (event) => {
+        this.setState({selectedFile: event.target.files[0]})
+    }
+
+    changeAvatar = () => { 
+        this.setState({loadingProfile: true})
+
+        const formData = new FormData()
+        formData.append('password', this.state.password)
+        formData.append('file', this.state.selectedFile, this.state.selectedFile.name)
+        axios
+        .post(`/api/updateAvatar`, formData, {
+            onUploadProgress: progressEvent => {
+                this.setState({
+                    progressBar: (Math.round(progressEvent.loaded / progressEvent.total * 100) + "%")
+                })
+              console.log(Math.round(progressEvent.loaded / progressEvent.total * 100) + "%")
+            }
+        })
+        .then(res => {
+            console.log(res);
+            console.log(res.data);
+            let msg = res.data.message
+            console.log(msg)
+            this.notify(msg)
+            this.setState({loadingProfile: false})
+            this.getUserDetails()
+        })
+        .catch(err => {
+            console.log(err);
+            this.notifyError(err)
+            this.setState({loadingProfile: false})
+        });
+    }
+
+    getUserDetails(){
+        console.log("GET USER DETAIL")
+        axios
+        .get(`/api/getUserDetails/`+this.state.userid)
+        .then(res => {
+            const userDetails = JSON.stringify(res.data.user_details[0])
+            const currentPoint = JSON.stringify(res.data.user_details[0].point)
+            console.log("USER DETAILS SEHABIS UPDATE PROFILE:")
+            console.log(userDetails)
+            localStorage.setItem('userDetails', userDetails)
+            localStorage.setItem('currentPoint', currentPoint)
+
+            // KIRIM STATES KE TOP MOST PARENT PARAMNYA: (isLoggedIn, userDetails, currentPoint)
+            window.updateTopMostParent("true", userDetails, currentPoint); 
+
+            this.setState({
+                loading: false,
+                userDetails: JSON.parse(localStorage.getItem("userDetails"))                
+            })
+        })
+    }
      
-    notify = () => {
-        toast(this.state.notifyMessage, {
+    notify = (msg) => {
+        toast(msg, {
             position: toast.POSITION.TOP_CENTER,
             className: 'pipipol-notify',
             autoClose: 7000
         });
     };
-    notifyError = () => {
-        toast.error(this.state.notifyMessage, {
+    notifyError = (msg) => {
+        toast.error(msg, {
             position: toast.POSITION.TOP_CENTER,
             className: 'pipipol-notify',
             autoClose: 7000
@@ -214,8 +255,8 @@ class Profil extends Component {
         const userAvatar = userDetails.avatar
         const userBadge = userDetails.badge_img
         const username = userDetails.username
-        console.log("PROFIL - USERDETAILS LOCALSTORAGE")
-        console.log(userDetails)
+        // console.log("PROFIL - USERDETAILS LOCALSTORAGE")
+        // console.log(userDetails)
 
         return (
             <div
@@ -241,6 +282,14 @@ class Profil extends Component {
                                                 }}
                                             >
                                                 { !userAvatar ? <img className="img-fluid" src={userProfileImgDefault} alt={username} /> : "" }
+                                                <button style={{display: "none"}} onClick={() => this.fileInput.click()} className="btn-change-avatar">Ubah Foto</button>
+                                                <div style={{display: "none"}} className="progress">
+                                                    <div style={{width: this.state.progressBar}} className="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">{this.state.progressBar}</div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <input style={{display: "none"}} type="file" onChange={this.fileChangedHandler} ref={fileInput => this.fileInput = fileInput} />
+                                                <button style={{display: "none"}} onClick={this.changeAvatar}>Upload!</button>
                                             </div>
                                             <div className="user-badge text-center">
                                                 {!userBadge ? <i className="ic fas fa-award" /> : <img src={ BaseURL+userBadge } alt="" />}
@@ -249,7 +298,7 @@ class Profil extends Component {
                                         <div className="col-sm-12 col-md-6 col-lg-5 mb-5">
                                             <div className="input-container">
                                                 <i className="fa fa-user icon"></i>
-                                                <input defaultValue={userDetails.username} onChange={this.onChange} className="input-field" type="text" placeholder="Username" name="username" />
+                                                <input disabled defaultValue={userDetails.username} onChange={this.onChange} className="input-field" type="text" placeholder="Username" name="username" />
                                             </div>
 
                                             <div className="input-container">
@@ -279,7 +328,7 @@ class Profil extends Component {
                                                 <input onChange={this.onChangePassword} className="input-field" type="password" placeholder="Password" name="password" required />
                                             </div>
 
-                                            <button onClick={this.updateProfile} type="submit" className="btn btn-lg btn-danger">Update Profil</button>
+                                            <button onClick={this.updateProfile} type="submit" className="btn btn-lg btn-danger w-auto ml-0 mr-0 pl-4 pr-4">{this.state.loadingProfile && (<i className="fas fa-spinner fa-spin mr-1" />)} Update Profil</button>
                                         </div>
 
                                         <div className="col-sm-12 col-md-6 col-lg-4 mb-5">
@@ -295,7 +344,7 @@ class Profil extends Component {
                                                 <i className="fa fa-key icon"></i>
                                                 <input onChange={this.onChangePasswordConfirm} className="input-field" type="password" placeholder="Konfirmasi Password Baru" name="confirmPassword" required />
                                             </div>
-                                            <button onClick={this.changePassword} type="submit" className="btn btn-lg btn-dark">Ganti Password</button>
+                                            <button onClick={this.changePassword} type="submit" className="btn btn-lg btn-dark w-auto ml-0 mr-0 pl-4 pr-4">{this.state.loadingPassword && (<i className="fas fa-spinner fa-spin mr-1" />)} Ubah Password</button>
                                         </div>
 
                                     </div>   
