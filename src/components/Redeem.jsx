@@ -168,7 +168,7 @@ class Redeem extends Component {
           </div>
           <div className="float-right">
             <button onClick={()=>{this.submitRedeem(item.id, item.voucher_name, item.point)}} className="btn btn-danger pl-3 pr-3">
-              {this.state.loadingSubmitRedeem && (<i className="fas fa-spinner fa-spin mr-1" />)} Tukar
+              Tukar
             </button>
           </div>
           {/* <div className="card-checkbox">
