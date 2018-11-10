@@ -194,7 +194,7 @@
     right: 88px;
     z-index: 1000;
     line-height: 1;
-    color: #000;
+    color: #000 !important;
     padding: 0.5rem 1.5rem 0.5rem 0;
     text-align: center;
     @media (min-width: 576px){
@@ -222,6 +222,10 @@
             background-color: #fff;
             z-index: -1;
         }
+    }
+    &:hover,
+    &:active{
+        color: #000 !important;
     }
     .point-value{
         margin-top: 3px;

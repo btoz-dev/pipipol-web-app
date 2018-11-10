@@ -204,7 +204,7 @@ class Router extends Component {
 
               {/* MOBILE MENU     */}
               <NavLink to="/profil" className="profile-point-mobile">
-                <div className="avatar" style={{backgroundImage: "url("+BaseURL+userDetails.avatar+")" }}
+                <div className="avatar" style={{backgroundImage: "url("+this.state.userAvatarUrl+")" }}
                 />
                 <div className="point-value">
                   <strong>{ this.state.currentPoint === "null" ? 0 : this.state.currentPoint }</strong> <small>pts</small>

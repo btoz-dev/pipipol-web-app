@@ -618,7 +618,7 @@ input:disabled, textarea:disabled {
   right: 88px;
   z-index: 1000;
   line-height: 1;
-  color: #000;
+  color: #000 !important;
   padding: 0.5rem 1.5rem 0.5rem 0;
   text-align: center;
 }
@@ -652,6 +652,10 @@ input:disabled, textarea:disabled {
   line-height: 48px;
   background-color: #fff;
   z-index: -1;
+}
+
+.profile-point-mobile:hover, .profile-point-mobile:active {
+  color: #000 !important;
 }
 
 .profile-point-mobile .point-value {
