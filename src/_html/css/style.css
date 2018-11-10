@@ -735,6 +735,8 @@ input:disabled, textarea:disabled {
 .bm-menu-wrap {
   top: 0;
   right: -10px !important;
+  -webkit-transition: all 0.2s ease-in-out 0s !important;
+  transition: all 0.2s ease-in-out 0s !important;
 }
 
 .bm-menu {
