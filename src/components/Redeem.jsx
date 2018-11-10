@@ -63,6 +63,12 @@ class Redeem extends Component {
   }
 
   submitRedeem(id, name, point) {
+
+    this.setState({
+      loadingSubmitRedeem: true
+    })
+
+
     this.setState({
       idVoucher: id,
       nameVoucher: name,
@@ -106,6 +112,9 @@ class Redeem extends Component {
           window.updateTopMostParent("", "", sisaPoint); 
           this.getVouchers()
         }
+        this.setState({
+          loadingSubmitRedeem: false
+        })
     })
     .catch(err => {
         console.log(err);
@@ -159,7 +168,7 @@ class Redeem extends Component {
           </div>
           <div className="float-right">
             <button onClick={()=>{this.submitRedeem(item.id, item.voucher_name, item.point)}} className="btn btn-danger pl-3 pr-3">
-              Tukar
+              {this.state.loadingSubmitRedeem && (<i className="fas fa-spinner fa-spin mr-1" />)} Tukar
             </button>
           </div>
           {/* <div className="card-checkbox">
