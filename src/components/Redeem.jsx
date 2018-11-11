@@ -224,7 +224,7 @@ class Redeem extends Component {
             </div>
 
             <div className="redeem-prizes">
-              <h2 className="text-center mb-5 font-700">Hadiah</h2>
+              <h2 className="text-center mb-5 font-700">Hadiah <i className={this.state.loading ? 'fas fa-spinner fa-spin ml-1' : 'd-none'} /></h2>
               <div className="card-columns">
                 {redeemItems}
               </div>
