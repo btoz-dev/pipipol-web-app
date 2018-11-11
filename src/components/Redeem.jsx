@@ -27,7 +27,8 @@ class Redeem extends Component {
       redeemStatus: false,
       sisaPoint: localStorage.getItem("currentPoint"),
       modalRedeemShow: false,
-      redeemMessage: ""
+      redeemMessage: "",
+      activeItem: -1
     };
     this.submitRedeem = this.submitRedeem.bind(this);
     this.toggleModalRedeemShow = this.toggleModalRedeemShow.bind(this);
@@ -62,19 +63,15 @@ class Redeem extends Component {
       )
   }
 
-  submitRedeem(id, name, point) {
-
-    this.setState({
-      loadingSubmitRedeem: true
-    })
-
+  submitRedeem(index, id, name, point) {
 
     this.setState({
       idVoucher: id,
       nameVoucher: name,
-      pointVoucher: point
+      pointVoucher: point,
+      loadingSubmitRedeem: true,
+      activeItem: index
     })
-
 
     let dataForSubmit = { 
         idUsers: localStorage.getItem("userid"), 
@@ -113,7 +110,8 @@ class Redeem extends Component {
           this.getVouchers()
         }
         this.setState({
-          loadingSubmitRedeem: false
+          loadingSubmitRedeem: false,
+          activeItem: -1
         })
     })
     .catch(err => {
@@ -150,7 +148,7 @@ class Redeem extends Component {
       $userAvatarUrl = BaseURL+userAvatar;
     }
 
-    const redeemItems = redeem.map(item => (
+    const redeemItems = redeem.map((item, index) => (
       <div key={item.id} className="card">
         <div className="card-header">
           <h5 className="card-title">{item.voucher_name}</h5>
@@ -167,8 +165,10 @@ class Redeem extends Component {
           < i className="fas fa-coins"></i> {item.point} <small>pts</small>
           </div>
           <div className="float-right">
-            <button onClick={()=>{this.submitRedeem(item.id, item.voucher_name, item.point)}} className="btn btn-danger pl-3 pr-3">
-              Tukar
+            <button 
+              onClick={()=>{this.submitRedeem(index, item.id, item.voucher_name, item.point)}} 
+              className="btn btn-danger">
+              <i className={this.state.activeItem === index ? 'fas fa-spinner fa-spin mr-1' : 'd-none'} />Tukar
             </button>
           </div>
           {/* <div className="card-checkbox">
