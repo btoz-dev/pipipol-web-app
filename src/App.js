@@ -100,7 +100,7 @@ class App extends Component {
 
         <div className="poll-grids-container">
           <div className="poll-grids-title">
-            <h2 className="text-center">Polling terbaru lainnya</h2>
+            <h2 className="text-center"><strong>Polling terbaru lainnya</strong></h2>
           </div>
           <div className="poll-grids container-fluid">
             <Feed />

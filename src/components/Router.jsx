@@ -15,6 +15,7 @@ import Footer from "./Footer";
 import Test from "./Test";
 import { NavLink } from "react-router-dom";
 import logo from "./../img/logo-pipipol_black.png";
+import userProfileImgDefault  from'./../img/ic-user.png';
 
 import { slide as Menu } from 'react-burger-menu'
 
@@ -143,7 +144,8 @@ class Router extends Component {
                         <div
                           className="avatar"
                           style={{backgroundImage: "url("+this.state.userAvatarUrl+")" }}
-                        />
+                        >{this.state.userAvatarUrl === '"https://apipipipol.btoz.co.idnull"' ? <img className="img-fluid user-avatar-default" src={userProfileImgDefault} alt="" /> : ''}
+                        </div>
                         <strong>{ this.state.currentPoint === "null" ? 0 : this.state.currentPoint }</strong> <small>pts</small> <i className="fas fa-angle-down ml-1"></i>
                       </NavLink>
                       <div className="dropdown-menu">

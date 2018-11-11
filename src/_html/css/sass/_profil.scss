@@ -7,7 +7,10 @@
         border-radius: 80px;
         background-position: center;
         background-size: cover;
-        background-color: #000;
+        background-color: transparent;
+        &-default{
+            position: absolute;
+        }
     }
     .avatar-preview{
         position: absolute;

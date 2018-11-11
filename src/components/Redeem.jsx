@@ -202,7 +202,7 @@ class Redeem extends Component {
                       backgroundImage: "url("+$userAvatarUrl+")"
                     }}
                   >
-                    { !userAvatar ? <img className="img-fluid" src={userProfileImgDefault} alt={username} /> : "" }
+                    { $userAvatarUrl === '"https://apipipipol.btoz.co.idnull"' ? <img className="img-fluid user-avatar-default" src={userProfileImgDefault} alt={username} /> : "" }
                   </div>
                   <div className="user-name">
                     <h1 className="font-700">{userDetails.firstname}</h1>

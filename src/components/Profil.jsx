@@ -350,7 +350,7 @@ class Profil extends Component {
                                             
                                             <div className="user-avatar" style={{backgroundImage: "url("+$userAvatarUrl+")"}}>
 
-                                                { !userAvatar ? <img className="img-fluid" src={userProfileImgDefault} alt={username} /> : "" }
+                                                { $userAvatarUrl === '"https://apipipipol.btoz.co.idnull"' ? <img className="img-fluid user-avatar-default" src={userProfileImgDefault} alt={username} /> : "" }
 
                                                 <button onClick={() => this.fileInput.click()} className={this.state.loadingProfile ? "btn-change-avatar anim show" : "btn-change-avatar anim" }>
                                                     {this.state.loadingProfile ? $avatarLoader : <i className="fas fa-camera"></i> }

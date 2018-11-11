@@ -433,6 +433,7 @@ input:disabled, textarea:disabled {
 }
 
 .navbar-nav .nav-item.nav-profile .avatar {
+  position: relative;
   float: left;
   width: 60px;
   height: 60px;
@@ -462,6 +463,10 @@ input:disabled, textarea:disabled {
   line-height: 60px;
   background-color: #fff;
   z-index: -1;
+}
+
+.navbar-nav .nav-item.nav-profile .avatar img {
+  position: absolute;
 }
 
 .navbar-nav .nav-item.nav-redeem {
@@ -1490,7 +1495,11 @@ input:disabled, textarea:disabled {
   border-radius: 80px;
   background-position: center;
   background-size: cover;
-  background-color: #000;
+  background-color: transparent;
+}
+
+.profil .user-avatar-default {
+  position: absolute;
 }
 
 .profil .avatar-preview {
