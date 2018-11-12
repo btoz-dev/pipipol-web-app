@@ -135,11 +135,11 @@ class Router extends Component {
                         Home
                       </NavLink>
                     </li>
-                    <li className="nav-item hide">
+                    {/* <li className="nav-item hide">
                       <NavLink to="/search" className="nav-link">
                         Search
                       </NavLink>
-                    </li>
+                    </li> */}
                     <li className="nav-item nav-profile dropdown">
                       <NavLink to="/profil" className="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                         
