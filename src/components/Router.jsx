@@ -13,6 +13,8 @@ import Error from "./Error";
 import Polling from "./Polling";
 import Footer from "./Footer";
 import Test from "./Test";
+import Search from "./Search";
+
 import { NavLink } from "react-router-dom";
 import logo from "./../img/logo-pipipol_black.png";
 import userProfileImgDefault  from'./../img/ic-user.png';
@@ -116,7 +118,7 @@ class Router extends Component {
 
                 <div className="collapse navbar-collapse" id="navbar">
                   <ul className="navbar-nav ml-auto">
-                    <li className="nav-item active">
+                    {/* <li className="nav-item active">
                       <a
                         href="#pollToolbar"
                         className="nav-link"
@@ -127,17 +129,17 @@ class Router extends Component {
                       >
                         <i className="fas fa-search" />
                       </a>
-                    </li>
+                    </li> */}
                     <li className="nav-item">
                       <NavLink to="/" className="nav-link">
                         Home
                       </NavLink>
                     </li>
-                    {/* <li className="nav-item hide">
-                      <NavLink to="/test" className="nav-link">
-                        Test
+                    <li className="nav-item hide">
+                      <NavLink to="/search" className="nav-link">
+                        Search
                       </NavLink>
-                    </li> */}
+                    </li>
                     <li className="nav-item nav-profile dropdown">
                       <NavLink to="/profil" className="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                         
@@ -166,43 +168,7 @@ class Router extends Component {
                 </div>
               </nav>
    
-              <div id="pollToolbar" className="poll-toolbar collapse">
-                <div className="container">
-                <div className="row">
-                  <div className="col-md-8 col-sm-12">
-                    <div className="input-group mt-3">
-                      <select className="custom-select" id="inputGroupSelect01">
-                        {listCategories}
-                      </select>
-                    </div>
-                  </div>
-                  <div className="col-md-4 col-sm-12">
-                    <div className="row">
-                      <div className="col-6">
-                        <NavLink
-                          to="#"
-                          className="btn btn-red mb-3 mt-3"
-                          href="#"
-                          role="button"
-                        >
-                          Populer
-                        </NavLink>
-                      </div>
-                      <div className="col-6">
-                        <NavLink
-                          to="#"
-                          className="btn btn-outline mb-3 mt-3"
-                          href="#"
-                          role="button"
-                        >
-                          Terbaru
-                        </NavLink>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              </div>
+              
 
               {/* MOBILE MENU     */}
               <NavLink to="/profil" className="profile-point-mobile">
@@ -230,7 +196,7 @@ class Router extends Component {
 
               <main id="page-wrap">                 
                 <Switch>
-                  <Route path="/" component={App} exact />
+                  <Route path="/" component={Search} exact />
                   <Route path="/daftar" render={() => {
                       Auth.logout();
                     }}
@@ -239,6 +205,7 @@ class Router extends Component {
                   <Route path="/profil" component={Profil} />
                   <Route path="/redeem" component={Redeem} />
                   <Route path="/polling/:id" component={Polling} />
+                  <Route path="/search" component={Search} />
                   <Route path="/test" component={Test} />
                   <Route path="/logout" render={() => {
                       Auth.logout();
@@ -284,7 +251,7 @@ class Router extends Component {
               </nav>
 
               <Switch>
-                <Route path="/" component={App} exact />
+                <Route path="/" component={Search} exact />
                 <Route path="/polling/:id" render={() => {
                     return <Redirect to='/login'  />;
                   }}
