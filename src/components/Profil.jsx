@@ -362,17 +362,19 @@ class Profil extends Component {
                                             
                                             {this.state.imagePreviewUrl && ($avatarUploadBtn)}
 
+                                            <div className="text-center mb-4"><strong>{userDetails.username}</strong></div>
+
                                             <div className="user-badge text-center">
                                                 {!userBadge ? <i className="ic fas fa-award" /> : <img src={ BaseURL+userBadge } alt="" />}
                                             </div>
                                         </div>
                                         <div className="col-sm-12 col-md-6 col-lg-5 mb-5">
-                                            <div className="input-container">
+                                            {/* <div className="input-container">
                                                 <i className="fa fa-user icon"></i>
                                                 <input disabled defaultValue={userDetails.username} onChange={this.onChange} className="input-field" type="text" placeholder="Username" name="username" />
-                                            </div>
+                                            </div> */}
 
-                                            <div className="input-container">
+                                            {/* <div className="input-container">
                                                 <div className="form-row">
                                                     <div className="col">
                                                     <i className="fas fa-id-card icon"></i>
@@ -382,6 +384,16 @@ class Profil extends Component {
                                                         <input defaultValue={userDetails.lastname} onChange={this.onChange} className="input-field pl-3" type="text" placeholder="Nama Belakang" name="lastname" />
                                                     </div>
                                                 </div>
+                                            </div> */}
+
+                                            <div className="input-container">
+                                                <i className="fas fa-id-card icon"></i>
+                                                <input defaultValue={userDetails.firstname} onChange={this.onChange} className="input-field" type="text" placeholder="Nama Depan" name="firstname" />
+                                            </div>
+
+                                            <div className="input-container">
+                                                <i className="fas fa-id-card icon"></i>
+                                                <input defaultValue={userDetails.lastname} onChange={this.onChange} className="input-field" type="text" placeholder="Nama Belakang" name="lastname" />
                                             </div>
 
                                             <div className="input-container">
