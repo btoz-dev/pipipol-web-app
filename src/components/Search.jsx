@@ -132,6 +132,7 @@ class Search extends React.Component {
     const noMorePolls = this.state.noMorePolls
 
     let sortByName = this.state.sortBy
+    
     if(sortByName === "popularity"){
       sortByName = "Popularitas"
     }else if(sortByName === "polls_id"){

@@ -175,8 +175,13 @@
 
 
 
-  input:disabled, textarea:disabled {
+  input:disabled, 
+  textarea:disabled {
       // color: #ec2828;
       cursor: not-allowed;
       background-color: #fff;
+  }
+  button.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
   }

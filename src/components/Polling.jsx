@@ -66,32 +66,38 @@ class Polling extends Component {
   };
 
   async getCaptcha(){
-    if(this.state.idChoice !== ""){
-      axios.get(BaseURL + `/api/getCaptcha/` + this.state.idPoll)
-        .then(res => {
-          console.log(res)
-          const dataCaptcha = res.data.list_captcha[0];
-          const newToken = dataCaptcha.token
-  
-          console.log(dataCaptcha.captchaText)
-  
-          localStorage.setItem("id_token", newToken);
-          localStorage.setItem("isLoggedIn", newToken);
-  
-          this.setState({
-            NEW_AUTH_TOKEN: localStorage.getItem("id_token", newToken),
-            dataCaptcha: dataCaptcha,
-            loadingCaptcha: false,
-            modalCaptchaShow: true
-          });
-        }
-      )
-    }else{
-      this.setState({
-        submitMessage: "Maaf, pilihan tidak boleh kosong!"
-      });
-      this.notifyError()
-    }
+    this.setState({
+      loadingCaptcha: true,
+      modalCaptchaShow: true
+    });
+
+    axios.get(BaseURL + `/api/getCaptcha/` + this.state.idPoll, {
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        'Cache-Control': 'no-cache',
+        'x-access-token': this.state.AUTH_TOKEN,
+      },
+      credentials: 'include',
+    })
+      .then(res => {
+        console.log(res)
+        const dataCaptcha = res.data.list_captcha[0];
+        const newToken = dataCaptcha.token
+
+        console.log(dataCaptcha.captchaText)
+
+        localStorage.setItem("id_token", newToken);
+        localStorage.setItem("isLoggedIn", newToken);
+
+        this.setState({
+          NEW_AUTH_TOKEN: localStorage.getItem("id_token", newToken),
+          dataCaptcha: dataCaptcha,
+          loadingCaptcha: false,
+          modalCaptchaShow: true
+        });
+      }
+    )
   }
 
   encodedData(data) {
@@ -376,13 +382,14 @@ class Polling extends Component {
                               Hasil
                             </button>
                             :
-                            <button onClick={this.submitPoll} className="btn btn-danger">
+                            <button onClick={this.submitPoll} className={this.state.idChoice !== "" && this.state.captchaText !== "" ? 'btn btn-danger' : 'btn btn-danger disabled'}>
                               {this.state.loadingSubmitPoll && (
                                 <i className="fas fa-spinner fa-spin mr-2" />
                               )}
                               Kirim
                             </button>
                           }
+                          
                         </div>
                       </div>
                       {/* <!-- /END POLL CAPTCHA --> */}
@@ -433,15 +440,15 @@ class Polling extends Component {
                 <i className= { this.state.loadingCaptcha ? "fas fa-sync mr-2 fa-spin" : "fas fa-sync mr-2"} />
                 Captcha
               </button>
-              {/* <button onClick={this.toggleModalCaptchaShow} className="btn btn-danger">
+              <button onClick={this.toggleModalCaptchaShow} className="btn btn-danger">
                 Tutup
-              </button> */}
-              <button onClick={this.submitPoll} className="btn btn-danger">
+              </button>
+              {/* <button onClick={this.submitPoll} className="btn btn-danger">
                 {this.state.loadingSubmitPoll && (
                   <i className="fas fa-spinner fa-spin mr-2" />
                 )}
                 Kirim
-              </button>
+              </button> */}
             </ModalFooter>
           </Modal>
           {/* <!-- /END MODAL IMAGE CAPTCHA --> */}
