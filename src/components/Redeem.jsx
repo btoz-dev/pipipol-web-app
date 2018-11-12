@@ -191,7 +191,7 @@ class Redeem extends Component {
         }}
       >
         <ToastContainer />
-        <div className="bg-container container-fluid">
+        <div className="bg-container container-fluid pb-3">
           <section className="redeem container">
             <div className="redeem-header">
               <div className="row no-gutters">

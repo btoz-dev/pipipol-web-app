@@ -188,6 +188,10 @@ class Search extends React.Component {
           </div>
         </div>
 
+        <div id="pollToolBarBottom">
+          <SearchToolBar applyFilterBy={this.applyFilterBy} applySortBy={this.applySortBy} />
+        </div>
+      
       </div>
 
     );

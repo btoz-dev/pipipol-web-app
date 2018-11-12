@@ -131,7 +131,7 @@ class Daftar extends Component {
                 }}
             >
                 <ToastContainer />
-                <div className="bg-container container-fluid">
+                <div className="bg-container container-fluid pb-3">
                     <section className="login container">
                         <div className="row">
                             <div className="col-sm-12 col-md-12 col-lg-6 my-auto">

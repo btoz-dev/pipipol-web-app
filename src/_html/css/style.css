@@ -896,7 +896,7 @@ input:disabled, textarea:disabled {
 
 .site-content .bg-container {
   background-color: rgba(0, 0, 0, 0.5);
-  padding: 1rem 0;
+  padding: 1rem 0 0;
 }
 
 .poll-bg-overlay {
@@ -1159,6 +1159,11 @@ input:disabled, textarea:disabled {
 .poll-card.featured .poll-content .poll-value-point small {
   font-size: 1rem;
   margin-top: -20px;
+}
+
+#pollToolBarBottom {
+  position: relative;
+  top: -88px !important;
 }
 
 .poll-single {
