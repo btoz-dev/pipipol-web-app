@@ -51,7 +51,7 @@ class SearchToolBar extends Component {
       <div id="pollToolbar" className="poll-toolbar">
         <div className="container">
           <div className="row">
-            <div className="col-md-8 col-sm-12">
+            <div className="col-md-7 col-sm-12">
               <div className="input-group mt-3">
                 <select value={this.state.value} onChange={this.handleChange} className="custom-select pl-4" id="inputGroupSelect01">
                   <option value=''> Pilih kategori..</option>
@@ -59,7 +59,7 @@ class SearchToolBar extends Component {
                 </select>
               </div>
             </div>
-            <div className="col-md-4 col-sm-12">
+            <div className="col-md-5 col-sm-12">
               <div className="row">
                 <div className="col-6">
                   <button className="btn btn-red mb-3 mt-3" onClick={this.clickApplySortByPopular}>

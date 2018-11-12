@@ -142,11 +142,8 @@ class Router extends Component {
                     </li> */}
                     <li className="nav-item nav-profile dropdown">
                       <NavLink to="/profil" className="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                        
-                        <div
-                          className="avatar"
-                          style={{backgroundImage: "url("+this.state.userAvatarUrl+")" }}
-                        >{this.state.userAvatarUrl === '"https://apipipipol.btoz.co.idnull"' ? <img className="img-fluid user-avatar-default" src={userProfileImgDefault} alt="" /> : ''}
+                        <div className="avatar" style={{backgroundImage: "url("+this.state.userAvatarUrl+")" }}>
+                          {this.state.userAvatarUrl === '"https://apipipipol.btoz.co.idnull"' ? <img className="img-fluid user-avatar-default" src={userProfileImgDefault} alt="" /> : ''}
                         </div>
                         <strong>{ this.state.currentPoint === "null" ? 0 : this.state.currentPoint }</strong> <small>pts</small> <i className="fas fa-angle-down ml-1"></i>
                       </NavLink>
@@ -172,8 +169,7 @@ class Router extends Component {
 
               {/* MOBILE MENU     */}
               <NavLink to="/profil" className="profile-point-mobile">
-                <div className="avatar" style={{backgroundImage: "url("+this.state.userAvatarUrl+")" }}
-                />
+                {this.state.userAvatarUrl === '"https://apipipipol.btoz.co.idnull"' ? <div className="avatar"><img className="img-fluid user-avatar-default" src={userProfileImgDefault} alt="" /></div> : <div className="avatar" style={{backgroundImage: "url("+this.state.userAvatarUrl+")" }}/>}
                 <div className="point-value">
                   <strong>{ this.state.currentPoint === "null" ? 0 : this.state.currentPoint }</strong> <small>pts</small>
                 </div>

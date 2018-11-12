@@ -480,6 +480,7 @@ input:disabled, textarea:disabled {
   color: #fff;
   padding-left: 1.25rem;
   padding-right: 1.25rem;
+  line-height: 4.5;
 }
 
 @media only screen and (max-width: 575px) {
@@ -640,22 +641,6 @@ input:disabled, textarea:disabled {
   margin: 0.3rem auto 0;
   background-position: center;
   background-size: cover;
-}
-
-.profile-point-mobile .avatar::before {
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  content: "\f2bd";
-  color: #000;
-  position: absolute;
-  left: 0;
-  width: 48px;
-  height: 48px;
-  text-align: center;
-  font-size: 48px;
-  line-height: 48px;
-  background-color: #fff;
-  z-index: -1;
 }
 
 .profile-point-mobile:hover, .profile-point-mobile:active {
