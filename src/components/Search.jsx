@@ -19,8 +19,8 @@ const applySetResult = (result, sortBy) => prevState => ({
   page: prevState.page + 1
 });
 
-const getPollsAPI = (limit, page) =>
-  `https://apipipipol.btoz.co.id/api/getPolls?page=${page}&limit=${limit}`;
+const getPollsAPI = (limit, page, sortBy, kategori) =>
+  `https://apipipipol.btoz.co.id/api/getPolls?page=${page}&limit=${limit}&kategori=${kategori}`;
 
 class Search extends React.Component {
   constructor(props) {
@@ -34,6 +34,7 @@ class Search extends React.Component {
       mainPolls: [],
       page: 1,
       limit: 12,
+      kategori: '',
       sortBy: 'popularity',
       noMorePolls: false,
       loading: true
@@ -55,22 +56,50 @@ class Search extends React.Component {
   }
 
   onInitialSearch = e => {
-    this.fetchStories(this.state.limit, this.state.page, this.state.sortBy);
+    console.log("KATEGORI")
+    console.log(this.state.kategori)
+
+      // RESET 
+    if(this.state.kategori !== '' && this.state.page !== 1){
+      this.setState({
+        page: 1,
+        noMorePolls: false
+      }, () => {
+        this.fetchStories(this.state.limit, this.state.page, this.state.sortBy, this.state.kategori);
+      });
+    }
+    if(this.state.page >= 1 ){
+      this.setState({
+        page: 1,
+        noMorePolls: false
+      }, () => {
+        this.fetchStories(this.state.limit, this.state.page, this.state.sortBy, this.state.kategori);
+      });
+    }
   };
 
   onPaginatedSearch = e => {
-    this.fetchStories(this.state.limit, this.state.page, this.state.sortBy);
+    this.fetchStories(this.state.limit, this.state.page, this.state.sortBy, this.state.kategori);
   }
 
-  fetchStories = (limit, page, sortBy) => {
-    console.log(page);
-    fetch(getPollsAPI(limit, page, sortBy))
+  fetchStories = (limit, page, sortBy, kategori) => {
+
+    
+
+    fetch(getPollsAPI(limit, page, sortBy, kategori))
       .then(response => response.json())
       .then(result => {
+
+        console.log("PAGE")
+        console.log(page)
+
+        console.log("LIST RESULT")
+        console.log(result.list_polls)
+
         console.log("LIST POLLS AWAL")
         console.log(this.state.list_polls)
 
-        this.onSetResult(result, page, sortBy);
+        this.onSetResult(result, page, sortBy, kategori);
 
         if(page === 1){
           let allPolls = sort(result.list_polls).desc(this.state.sortBy)
@@ -96,7 +125,7 @@ class Search extends React.Component {
       });
   };
 
-  onSetResult = (result, page, sortBy) =>
+  onSetResult = (result, page, sortBy, kategori) =>
     page === 1
       ? this.setState(applySetResult(result, sortBy))
       : this.setState(applyUpdateResult(result, sortBy));
@@ -120,11 +149,10 @@ class Search extends React.Component {
   applyFilterBy(filterBy){
     // window.location.reload();
     this.setState({
-      list_polls: sort(this.state.list_polls).desc(filterBy),
-      // firstPoll: sort(this.state.list_polls[0]).desc(this.state.sortBy),
-      // mainPolls: sort(this.state.list_polls).desc(this.state.sortBy).slice(1,5)
-    })
-    // this.fetchStories(this.state.limit, 0, this.state.sortBy);
+      kategori: filterBy
+    }, () => {
+        this.onInitialSearch();
+    });
   }
 
   render() {
@@ -165,7 +193,7 @@ class Search extends React.Component {
               <div className="poll-grids-title">
                 <h2 className="text-center">
                   <strong>
-                    Polling lainnya berdasarkan <span className="text-red">{sortByName}</span>
+                    Polling {this.state.kategori} lainnya berdasarkan <span className="text-red">{sortByName}</span>
                   </strong>
                 </h2>
               </div>

@@ -7,7 +7,8 @@ class SearchToolBar extends Component {
     super(props);
     this.state = {
       categories: [],
-      sortBy: 'popularity'
+      sortBy: 'popularity',
+      filterBy: ''
     };
   }
 
@@ -17,7 +18,7 @@ class SearchToolBar extends Component {
     this.setState({ 
       categories: data.list_kategori
     })
-    this.handleChange = this.handleChange.bind(this);
+    this.chooseFilterBy = this.chooseFilterBy.bind(this);
   };
 
   clickApplySortByPopular = () => {
@@ -33,7 +34,10 @@ class SearchToolBar extends Component {
     })
   }
 
-  handleChange(event) {    
+  chooseFilterBy(event) {    
+    this.setState({
+      filterBy: event.target.value
+    })
     this.props.applyFilterBy(event.target.value);
   }
 
@@ -53,8 +57,8 @@ class SearchToolBar extends Component {
           <div className="row">
             <div className="col-md-7 col-sm-12">
               <div className="input-group mt-3">
-                <select value={this.state.value} onChange={this.handleChange} className="custom-select pl-4" id="inputGroupSelect01">
-                  <option value=''> Pilih kategori..</option>
+                <select value={this.state.value} onChange={this.chooseFilterBy} className="custom-select pl-4" id="inputGroupSelect01">
+                  <option value=''> Semua Kategori</option>
                   {listCategories}
                 </select>
               </div>
