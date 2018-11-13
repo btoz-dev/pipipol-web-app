@@ -220,11 +220,9 @@ class Polling extends Component {
     this.setState({
       reportReason: ev.target.value,
     });
-    console.log(this.state.reportReason)
+    
   }
   submitReport(){
-    console.log(this.state.reportReason)
-
     const reason = this.state.reportReason
 
     if(reason !== ''){
