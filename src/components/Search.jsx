@@ -48,24 +48,6 @@ class Search extends React.Component {
     this.onInitialSearch()
   }
 
-  // componentWillMount = async () => {
-  //   axios
-  //   .get(`/api/getPolls`)
-  //   .then(result => {
-  //     let allPolls = sort(result.data.list_polls).desc(this.state.sortBy)
-  //     let firstPoll = allPolls[0]
-  //     let mainPolls = allPolls.slice(1,5)
-  //     // console.log("SORTTTTTT")
-  //     // console.log(mainPolls);
-  //     this.setState({ 
-  //       list_polls: allPolls,
-  //       allPolls: allPolls,
-  //       firstPoll: firstPoll,
-  //       mainPolls: mainPolls
-  //     })
-  //   })
-  // };
-
   onInitialSearch = e => {
     this.fetchStories(this.state.limit, this.state.page, this.state.sortBy);
   };
@@ -200,9 +182,9 @@ class Search extends React.Component {
           </div>
         </div>
 
-        <div id="pollToolBarBottom">
+        {/* <div id="pollToolBarBottom">
           <SearchToolBar applyFilterBy={this.applyFilterBy} applySortBy={this.applySortBy} />
-        </div>
+        </div> */}
       
       </div>
 

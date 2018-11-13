@@ -176,14 +176,14 @@ class Router extends Component {
               </NavLink>
               <div className="bg-burger-menu"></div>
               <Menu isOpen={this.state.menuOpen} onStateChange={(state) => this.handleStateChange(state)} right pageWrapId={ "page-wrap" } outerContainerId={ "outer-container" } >
-                <a
+                {/* <a
                   href="#pollToolbar"
                   data-toggle="collapse"
                   role="button"
                   aria-expanded="false"
                   aria-controls="pollToolbar"
                   to="/" onClick={() => this.closeMenu()}><i className="fas fa-search mr-1"></i> Cari Polling
-                </a>
+                </a> */}
                 <NavLink to="/" onClick={() => this.closeMenu()}><i className="fas fa-home mr-1"></i> Home</NavLink>
                 <NavLink to="/profil" onClick={() => this.closeMenu()}><i className="fas fa-user-alt mr-1"></i> Profile</NavLink>
                 <NavLink to="/redeem" onClick={() => this.closeMenu()}><i className="fas fa-exchange-alt mr-1"></i> Redeem</NavLink>
