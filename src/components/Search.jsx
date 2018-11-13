@@ -20,7 +20,7 @@ const applySetResult = (result, sortBy) => prevState => ({
 });
 
 const getHackerNewsUrl = (limit, page) =>
-  `https://apipipipol.btoz.co.id/api/getPolls/${page}/${limit}`;
+  `https://apipipipol.btoz.co.id/api/getPolls?page=${page}&limit=${limit}`;
 
 class Search extends React.Component {
   constructor(props) {
@@ -45,23 +45,24 @@ class Search extends React.Component {
 
   // LOAD AWAL
   componentDidMount() {
-    this.onInitialSearch()
+    // this.onInitialSearch()
   }
 
-  componentWillMount = async () => {
+  componentDidMount = async () => {
     axios
-    .get(`/api/getPolls`)
+    .get(`/api/getPolls?page=${this.state.page}&limit=${this.state.limit}`)
     .then(result => {
       let allPolls = sort(result.data.list_polls).desc(this.state.sortBy)
       let firstPoll = allPolls[0]
       let mainPolls = allPolls.slice(1,5)
-      console.log("SORTTTTTT")
-      console.log(mainPolls);
       this.setState({ 
+        result: allPolls,
         allPolls: allPolls,
         firstPoll: firstPoll,
         mainPolls: mainPolls
       })
+      console.log("SORTTTTTT")
+      console.log(this.state.list_polls);
     })
   };
 
@@ -86,7 +87,7 @@ class Search extends React.Component {
         let mainPolls = allPolls.slice(1,5)
         this.setState({
           result: result,
-          allPolls: allPolls,
+          // allPolls: allPolls,
           // firstPoll: firstPoll,
           // mainPolls: mainPolls,
           loading: false
@@ -101,7 +102,7 @@ class Search extends React.Component {
   };
 
   onSetResult = (result, page, sortBy) =>
-    page === 0
+    page === 1
       ? this.setState(applySetResult(result, sortBy))
       : this.setState(applyUpdateResult(result, sortBy));
 

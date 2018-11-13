@@ -192,7 +192,7 @@ class Router extends Component {
 
               <main id="page-wrap">                 
                 <Switch>
-                  <Route path="/" component={Search} exact />
+                  <Route path="/" component={App} exact />
                   <Route path="/daftar" render={() => {
                       Auth.logout();
                     }}
@@ -247,7 +247,7 @@ class Router extends Component {
               </nav>
 
               <Switch>
-                <Route path="/" component={Search} exact />
+                <Route path="/" component={App} exact />
                 <Route path="/polling/:id" render={() => {
                     return <Redirect to='/login'  />;
                   }}

@@ -281,6 +281,23 @@ a:hover {
   transition: border 0.15s ease-in-out;
 }
 
+.radio label.black {
+  border-bottom: solid 2px #ccc;
+}
+
+.radio label.black::before {
+  border-color: #ccc;
+  margin-left: -15px;
+}
+
+.radio-danger input[type="radio"]:checked + label.black::before {
+  border-color: #ccc;
+}
+
+.radio label.black::after {
+  margin-left: -10px;
+}
+
 .radio label::after {
   display: inline-block;
   position: absolute;
@@ -1309,7 +1326,7 @@ button.disabled {
   }
 }
 
-.poll-single-body .lapor {
+.poll-single-body .btn-lapor {
   display: block;
   position: absolute;
   bottom: 88px;
@@ -1317,6 +1334,10 @@ button.disabled {
   text-align: center;
   width: 100%;
   padding: 1rem;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  color: #fff;
 }
 
 .poll-result {
@@ -1360,6 +1381,10 @@ button.disabled {
 .poll-captcha ::placeholder {
   color: #000;
   opacity: 0.5;
+}
+
+.report-reason {
+  text-align: left;
 }
 
 .redeem {

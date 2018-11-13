@@ -100,7 +100,21 @@
         background-color:transparent;
         -webkit-transition: border 0.15s ease-in-out;
         -o-transition: border 0.15s ease-in-out;
-        transition: border 0.15s ease-in-out; }
+        transition: border 0.15s ease-in-out; 
+      }
+      .radio label.black{
+        border-bottom: solid 2px #ccc;
+      }
+      .radio label.black::before{
+        border-color: #ccc;
+        margin-left: -15px;
+      }
+      .radio-danger input[type="radio"]:checked + label.black::before{
+        border-color: #ccc;
+      }
+      .radio label.black::after{
+        margin-left: -10px;
+      }
       .radio label::after {
         display: inline-block;
         position: absolute;

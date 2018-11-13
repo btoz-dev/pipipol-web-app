@@ -18,6 +18,7 @@ class App extends Component {
       loading: true
     };
   }
+  
   componentDidMount = async () => {
     const api_get_polls = await fetch(BaseURL + "/api/getPolls");
     const data = await api_get_polls.json();

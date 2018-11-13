@@ -26,7 +26,7 @@ class Feed extends React.Component {
 
   componentDidMount() {
     fetch(
-      BaseURL + "api/getPolls/0/24"
+      BaseURL + "api/getPolls?page=1&limit=100"
     )
       .then(res => res.json())
       .then(res => {

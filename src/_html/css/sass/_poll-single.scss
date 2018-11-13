@@ -80,7 +80,7 @@
                 .btn-outline{
                     border-color: #ec2828;
                 }
-                .lapor-mobile{
+                .btn-lapor-mobile{
 
                 }
             }
@@ -125,7 +125,7 @@
                 }                    
             }
         }
-        .lapor{
+        .btn-lapor{
             display: block;
             position: absolute;
             bottom: 88px;
@@ -133,6 +133,10 @@
             text-align: center;
             width: 100%;
             padding: 1rem;
+            cursor: pointer;
+            background-color: transparent;
+            border: none;
+            color: #fff;
         }
         
     }
@@ -167,4 +171,10 @@
         color: #000;
         opacity: 0.5;
     }
+}
+
+
+
+.report-reason{
+    text-align: left;
 }

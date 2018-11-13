@@ -31,17 +31,23 @@ class Polling extends Component {
       modalResultsShow: false,
       modalResultsOnlyShow: false,
       modalCaptchaShow: false,
+      modalReportShow: false,
       pollingResults: [],
       polled: false,
+      reportReason: '',
+
     };
     this.Auth = new AuthService();
     this.handleChangeChoice = this.handleChangeChoice.bind(this);
     this.handleChangeCaptchaText = this.handleChangeCaptchaText.bind(this);
     this.getCaptcha = this.getCaptcha.bind(this);
     this.submitPoll = this.submitPoll.bind(this);
+    this.submitReport = this.submitReport.bind(this);
+    this.handleChangeChoiceReport = this.handleChangeChoiceReport.bind(this);
     this.toggleModalCaptchaShow = this.toggleModalCaptchaShow.bind(this);
     this.toggleModalResultsShow = this.toggleModalResultsShow.bind(this);
     this.toggleModalResultsOnlyShow = this.toggleModalResultsOnlyShow.bind(this);
+    this.toggleModalReportShow = this.toggleModalReportShow.bind(this);
   }
 
   componentWillMount(){
@@ -209,6 +215,51 @@ class Polling extends Component {
     }
   }
 
+
+  handleChangeChoiceReport(ev) {
+    this.setState({
+      reportReason: ev.target.value,
+    });
+    console.log(this.state.reportReason)
+  }
+  submitReport(){
+    console.log(this.state.reportReason)
+
+    const reason = this.state.reportReason
+
+    if(reason !== ''){
+      this.setState({
+        loadingSubmitReport: true
+      });
+
+      axios
+      .post(`/api/report-polls`, this.encodedData(reason))
+      .then(res => {
+          console.log("=== RESPONSE REPORT ===")
+          console.log(res);
+          console.log(res.data);
+          let report = res.data.report
+          let msg = res.data.message
+
+          if(report){
+            this.notifyReport(msg)
+          }else{
+            this.notifyReportError(msg)
+          }
+          this.setState({
+            loadingSubmitRedeem: false
+          })
+            
+      })
+      .catch(err => {
+          console.log(err);
+          this.notifyReportError(err)
+      });
+    }else{
+      this.notifyReportError("Silahkan memilih alasan pelaporan terlebih dahulu, terima kasih.")
+    }
+  }
+
   notify = () => {
     toast(this.state.submitMessage, {
       position: toast.POSITION.TOP_CENTER,
@@ -216,8 +267,24 @@ class Polling extends Component {
       autoClose: 7000
     });
   };
+
   notifyError = () => {
     toast.error(this.state.submitMessage, {
+      position: toast.POSITION.TOP_CENTER,
+      className: 'pipipol-notify',
+      autoClose: 7000
+    });
+  };
+
+  notifyReport = (msg) => {
+    toast.error(msg, {
+      position: toast.POSITION.TOP_CENTER,
+      className: 'pipipol-notify',
+      autoClose: 7000
+    });
+  };
+  notifyReportError = (msg) => {
+    toast.error(msg, {
       position: toast.POSITION.TOP_CENTER,
       className: 'pipipol-notify',
       autoClose: 7000
@@ -239,6 +306,11 @@ class Polling extends Component {
       modalResultsOnlyShow: !this.state.modalResultsOnlyShow
     });
   }
+  toggleModalReportShow() {
+    this.setState({
+      modalReportShow: !this.state.modalReportShow
+    });
+  }
 
   render() {
     const polling = this.state.activePolling;
@@ -256,6 +328,21 @@ class Polling extends Component {
           onChange={this.handleChangeChoice}
         />
         <label htmlFor={"radioAnswer" + item.id}>{item.answer}</label>
+      </div>
+    ));
+
+
+    const reasons = ['Pornografi', 'Kekerasan', 'Pelecehan', 'HOAX', 'Spam', 'Ujaran Kebencian', 'Penjualan Tidak Resmi', 'Terorisme'];
+    const reasonItems = reasons.map((reason, index) => (
+      <div key={index} className="radio radio-danger d-inline-block mr-1">
+        <input
+          type="radio"
+          name="reason"
+          id={"radioReason" + index}
+          value={reason}
+          onChange={this.handleChangeChoiceReport}
+        />
+        <label className="black" htmlFor={"radioReason" + index}>{reason}</label>
       </div>
     ));
 
@@ -336,7 +423,7 @@ class Polling extends Component {
                             </div>
                           </div>
                           <div className="col text-right">
-                            <div className="lapor-mobile btn btn-sm">
+                            <div className="btn-lapor-mobile btn btn-sm">
                               <i className="fas fa-exclamation-circle" />{" "}
                               Laporkan
                             </div>
@@ -400,9 +487,9 @@ class Polling extends Component {
                       <span className="value">{polling.point}</span>{" "}
                       <small>poin</small>
                     </div>
-                    <div href="#" className="lapor">
+                    <button onClick={this.toggleModalReportShow} className="btn-lapor">
                       <i className="fas fa-exclamation-circle" /> Laporkan
-                    </div>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -480,6 +567,24 @@ class Polling extends Component {
             </ModalFooter>
           </Modal>
           {/* <!-- /END MODAL POLL RESULTS --> */}
+
+          {/* <!-- MODAL LAPOR --> */}
+          <Modal isOpen={this.state.modalReportShow} toggle={this.toggleModalReportShow} centered={true} className={this.props.className}>
+            <ModalHeader>
+              Beri Masukan tentang Polling Ini!
+            </ModalHeader>
+            <ModalBody>
+              <h5 className="mb-4">Kami akan menggunakan masukan Anda untuk mengetahui ketika ada sesuatu yang salah.</h5>
+              <div className="">
+                {reasonItems}
+              </div>
+            </ModalBody>
+            <ModalFooter>
+              <button onClick={this.toggleModalReportShow} className="btn btn-dark">Batalkan</button>
+              <button onClick={this.submitReport} className="btn btn-danger">Kirim</button>
+            </ModalFooter>
+          </Modal>
+          {/* <!-- /END MODAL LAPOR --> */}
       </section>
     );
   }
