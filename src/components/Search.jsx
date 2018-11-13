@@ -15,7 +15,7 @@ const applyUpdateResult = (result, sortBy) => prevState => ({
 });
 
 const applySetResult = (result, sortBy) => prevState => ({
-  list_polls: sort(result.list_polls.slice(6)).desc(sortBy),
+  list_polls: sort(result.list_polls).desc(sortBy),
   page: prevState.page + 1
 });
 
@@ -32,8 +32,8 @@ class Search extends React.Component {
       list_polls: [],
       firstPoll: [],
       mainPolls: [],
-      page: null,
-      limit: 13,
+      page: 1,
+      limit: 12,
       sortBy: 'popularity',
       noMorePolls: false,
       loading: true
@@ -45,26 +45,26 @@ class Search extends React.Component {
 
   // LOAD AWAL
   componentDidMount() {
-    // this.onInitialSearch()
+    this.onInitialSearch()
   }
 
-  componentDidMount = async () => {
-    axios
-    .get(`/api/getPolls?page=${this.state.page}&limit=${this.state.limit}`)
-    .then(result => {
-      let allPolls = sort(result.data.list_polls).desc(this.state.sortBy)
-      let firstPoll = allPolls[0]
-      let mainPolls = allPolls.slice(1,5)
-      this.setState({ 
-        result: allPolls,
-        allPolls: allPolls,
-        firstPoll: firstPoll,
-        mainPolls: mainPolls
-      })
-      console.log("SORTTTTTT")
-      console.log(this.state.list_polls);
-    })
-  };
+  // componentWillMount = async () => {
+  //   axios
+  //   .get(`/api/getPolls`)
+  //   .then(result => {
+  //     let allPolls = sort(result.data.list_polls).desc(this.state.sortBy)
+  //     let firstPoll = allPolls[0]
+  //     let mainPolls = allPolls.slice(1,5)
+  //     // console.log("SORTTTTTT")
+  //     // console.log(mainPolls);
+  //     this.setState({ 
+  //       list_polls: allPolls,
+  //       allPolls: allPolls,
+  //       firstPoll: firstPoll,
+  //       mainPolls: mainPolls
+  //     })
+  //   })
+  // };
 
   onInitialSearch = e => {
     this.fetchStories(this.state.limit, this.state.page, this.state.sortBy);
@@ -79,25 +79,32 @@ class Search extends React.Component {
     fetch(getHackerNewsUrl(limit, page, sortBy))
       .then(response => response.json())
       .then(result => {
-        // console.log(result.list_polls.length);
+        console.log("LIST POLLS AWAL")
+        console.log(this.state.list_polls)
+
         this.onSetResult(result, page, sortBy);
 
-        let allPolls = sort(result.list_polls).desc(this.state.sortBy)
-        let firstPoll = allPolls[0]
-        let mainPolls = allPolls.slice(1,5)
-        this.setState({
-          result: result,
-          // allPolls: allPolls,
-          // firstPoll: firstPoll,
-          // mainPolls: mainPolls,
-          loading: false
-        })
-        console.log(this.state.firstPoll)
+        if(page === 1){
+          let allPolls = sort(result.list_polls).desc(this.state.sortBy)
+          let firstPoll = allPolls[0]
+          let mainPolls = allPolls.slice(1,5)
+
+          this.setState({
+            firstPoll: firstPoll,
+            mainPolls: mainPolls,
+            loading: false
+          })
+        }
+        // console.log(result.list_polls.length);
+        console.log("LIST POLLS UPDATE")
+        console.log(this.state.list_polls)
+
         if (result.list_polls.length < limit) {
           this.setState({
             noMorePolls: true
           });
         }
+        
       });
   };
 
@@ -105,6 +112,9 @@ class Search extends React.Component {
     page === 1
       ? this.setState(applySetResult(result, sortBy))
       : this.setState(applyUpdateResult(result, sortBy));
+
+
+
 
   applySortBy(sortBy){
     scrollToElement('#pollingFeeds', {
