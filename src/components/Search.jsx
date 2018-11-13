@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios"
 import sort from 'fast-sort';
 
+import { ToastContainer, toast } from 'react-toastify';
+
 import SearchToolBar from './SearchToolBar';
 import PollingFirst from './PollingFirst';
 import PollingMain from './PollingMain';
@@ -19,8 +21,8 @@ const applySetResult = (result, sortBy) => prevState => ({
   page: prevState.page + 1
 });
 
-const getPollsAPI = (limit, page, sortBy, kategori) =>
-  `https://apipipipol.btoz.co.id/api/getPolls?page=${page}&limit=${limit}&kategori=${kategori}`;
+const getPollsAPI = (limit, page, sortBy, kategori, searchBy) =>
+  `https://apipipipol.btoz.co.id/api/getPolls?page=${page}&limit=${limit}&kategori=${kategori}&search=${searchBy}`;
 
 class Search extends React.Component {
   constructor(props) {
@@ -36,11 +38,13 @@ class Search extends React.Component {
       limit: 12,
       kategori: '',
       sortBy: 'popularity',
+      searchBy: '',
       noMorePolls: false,
       loading: true
     };
     this.applySortBy = this.applySortBy.bind(this);
     this.applyFilterBy = this.applyFilterBy.bind(this);
+    this.applySearchBy = this.applySearchBy.bind(this);
     this.pollingFeeds = React.createRef();
   }
 
@@ -65,7 +69,7 @@ class Search extends React.Component {
         page: 1,
         noMorePolls: false
       }, () => {
-        this.fetchStories(this.state.limit, this.state.page, this.state.sortBy, this.state.kategori);
+        this.fetchStories(this.state.limit, this.state.page, this.state.sortBy, this.state.kategori, this.state.searchBy);
       });
     }
     if(this.state.page >= 1 ){
@@ -73,33 +77,44 @@ class Search extends React.Component {
         page: 1,
         noMorePolls: false
       }, () => {
-        this.fetchStories(this.state.limit, this.state.page, this.state.sortBy, this.state.kategori);
+        console.log('SEARCH BY')
+        console.log(this.state.serachBy)
+        this.fetchStories(this.state.limit, this.state.page, this.state.sortBy, this.state.kategori, this.state.searchBy);
       });
     }
   };
 
   onPaginatedSearch = e => {
-    this.fetchStories(this.state.limit, this.state.page, this.state.sortBy, this.state.kategori);
+    this.fetchStories(this.state.limit, this.state.page, this.state.sortBy, this.state.kategori, this.state.searchBy);
   }
 
-  fetchStories = (limit, page, sortBy, kategori) => {
+  fetchStories = (limit, page, sortBy, kategori, searchBy) => {
 
     
 
-    fetch(getPollsAPI(limit, page, sortBy, kategori))
+    fetch(getPollsAPI(limit, page, sortBy, kategori, searchBy))
       .then(response => response.json())
       .then(result => {
 
-        console.log("PAGE")
-        console.log(page)
+        // console.log("PAGE")
+        // console.log(page)
 
-        console.log("LIST RESULT")
-        console.log(result.list_polls)
+        // console.log("LIST RESULT")
+        // console.log(result.list_polls)
 
-        console.log("LIST POLLS AWAL")
-        console.log(this.state.list_polls)
+        // console.log("LIST POLLS AWAL")
+        // console.log(this.state.list_polls)
 
-        this.onSetResult(result, page, sortBy, kategori);
+        console.log("RESULT LENGTH")
+        console.log(result.list_polls.length);
+
+        let searchResult = result.list_polls.length
+        if(searchResult === 0){
+          this.notifyError("Maaf, tidak ada hasil pencarian yang sesuai dengan keyword tersebut. Silahkan coba lagi dengan keyword yang lain")  
+          return
+        }
+
+        this.onSetResult(result, page, sortBy, kategori, searchBy);
 
         if(page === 1){
           let allPolls = sort(result.list_polls).desc(this.state.sortBy)
@@ -113,8 +128,8 @@ class Search extends React.Component {
           })
         }
         // console.log(result.list_polls.length);
-        console.log("LIST POLLS UPDATE")
-        console.log(this.state.list_polls)
+        // console.log("LIST POLLS UPDATE")
+        // console.log(this.state.list_polls)
 
         if (result.list_polls.length < limit) {
           this.setState({
@@ -125,7 +140,7 @@ class Search extends React.Component {
       });
   };
 
-  onSetResult = (result, page, sortBy, kategori) =>
+  onSetResult = (result, page, sortBy, kategori, searchBy) =>
     page === 1
       ? this.setState(applySetResult(result, sortBy))
       : this.setState(applyUpdateResult(result, sortBy));
@@ -154,6 +169,29 @@ class Search extends React.Component {
         this.onInitialSearch();
     });
   }
+  applySearchBy(searchBy) {    
+    console.log(searchBy)
+    this.setState({
+      searchBy: searchBy
+    }, () => {
+      this.onInitialSearch();
+    });
+  }
+
+  notify = (msg) => {
+    toast(msg, {
+      position: toast.POSITION.TOP_CENTER,
+      className: 'pipipol-notify',
+      autoClose: 7000
+    });
+  };
+  notifyError = (msg) => {
+    toast.error(msg, {
+        position: toast.POSITION.TOP_CENTER,
+        className: 'pipipol-notify',
+        autoClose: 7000
+    });
+  };
 
   render() {
     const noMorePolls = this.state.noMorePolls
@@ -169,17 +207,17 @@ class Search extends React.Component {
     return (
       <div id="topPage">
 
-        <SearchToolBar applyFilterBy={this.applyFilterBy} applySortBy={this.applySortBy} />
+        <ToastContainer />
+
+        <SearchToolBar applySearchBy={this.applySearchBy} applyFilterBy={this.applyFilterBy} applySortBy={this.applySortBy} />
 
         <div className="site-content">
           <div className="bg-container">
             <div className="poll-grids container-fluid pb-3">
 
               {/* <div className="interactions">
-                <form type="submit" onSubmit={this.onInitialSearch}>
-                  <input type="text" ref={node => (this.input = node)} />
-                  <button type="submit">Search</button>
-                </form>
+                <input onChange={this.applySearchBy} type="text" placeholder="Cari polling.." autocomplete="off" />
+                <button onClick={this.onInitialSearch} type="submit">Search</button>
               </div> */}
 
               <div className="row no-gutters">

@@ -172,6 +172,22 @@
             border: solid 2px #fff;
         }
     }
+    input[type=text]{
+        height: 44px;
+        border-radius: 22px;
+        background-color: #000;
+        color: #fff;
+        border: none;
+    }
+    .input-group{
+        .btn{
+            border-top-left-radius: 0 !important;
+            border-bottom-left-radius: 0 !important;
+        }
+        .dropdown-toggle::after{
+            display: none;
+        }
+    }
 }
 
 .nav-login-mobile{

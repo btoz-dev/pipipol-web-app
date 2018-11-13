@@ -23,10 +23,12 @@
     }
     .Toastify__progress-bar,
     .Toastify__progress-bar--default{
-        background: rgba(236,40,40,1)
+        background: -webkit-linear-gradient(left, #4cd964, #5ac8fa, #007aff, #34aadc, #5856d6, #ff2d55);
+        background: linear-gradient(to right, #4cd964, #5ac8fa, #007aff, #34aadc, #5856d6, #ff2d55);
     }
     .Toastify__progress-bar--error{
-        background: rgba(0,0,0,1)
+        background: -webkit-linear-gradient(left, #4cd964, #5ac8fa, #007aff, #34aadc, #5856d6, #ff2d55);
+        background: linear-gradient(to right, #4cd964, #5ac8fa, #007aff, #34aadc, #5856d6, #ff2d55);
     }
     .Toastify__toast-body{
         padding: 1rem;

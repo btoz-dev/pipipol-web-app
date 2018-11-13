@@ -622,6 +622,23 @@ button.disabled {
   border: solid 2px #fff;
 }
 
+.poll-toolbar input[type=text] {
+  height: 44px;
+  border-radius: 22px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+}
+
+.poll-toolbar .input-group .btn {
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+}
+
+.poll-toolbar .input-group .dropdown-toggle::after {
+  display: none;
+}
+
 .nav-login-mobile {
   position: absolute;
   right: 0;
@@ -1973,11 +1990,13 @@ button.disabled {
 
 .pipipol-notify .Toastify__progress-bar,
 .pipipol-notify .Toastify__progress-bar--default {
-  background: #ec2828;
+  background: -webkit-gradient(linear, left top, right top, from(#4cd964), color-stop(#5ac8fa), color-stop(#007aff), color-stop(#34aadc), color-stop(#5856d6), to(#ff2d55));
+  background: linear-gradient(to right, #4cd964, #5ac8fa, #007aff, #34aadc, #5856d6, #ff2d55);
 }
 
 .pipipol-notify .Toastify__progress-bar--error {
-  background: black;
+  background: -webkit-gradient(linear, left top, right top, from(#4cd964), color-stop(#5ac8fa), color-stop(#007aff), color-stop(#34aadc), color-stop(#5856d6), to(#ff2d55));
+  background: linear-gradient(to right, #4cd964, #5ac8fa, #007aff, #34aadc, #5856d6, #ff2d55);
 }
 
 .pipipol-notify .Toastify__toast-body {
