@@ -6,7 +6,7 @@ import userProfileImgDefault  from'./../img/ic-user.png';
 import bgRedeem  from'./../img/bg-redeem.jpg';
 import { ToastContainer, toast } from 'react-toastify';
 
-
+var scrollToElement = require('scroll-to-element');
 
 const qs = require('query-string');
 
@@ -46,6 +46,14 @@ class Profil extends Component {
         this.changePassword = this.changePassword.bind(this);
         this.updateProfile = this.updateProfile.bind(this);
         this.changeAvatar = this.changeAvatar.bind(this);
+    }
+
+    componentDidMount = async () => {
+        scrollToElement('#topPage', {
+            offset: -88,
+            ease: 'inOutQuad',
+            duration: 700
+        });
     }
 
     onChange(e){
@@ -339,7 +347,7 @@ class Profil extends Component {
 
                 
 
-                <div className="bg-container container-fluid pb-3">
+                <div id="topPage" className="bg-container container-fluid pb-3">
                     <section className="login container">
                         <div className="row">
                             <div className="col-12">

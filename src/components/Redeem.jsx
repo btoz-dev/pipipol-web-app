@@ -7,6 +7,8 @@ import { ToastContainer, toast } from 'react-toastify';
 
 const queryString = require('query-string');
 
+var scrollToElement = require('scroll-to-element');
+
 const BaseURL = "https://apipipipol.btoz.co.id";
 
 class Redeem extends Component {
@@ -46,6 +48,12 @@ class Redeem extends Component {
         console.log(this.state.userDetails)
       }
     )
+
+    scrollToElement('#topPage', {
+      offset: -88,
+      ease: 'inOutQuad',
+      duration: 700
+    });
   };
 
   getVouchers(){
@@ -191,7 +199,7 @@ class Redeem extends Component {
         }}
       >
         <ToastContainer />
-        <div className="bg-container container-fluid pb-3">
+        <div id="topPage" className="bg-container container-fluid pb-3">
           <section className="redeem container">
             <div className="redeem-header">
               <div className="row no-gutters">

@@ -19,7 +19,7 @@ const applySetResult = (result, sortBy) => prevState => ({
   page: prevState.page + 1
 });
 
-const getHackerNewsUrl = (limit, page) =>
+const getPollsAPI = (limit, page) =>
   `https://apipipipol.btoz.co.id/api/getPolls?page=${page}&limit=${limit}`;
 
 class Search extends React.Component {
@@ -46,6 +46,12 @@ class Search extends React.Component {
   // LOAD AWAL
   componentDidMount() {
     this.onInitialSearch()
+    
+    scrollToElement('#topPage', {
+      offset: -88,
+      ease: 'inOutQuad',
+      duration: 700
+    });
   }
 
   onInitialSearch = e => {
@@ -58,7 +64,7 @@ class Search extends React.Component {
 
   fetchStories = (limit, page, sortBy) => {
     console.log(page);
-    fetch(getHackerNewsUrl(limit, page, sortBy))
+    fetch(getPollsAPI(limit, page, sortBy))
       .then(response => response.json())
       .then(result => {
         console.log("LIST POLLS AWAL")
@@ -103,7 +109,7 @@ class Search extends React.Component {
       offset: -88,
       ease: 'inOutQuad',
       duration: 700
-  });
+    });
     this.setState({
       sortBy: sortBy,
       list_polls: sort(this.state.list_polls).desc(sortBy),
@@ -133,7 +139,7 @@ class Search extends React.Component {
     }
 
     return (
-      <div>
+      <div id="topPage">
 
         <SearchToolBar applyFilterBy={this.applyFilterBy} applySortBy={this.applySortBy} />
 

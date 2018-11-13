@@ -21,6 +21,8 @@ import userProfileImgDefault  from'./../img/ic-user.png';
 
 import { slide as Menu } from 'react-burger-menu'
 
+var scrollToElement = require('scroll-to-element');
+
 const Auth = new AuthService();
 
 const BaseURL = "https://apipipipol.btoz.co.id";
@@ -45,7 +47,9 @@ class Router extends Component {
       loading: true,
       userAvatarUrl: localStorage.getItem('userAvatar')
     };
+    this.clickScrollToElement = this.clickScrollToElement.bind(this);
   }
+
 
   componentDidMount = async () => {
     const api_get_categories = await fetch(BaseURL + "/api/getKategori");
@@ -76,6 +80,14 @@ class Router extends Component {
 
   toggleMenu () {
     this.setState({menuOpen: !this.state.menuOpen})
+  }
+  
+  clickScrollToElement(elm){
+    scrollToElement(elm, {
+      offset: -88,
+      ease: 'inOutQuad',
+      duration: 700
+    });
   }
   
   render() {
@@ -110,7 +122,7 @@ class Router extends Component {
         <div id="outer-container">
           <BrowserRouter>
             <div>
-              <nav className="navbar navbar-expand-sm navbar-dark bg-tr">
+              <nav id="mainNav" className="navbar navbar-expand-sm navbar-dark bg-tr">
                 <NavLink to="/" className="navbar-brand">
                   <img src={logo} alt="" />
                 </NavLink>
