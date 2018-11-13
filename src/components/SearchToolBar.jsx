@@ -72,7 +72,7 @@ class SearchToolBar extends Component {
                 <input onChange={this.clickApplySearchBy} type="text" className="form-control pl-4 pr-4" placeholder="Cari Polling.." aria-label="Cari Polling" />
                 <div className="input-group-btn">
                   <button type="button" className="btn btn-dark pr-3 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Pilih Kategori <i class="fas fa-angle-down ml-1"></i>
+                    {this.state.filterBy !== '' ? this.state.filterBy : 'Semua Kategori'} <i class="fas fa-angle-down ml-1"></i>
                   </button>
                   <div className="dropdown-menu dropdown-menu-right">
                     <a onClick={this.chooseFilterBy} data-value="" className="dropdown-item" href="#">Semua kategori</a>

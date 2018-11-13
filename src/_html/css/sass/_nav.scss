@@ -173,6 +173,7 @@
         }
     }
     input[type=text]{
+        position: relative;
         height: 44px;
         border-radius: 22px;
         background-color: #000;
@@ -187,6 +188,15 @@
         .dropdown-toggle::after{
             display: none;
         }
+        // .dropdown-toggle::before{
+        //     content: "di";
+        //     position: relative;
+        //     top: 0;
+        //     left: -25px;
+        //     opacity: 0.5;
+        //     font-style: italic;
+        //     font-weight: 100
+        // }
     }
 }
 

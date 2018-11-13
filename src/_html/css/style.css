@@ -623,6 +623,7 @@ button.disabled {
 }
 
 .poll-toolbar input[type=text] {
+  position: relative;
   height: 44px;
   border-radius: 22px;
   background-color: #000;
