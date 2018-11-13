@@ -223,7 +223,14 @@ class Polling extends Component {
     
   }
   submitReport(){
+
+    const idPoll = this.state.idPoll;
     const reason = this.state.reportReason
+
+    const dataForSubmit = {
+      idPoll,
+      reason
+    };
 
     if(reason !== ''){
       this.setState({
@@ -231,7 +238,7 @@ class Polling extends Component {
       });
 
       axios
-      .post(`/api/report-polls`, this.encodedData(reason))
+      .post(`/api/report-polls`, this.encodedData(dataForSubmit))
       .then(res => {
           console.log("=== RESPONSE REPORT ===")
           console.log(res);
@@ -247,7 +254,7 @@ class Polling extends Component {
           this.setState({
             loadingSubmitRedeem: false
           })
-            
+          this.toggleModalReportShow()
       })
       .catch(err => {
           console.log(err);
