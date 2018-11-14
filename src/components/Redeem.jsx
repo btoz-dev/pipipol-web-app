@@ -49,25 +49,17 @@ class Redeem extends Component {
     this.toggleModalRedeemHistoryHide = this.toggleModalRedeemHistoryHide.bind(this);
     this.getRedeemHistory = this.getRedeemHistory.bind(this);
   }
-  componentWillMount = async () => {
-    axios
-    .get(`/api/getVouchers`)
-      .then(res => {
-        console.log(res.data)
-        this.setState({ 
-          redeem: res.data.list_vouchers, 
-          loading: false 
-        });
-        console.log("REDEEM - USERDETAILS LOCALSTORAGE")
-        console.log(this.state.userDetails)
-      }
-    )
 
+  componentDidMount = async () => {
     scrollToElement('#topPage', {
       offset: -88,
       ease: 'inOutQuad',
       duration: 700
     });
+  };
+
+  componentWillMount = async () => {
+    this.getVouchers()
   };
 
   getVouchers(){
