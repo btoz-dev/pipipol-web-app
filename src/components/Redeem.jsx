@@ -50,16 +50,14 @@ class Redeem extends Component {
     this.getRedeemHistory = this.getRedeemHistory.bind(this);
   }
 
-  componentDidMount = async () => {
+  componentDidMount (){
+    this.getVouchers()
+
     scrollToElement('#topPage', {
       offset: -88,
       ease: 'inOutQuad',
       duration: 700
     });
-  };
-
-  componentWillMount = async () => {
-    this.getVouchers()
   };
 
   getVouchers(){
