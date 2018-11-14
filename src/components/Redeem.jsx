@@ -51,10 +51,7 @@ class Redeem extends Component {
   }
 
   componentDidMount (){
-    this.timer = setInterval(
-      () => this.getVouchers(),
-      1000,
-    );
+    this.getVouchers()
 
     scrollToElement('#topPage', {
       offset: -88,
@@ -68,18 +65,27 @@ class Redeem extends Component {
   }
 
   async getVouchers(){
-    axios
-      .get(`/api/getVouchers`)
-        .then(res => {
-          console.log(res.data)
-          this.setState({ 
-            redeem: res.data.list_vouchers, 
-            loading: false 
-          });
-          console.log("REDEEM - USERDETAILS LOCALSTORAGE")
-          console.log(this.state.userDetails)
-        }
-      )
+    
+    axios.get(BaseURL + `/api/getVouchers`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        'Cache-Control': 'no-cache',
+        'x-access-token': this.state.AUTH_TOKEN,
+      },
+      credentials: 'include',
+    })
+      .then(res => {
+        console.log(res.data)
+        this.setState({ 
+          redeem: res.data.list_vouchers, 
+          loading: false 
+        });
+        console.log("REDEEM - USERDETAILS LOCALSTORAGE")
+        console.log(this.state.userDetails)
+      }
+    )
+
   }
 
   submitRedeem(index, id, name, point) {
@@ -214,7 +220,6 @@ class Redeem extends Component {
   }
 
   render() {
-    const redeem = this.state.redeem;
     const userDetails = this.state.userDetails;
     const username = this.state.userDetails.username;
     // console.log(this.state.redeem[3])
@@ -228,19 +233,10 @@ class Redeem extends Component {
       $userAvatarUrl = BaseURL+userAvatar;
     }
 
-    const redeemHistory = sort(this.state.redeemHistory).desc('tgl_redeem')
 
-    const listRedeemHistory = redeemHistory.map(list => (
-      <tr className="anim" key={list.id} onClick={() => this.toggleModalRedeemHistoryShow(list.voucher_name, list.voucher_img)}>
-        <td>{list.tgl_redeem}</td>
-        <td>{list.voucher_name}</td>
-        <td>{list.point}</td>
-        <td><button className="btn btn-dark btn-sm pl-3 pr-3" onClick={() => this.toggleModalRedeemHistoryShow(list.voucher_name, list.voucher_img)}>Lihat</button></td>
-      </tr>
-    ));
+    const redeem = this.state.redeem;
 
-
-    
+    console.log(redeem)
 
     const redeemItems = redeem.map((item, index) => (
       <div key={item.id} className="card">
@@ -274,6 +270,22 @@ class Redeem extends Component {
         </div>
       </div>
     ));
+
+    const redeemHistory = sort(this.state.redeemHistory).desc('tgl_redeem')
+
+    const listRedeemHistory = redeemHistory.map(list => (
+      <tr className="anim" key={list.id} onClick={() => this.toggleModalRedeemHistoryShow(list.voucher_name, list.voucher_img)}>
+        <td>{list.tgl_redeem}</td>
+        <td>{list.voucher_name}</td>
+        <td>{list.point}</td>
+        <td><button className="btn btn-dark btn-sm pl-3 pr-3" onClick={() => this.toggleModalRedeemHistoryShow(list.voucher_name, list.voucher_img)}>Lihat</button></td>
+      </tr>
+    ));
+
+
+    
+
+    
 
     return (
 
