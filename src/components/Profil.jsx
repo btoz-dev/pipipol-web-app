@@ -272,6 +272,13 @@ class Profil extends Component {
         formData.append('file', this.state.file, this.state.file.name)
         axios
         .post(`/api/updateAvatar`, formData, {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+                'Cache-Control': 'no-cache',
+                'x-access-token': this.state.AUTH_TOKEN,
+            },
+            credentials: 'include',
+            
             onUploadProgress: progressEvent => {
                 this.setState({
                     progressBar: (Math.round(progressEvent.loaded / progressEvent.total * 100) + "%")
