@@ -51,7 +51,10 @@ class Redeem extends Component {
   }
 
   componentDidMount (){
-    this.getVouchers()
+    this.timer = setInterval(
+      () => this.getVouchers(),
+      1000,
+    );
 
     scrollToElement('#topPage', {
       offset: -88,
@@ -59,6 +62,10 @@ class Redeem extends Component {
       duration: 700
     });
   };
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
 
   async getVouchers(){
     axios
