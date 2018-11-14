@@ -51,12 +51,20 @@
             width: 80%;
             margin: 1rem auto;
             display: block;
+            @media only screen and (max-width: 375px) {
+                width: 90%;
+            }
             &.btn-facebook{
                 background-color: #3B5998;
                 color: #fff;
+                font-size: 1rem;
+                .fa{
+                    margin-right: 1rem;
+                }
             }
             &.btn-google{
-                background-color: #3B5998;
+                // background-color: #3B5998;
+                font-size: 1rem;
             }
         }
 

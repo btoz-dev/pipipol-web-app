@@ -439,12 +439,12 @@ class Polling extends Component {
                       </div>
                       {/* <!-- /END POLL QUESTION --> */}
                       {/* <!-- POLL CAPTCHA --> */}
-                      <div className="poll-captcha row no-gutters">
+                      <div className="poll-captcha row">
                       { this.state.polled 
                         ?
                         <div></div>
                         :
-                        <div className="col col-sm-12 col-md-8">
+                        <div className="col-8">
                           <label>
                             <div
                               onClick={this.getCaptcha}
@@ -464,7 +464,7 @@ class Polling extends Component {
                         </div>
                       }
 
-                        <div className="col col-sm-12 col-md-4">
+                        <div className="col-4">
                           { this.state.polled 
                             ?
                             <button onClick={this.toggleModalResultsShow} className="btn btn-danger">

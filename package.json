@@ -17,12 +17,15 @@
     "react": "16.5.2",
     "react-burger-menu": "^2.5.4",
     "react-dom": "16.5.2",
+    "react-facebook-login": "^4.1.1",
+    "react-google-login": "^3.2.1",
     "react-notification-alert": "0.0.8",
     "react-router-dom": "4.3.1",
     "react-scripts": "2.0.3",
     "react-toastify": "^4.4.0",
     "reactstrap": "^6.5.0",
-    "scroll-to-element": "^2.0.2"
+    "scroll-to-element": "^2.0.2",
+    "simple-react-validator": "0.0.8"
   },
   "devDependencies": {},
   "scripts": {

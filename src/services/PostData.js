@@ -1,4 +1,6 @@
 export function PostData(type, encodedDataUser) {
+
+    // let BaseURL = `https://cors-anywhere.herokuapp.com/https://apipipipol.btoz.co.id/api/`;
     let BaseURL = `https://apipipipol.btoz.co.id/api/`;
     //let BaseURL = 'http://localhost/PHP-Slim-Restful/api/';
 
@@ -24,6 +26,8 @@ export function PostData(type, encodedDataUser) {
             resolve(res);
           })
           .catch((error) => {
+            localStorage.removeItem('id_token');
+            localStorage.removeItem('userData');
             console.log("=== RESPONSE ERROR DARI POSTDATA ===")
             console.log(error)
             reject(error);

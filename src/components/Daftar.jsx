@@ -3,6 +3,7 @@ import { NavLink, Redirect } from "react-router-dom";
 import {PostData} from '../services/PostData';
 import md5 from "md5";
 import { ToastContainer, toast } from 'react-toastify';
+import SimpleReactValidator from 'simple-react-validator';
 import bgRedeem  from'./../img/bg-redeem.jpg';
 import logoPipipol  from'./../img/logo-pipipol.png';
 
@@ -24,29 +25,89 @@ class Daftar extends Component {
         };
         
     
-        this.onChange = this.onChange.bind(this);
+        // this.onChange = this.onChange.bind(this);
+        this.onChangeUsername = this.onChangeUsername.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
         this.onChangePasswordConfirm = this.onChangePasswordConfirm.bind(this);
         this.signup = this.signup.bind(this);
+        this.onChangeEmail = this.onChangeEmail.bind(this);
+        // this.onBlurEmail = this.onBlurEmail.bind(this);
+        this.validator = new SimpleReactValidator();
+        this.validatorUsername = new SimpleReactValidator();
+        this.validatorEmail = new SimpleReactValidator();
+        this.validatorPassword = new SimpleReactValidator();
+        this.validatorPasswordConfirm = new SimpleReactValidator();
     }
 
-    onChange(e){
+
+    encodedData(data) {
+        return Object.keys(data).map((key) => {
+            return encodeURIComponent(key) + '=' + encodeURIComponent(data[key]);
+        }).join('&');
+    }
+
+    // onChange(e){
+    //     this.setState({
+    //         [e.target.name]: e.target.value
+    //     });
+    // }
+    // onBlurEmail(e){
+    //     if( !this.validator.fieldValid('email') ){
+    //         this.validator.showMessages();
+    //     }
+    // }
+
+    onChangeUsername(e){
         this.setState({
-            [e.target.name]: e.target.value
+            username: e.target.value
+        }, () => {
+            if( !this.validatorUsername.fieldValid('username') ){
+                this.validatorUsername.showMessages();
+            }
         });
     }
-
+    onChangeEmail(e){
+        this.setState({
+            email: e.target.value
+        }, () => {
+            if( !this.validatorEmail.fieldValid('email') ){
+                this.validatorEmail.showMessages();
+            }
+        });
+    }
     onChangePassword(e){
         this.setState({
-            password: md5(e.target.value)
+            password: e.target.value
+        }, () => {
+            if( !this.validatorPassword.fieldValid('password') ){
+                this.validatorPassword.showMessages();
+                console.log("NOT VALID")
+            }else{
+                console.log("VALID")
+            }
+        });
+    }
+    onChangePasswordConfirm(e){
+        this.setState({
+            passwordConfirm: e.target.value
+        }, () => {
+            if( !this.validatorPasswordConfirm.fieldValid('password') ){
+                this.validatorPasswordConfirm.showMessages();
+            }
         });
     }
 
-    onChangePasswordConfirm(e){
-        this.setState({
-            passwordConfirm: md5(e.target.value)
-        });
-    }
+    // onChangePassword(e){
+    //     this.setState({
+    //         password: md5(e.target.value)
+    //     });
+    // }
+
+    // onChangePasswordConfirm(e){
+    //     this.setState({
+    //         passwordConfirm: md5(e.target.value)
+    //     });
+    // }
      
     signup() {
         console.log(this.state.username)
@@ -60,16 +121,16 @@ class Daftar extends Component {
             loading: true
         })
 
-        const encodedDataUser = Object.keys(this.state).map((key) => {
-            return encodeURIComponent(key) + '=' + encodeURIComponent(this.state[key]);
-            }).join('&');
-        
-        console.log(encodedDataUser)
+        let postData = {
+                username: this.state.username,
+                email: this.state.email,
+                password: md5(this.state.password)
+            }
 
-        if(this.state.username && this.state.firstname && this.state.email && this.state.phone && this.state.password && this.state.passwordConfirm){
+        if(this.state.username && this.state.email && this.state.password && this.state.passwordConfirm){
             
             if(this.state.password === this.state.passwordConfirm){
-                PostData('register', encodedDataUser).then((result) => {
+                PostData('register', this.encodedData(postData)).then((result) => {
                     let responseJson = result;
                     if(responseJson){  
                         console.log("DAFTAR SUKSES") 
@@ -88,7 +149,7 @@ class Daftar extends Component {
                 });
             }else{
                 console.log("PASSWORD BEDA!!!!")
-                this.notifyError("PASSWORD BEDA!!!!")
+                this.notifyError("Password tidak cocok, silahkan periksa kembali.")
                 this.setState({loading: false})
             }
         }else{
@@ -146,33 +207,37 @@ class Daftar extends Component {
                                         <h1 className="text-center w-100 font-700">DAFTAR</h1>
                                         <div className="input-container">
                                             <i className="fa fa-user icon"></i>
-                                            <input onChange={this.onChange} className="input-field" type="text" placeholder="Username" name="username" />
+                                            <input onChange={this.onChangeUsername} className="input-field" type="text" placeholder="Username" name="username" required />
                                         </div>
+                                        {this.validatorUsername.message('username', this.state.username, 'required|alpha_num_dash', 'validation-input-message text-danger small font-italic')}
 
-                                        <div className="input-container">
+                                        {/* <div className="input-container">
                                             <i className="fa fa-user icon"></i>
                                             <input onChange={this.onChange} className="input-field" type="text" placeholder="Nama Depan" name="firstname" />
-                                        </div>
+                                        </div> */}
 
                                         <div className="input-container">
                                             <i className="fa fa-envelope icon"></i>
-                                            <input onChange={this.onChange} className="input-field" type="email" placeholder="Email" name="email" />
+                                            <input onChange={this.onChangeEmail} className="input-field" type="email" placeholder="Email" name="email" required />
                                         </div>
+                                        {this.validatorEmail.message('email', this.state.email, 'required|email', 'validation-input-message text-danger small font-italic')}
 
-                                        <div className="input-container">
+                                        {/* <div className="input-container">
                                             <i className="fa fa-phone icon"></i>
                                             <input onChange={this.onChange} className="input-field" type="text" placeholder="Nomor Handphone" name="phone" />
-                                        </div>
+                                        </div> */}
                                         
                                         <div className="input-container">
                                             <i className="fa fa-key icon"></i>
-                                            <input onChange={this.onChangePassword} className="input-field" type="password" placeholder="Password" name="password" />
+                                            <input onChange={this.onChangePassword} className="input-field" type="password" placeholder="Password" name="password" required />
                                         </div>
+                                        {this.validatorPassword.message('password', this.state.password, 'required|min:7', 'validation-input-message text-danger small font-italic')}
 
                                         <div className="input-container">
                                             <i className="fa fa-key icon"></i>
-                                            <input onChange={this.onChangePasswordConfirm} className="input-field" type="password" placeholder="Confirm Password" name="confirmPassword" />
+                                            <input onChange={this.onChangePasswordConfirm} className="input-field" type="password" placeholder="Confirm Password" name="confirmPassword" required />
                                         </div>
+                                        {this.validatorPasswordConfirm.message('password', this.state.passwordConfirm, 'required|min:7', 'validation-input-message text-danger small font-italic')}
                                         
                                         <button onClick={this.signup} type="submit" className="btn btn-lg btn-danger">{this.state.loading && (<i className="fas fa-spinner fa-spin mr-2" />)} Daftar</button>
                                         <div className="text-daftar">Sudah memiliki akun? 

@@ -1,11 +1,16 @@
 import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 import axios from "axios";
 import AuthService from '../services/AuthService';
 import md5 from "md5";
+import FacebookLogin from 'react-facebook-login';
+import GoogleLogin from 'react-google-login';
+import {PostData} from './../services/PostData';
 import { ToastContainer, toast } from 'react-toastify';
 import bgRedeem  from'./../img/bg-redeem.jpg';
 import logoPipipol  from'./../img/logo-pipipol.png';
+
+const qs = require('query-string');
 
 const BaseURL = "https://apipipipol.btoz.co.id";
 
@@ -15,11 +20,114 @@ class Login extends Component {
         super(props);
         this.state = {
             loginMessage: "",
-            loading: false
+            loading: false,
+            loginError: false,
+            redirect: false
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
         this.Auth = new AuthService();
+
+        this.signup = this.signup.bind(this);
+    }
+
+    encodedData(data) {
+        return Object.keys(data).map((key) => {
+            return encodeURIComponent(key) + '=' + encodeURIComponent(data[key]);
+        }).join('&');
+    }
+
+    signup(res, type) {
+
+        this.setState({
+            loading: true
+        })
+
+        let postData;
+
+        // FACEBOOK
+        if (type === 'facebook' && res.email) {
+            postData = {
+                name: res.name,
+                provider: type,
+                email: res.email,
+                provider_id: res.id,
+                token: res.accessToken,
+                provider_pic: res.picture.data.url
+            };
+            if (postData) {
+                PostData('facebookAuth', postData).then((result) => {
+                   let responseJson = result;
+                   sessionStorage.setItem("userData", JSON.stringify(responseJson));
+                   this.setState({redirect: true});
+                });
+            }
+        }
+
+        // GOOGLE
+        if (type === 'google' && res.w3.U3) {
+            postData = {
+                idtoken: res.Zi.id_token
+            };
+            
+            if (postData) {
+
+                localStorage.setItem("id_token", postData.idtoken);
+
+                PostData('googleAuth', this.encodedData(postData)).then((result) => {
+                    let response = result;
+                    if (response.status >= 200 && response.status < 300) { // Success status lies between 200 to 300
+                        sessionStorage.setItem("userData", JSON.stringify(response));
+                        this.setState({redirect: true});
+                    } else {
+                        this.notifyErrorAPI("ERROR "+" "+ response.status +" "+ response.statusText)
+                        //  JIKA GAGAL REMOVE
+                        localStorage.removeItem('id_token');
+                        localStorage.removeItem('userData');
+                    }
+                    this.setState({
+                        loading: false
+                    })
+                });
+            }
+            
+            // if (postData) {
+            //     localStorage.setItem("id_token", postData.idtoken);
+            //     PostData('googleAuth', postData).then((result) => {
+            //         console.log("RESULT => api/googleAuth") 
+            //         console.log(result)  
+            //         let responseJson = result;
+            //         if(responseJson){  
+            //             sessionStorage.setItem("userData", JSON.stringify(responseJson));
+            //             this.setState({redirect: true});
+            //             // return (<Redirect to={'/login'}/>)
+            //         }
+            //         else{
+            //             console.log("DAFTAR ERROR")
+            //             this.setState({loading: false})
+            //             this.notifyError("Terjadi kesalahan, silahkan mengulangi lagi.")
+            //         }
+            //     });
+            // }
+
+            // USING AXIOS
+            // localStorage.setItem("id_token", res.Zi.id_token);
+            // let dataForSubmit = { 
+            //     'idtoken': res.Zi.id_token
+            // }
+            // console.log(dataForSubmit)
+        
+            // axios
+            // .post(`/api/googleAuth`, this.encodedData(dataForSubmit))
+            // .then(res => {
+            //     console.log(res);
+            //     console.log(res.data);
+            //     console.log(res.data.message)
+            // })
+            // .catch(err => {
+            //     console.log(err);
+            // });
+        }
     }
     
     componentWillMount(){
@@ -99,7 +207,33 @@ class Login extends Component {
         });
     };
 
+    notifyErrorAPI = (msg) => {
+        toast.error(msg, {
+            position: toast.POSITION.TOP_CENTER,
+            className: 'pipipol-notify',
+            autoClose: 7000
+        });
+    };
+
+
+
     render() {
+
+        if (this.state.redirect || sessionStorage.getItem('userData')) {
+            return (<Redirect to={'/'}/>)
+        }
+
+        const responseFacebook = (response) => {
+            console.log("facebook console");
+            console.log(response);
+            this.signup(response, 'facebook');
+        }
+        
+        const responseGoogle = (response) => {
+            console.log("google console");
+            console.log(response);
+            this.signup(response, 'google');
+        }
 
         return (
             <div
@@ -145,8 +279,26 @@ class Login extends Component {
                                                 </NavLink>
                                             </strong>
                                         </div>
-                                        <button href="#" className="btn btn-lg btn-facebook"><i className="fab fa-facebook-f mr-2"></i> Facebook</button>
-                                        <button href="#" className="btn btn-lg btn-danger"><i className="fab fa-google mr-2"></i> Google</button>
+                                        <FacebookLogin
+                                        appId="417821488749878"
+                                        autoLoad={false}
+                                        fields="name,email,picture"
+                                        callback={responseFacebook}
+                                        cssClass="btn btn-lg btn-facebook" 
+                                        icon="fa-facebook" />
+                                        
+
+                                        <GoogleLogin
+                                        clientId="1070882847848-74ju17up0b5joq8ttbuu6i0rsgg0aqrg.apps.googleusercontent.com"
+                                        buttonText="Login with Google"
+                                        onSuccess={responseGoogle}
+                                        onFailure={responseGoogle} 
+                                        className="btn-google btn btn-lg btn-danger">
+                                            {this.state.loading && (<i className="fas fa-spinner fa-spin mr-2" />)} <i className="fab fa-google mr-2"></i>  Login with Google
+                                        </GoogleLogin>
+                                        
+                                        {/* <button href="#" className="btn btn-lg btn-facebook"><i className="fab fa-facebook-f mr-2"></i> Facebook</button>
+                                        <button href="#" className="btn btn-lg btn-danger"><i className="fab fa-google mr-2"></i> Google</button> */}
                                     </form>
                                 </div>
                             </div>

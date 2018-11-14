@@ -415,6 +415,15 @@ button.disabled {
   pointer-events: none;
 }
 
+.validation-input-message,
+.validation-message {
+  position: relative;
+  top: -1rem;
+  font-size: small;
+  color: #ec2828;
+  font-style: italic;
+}
+
 .navbar {
   z-index: 999;
   position: fixed;
@@ -892,13 +901,24 @@ button.disabled {
   display: block;
 }
 
+@media only screen and (max-width: 375px) {
+  .login .login-form .btn {
+    width: 90%;
+  }
+}
+
 .login .login-form .btn.btn-facebook {
   background-color: #3B5998;
   color: #fff;
+  font-size: 1rem;
+}
+
+.login .login-form .btn.btn-facebook .fa {
+  margin-right: 1rem;
 }
 
 .login .login-form .btn.btn-google {
-  background-color: #3B5998;
+  font-size: 1rem;
 }
 
 .login .login-form .text-daftar,
@@ -1192,7 +1212,7 @@ button.disabled {
 }
 
 .poll-single {
-  padding: 2rem 0;
+  padding: 2rem 0 7rem;
   color: #fff;
 }
 
@@ -1253,8 +1273,10 @@ button.disabled {
 }
 
 .poll-single-body .poll-body-center .poll-captcha {
-  width: 100%;
+  position: absolute;
+  bottom: -110px;
   padding: 2rem 0;
+  width: 100%;
 }
 
 .poll-single-body .poll-body-center .poll-captcha label {
@@ -1347,7 +1369,7 @@ button.disabled {
 .poll-single-body .btn-lapor {
   display: block;
   position: absolute;
-  bottom: 88px;
+  bottom: -25px;
   left: 0;
   text-align: center;
   width: 100%;
