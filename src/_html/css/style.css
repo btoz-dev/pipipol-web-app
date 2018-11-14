@@ -818,6 +818,29 @@ button.disabled {
   text-align: center;
 }
 
+.nav-tabs .nav-link {
+  background-color: transparent;
+  color: #fff !important;
+  border: none;
+  border-bottom: solid 3px rgba(255, 255, 255, 0);
+  padding: 0 1.5rem;
+  cursor: pointer;
+}
+
+.nav-tabs .nav-link h4 {
+  margin: 0;
+  line-height: 4rem;
+}
+
+.nav-tabs .nav-link.active {
+  border-bottom: solid 3px #ec2828;
+  background-color: transparent;
+}
+
+.nav-tabs .nav-link.active h4 {
+  font-size: 2rem;
+}
+
 .login {
   color: #fff;
 }
@@ -918,6 +941,7 @@ button.disabled {
 }
 
 .login .login-form .btn.btn-google {
+  background-color: #EA4335;
   font-size: 1rem;
 }
 
@@ -1433,8 +1457,7 @@ button.disabled {
 
 .redeem-header {
   text-align: center;
-  padding: 1rem 0 3rem 0;
-  border-bottom: solid 1px #e1e1e1;
+  padding: 1rem 0;
 }
 
 .redeem-header .user-avatar {
@@ -1563,6 +1586,60 @@ button.disabled {
 #modalRedeem .fas {
   font-size: 7rem;
   color: #ec2828;
+}
+
+.redeem .table-dark {
+  background-color: transparent;
+}
+
+.redeem .table-responsive {
+  background: #fff;
+  color: #000;
+  border-radius: 0.25rem;
+  padding: 1.5rem 3rem 1rem;
+}
+
+.redeem .table thead th {
+  border-top: none;
+}
+
+.redeem .table thead th.th-date {
+  width: 110px;
+}
+
+.redeem .table thead th.th-prize {
+  width: 40%;
+}
+
+.redeem .table thead th.th-poin {
+  min-width: 20%;
+}
+
+.redeem .table thead th.th-image {
+  width: 10%;
+}
+
+.redeem .table tr {
+  cursor: pointer;
+}
+
+.redeem .table tr:hover {
+  background-color: #f1f1f1;
+  -webkit-box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.25);
+}
+
+.redeem .table tr:hover .btn-dark {
+  background-color: #ec2828;
+  border-color: #ec2828;
+}
+
+.redeem .table a {
+  color: #000;
+}
+
+.redeem .table a:hover {
+  color: #f26522;
 }
 
 .profil .user-avatar {
@@ -1720,6 +1797,26 @@ button.disabled {
 
 .text-black {
   color: #000;
+}
+
+.font-size-1 {
+  font-size: 1rem;
+}
+
+.font-size-2 {
+  font-size: 2rem;
+}
+
+.font-size-3 {
+  font-size: 3rem;
+}
+
+.font-size-4 {
+  font-size: 4rem;
+}
+
+.font-size-5 {
+  font-size: 5rem;
 }
 
 .modal-content {

@@ -21,6 +21,8 @@ class Login extends Component {
         this.state = {
             loginMessage: "",
             loading: false,
+            loadingGoogle: false,
+            loadingFacebook: false,
             loginError: false,
             redirect: false
         }
@@ -38,15 +40,13 @@ class Login extends Component {
     }
 
     signup(res, type) {
-
-        this.setState({
-            loading: true
-        })
-
         let postData;
 
         // FACEBOOK
         if (type === 'facebook' && res.email) {
+
+            this.setState({ loadingFacebook: true })
+
             postData = {
                 name: res.name,
                 provider: type,
@@ -66,6 +66,9 @@ class Login extends Component {
 
         // GOOGLE
         if (type === 'google' && res.w3.U3) {
+
+            this.setState({ loadingGoogle: true })
+
             postData = {
                 idtoken: res.Zi.id_token
             };
@@ -75,6 +78,7 @@ class Login extends Component {
                 localStorage.setItem("id_token", postData.idtoken);
 
                 PostData('googleAuth', this.encodedData(postData)).then((result) => {
+                    this.setState({ loadingGoogle: false })
                     let response = result;
                     if (response.status >= 200 && response.status < 300) { // Success status lies between 200 to 300
                         sessionStorage.setItem("userData", JSON.stringify(response));
@@ -85,9 +89,6 @@ class Login extends Component {
                         localStorage.removeItem('id_token');
                         localStorage.removeItem('userData');
                     }
-                    this.setState({
-                        loading: false
-                    })
                 });
             }
             
@@ -294,7 +295,7 @@ class Login extends Component {
                                         onSuccess={responseGoogle}
                                         onFailure={responseGoogle} 
                                         className="btn-google btn btn-lg btn-danger">
-                                            {this.state.loading && (<i className="fas fa-spinner fa-spin mr-2" />)} <i className="fab fa-google mr-2"></i>  Login with Google
+                                            {this.state.loadingGoogle && (<i className="fas fa-spinner fa-spin mr-2" />)} <i className="fab fa-google mr-2"></i>  Login with Google
                                         </GoogleLogin>
                                         
                                         {/* <button href="#" className="btn btn-lg btn-facebook"><i className="fab fa-facebook-f mr-2"></i> Facebook</button>
