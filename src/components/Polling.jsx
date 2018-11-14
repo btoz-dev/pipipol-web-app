@@ -77,6 +77,8 @@ class Polling extends Component {
       modalCaptchaShow: true
     });
 
+    console.log(this.state.AUTH_TOKEN)
+
     axios.get(BaseURL + `/api/getCaptcha/` + this.state.idPoll, {
       method: 'get',
       headers: {
@@ -238,13 +240,21 @@ class Polling extends Component {
       });
 
       axios
-      .post(`/api/report-polls`, this.encodedData(dataForSubmit))
+      .post(`/api/report-polls`, this.encodedData(dataForSubmit), {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+          'Cache-Control': 'no-cache',
+          'x-access-token': this.state.AUTH_TOKEN,
+        },
+        credentials: 'include',
+      })
       .then(res => {
           console.log("=== RESPONSE REPORT ===")
           console.log(res);
           console.log(res.data);
           let report = res.data.report
           let msg = res.data.message
+          console.log(msg)
 
           if(report){
             this.notifyReport(msg)
@@ -282,7 +292,7 @@ class Polling extends Component {
   };
 
   notifyReport = (msg) => {
-    toast.error(msg, {
+    toast(msg, {
       position: toast.POSITION.TOP_CENTER,
       className: 'pipipol-notify',
       autoClose: 7000

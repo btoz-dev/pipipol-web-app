@@ -77,7 +77,16 @@ class Login extends Component {
 
                 localStorage.setItem("id_token", postData.idtoken);
 
-                PostData('googleAuth', this.encodedData(postData)).then((result) => {
+                PostData('googleAuth', this.encodedData(postData), {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+                        'Cache-Control': 'no-cache',
+                        'x-access-token': postData.idtoken
+                    },
+                    credentials: 'include',
+                })
+                .then((result) => {
                     this.setState({ loadingGoogle: false })
                     let response = result;
                     if (response.status >= 200 && response.status < 300) { // Success status lies between 200 to 300
