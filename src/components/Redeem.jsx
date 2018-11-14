@@ -60,7 +60,7 @@ class Redeem extends Component {
     });
   };
 
-  getVouchers(){
+  async getVouchers(){
     axios
       .get(`/api/getVouchers`)
         .then(res => {
