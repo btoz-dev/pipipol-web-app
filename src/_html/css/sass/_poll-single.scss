@@ -83,7 +83,9 @@
                     border-color: #ec2828;
                 }
                 .btn-lapor-mobile{
-
+                    color: #fff;
+                    background-color: transparent;
+                    border: none;
                 }
             }
         }
@@ -130,7 +132,7 @@
         .btn-lapor{
             display: block;
             position: absolute;
-            bottom: -25px;
+            bottom: -24px;
             left: 0;
             text-align: center;
             width: 100%;

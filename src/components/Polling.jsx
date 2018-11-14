@@ -428,7 +428,7 @@ class Polling extends Component {
                             </div>
                           </div>
                           <div className="col text-right">
-                            <button  onClick={this.toggleModalReportShow} className="btn-lapor-mobile btn btn-sm">
+                            <button  onClick={this.toggleModalReportShow} className="btn-lapor-mobile">
                               <i className="fas fa-exclamation-circle" />{" "}
                               Laporkan
                             </button>

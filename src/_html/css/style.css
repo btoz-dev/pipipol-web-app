@@ -1344,6 +1344,12 @@ button.disabled {
   border-color: #ec2828;
 }
 
+.poll-single-body .poll-body-center .poll-body-right-mobile .btn-lapor-mobile {
+  color: #fff;
+  background-color: transparent;
+  border: none;
+}
+
 .poll-single-body .poll-body-right {
   padding-bottom: 1rem;
 }
@@ -1393,7 +1399,7 @@ button.disabled {
 .poll-single-body .btn-lapor {
   display: block;
   position: absolute;
-  bottom: -25px;
+  bottom: -24px;
   left: 0;
   text-align: center;
   width: 100%;
