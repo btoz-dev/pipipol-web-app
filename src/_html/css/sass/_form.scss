@@ -37,7 +37,7 @@
         outline: 5px auto -webkit-focus-ring-color;
         outline-offset: -2px; }
       .checkbox input[type="checkbox"]:checked + label::after {
-        font-family: 'FontAwesome';
+        font-family: "Font Awesome 5 Free";
         content: "\f00c"; }
       .checkbox input[type="checkbox"]:disabled + label {
         opacity: 0.65; }
