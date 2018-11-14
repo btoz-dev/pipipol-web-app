@@ -162,7 +162,14 @@ class Profil extends Component {
         console.log(dataForSubmit)
     
         axios
-        .post(`/api/updateProfile`, qs.stringify(dataForSubmit))
+        .post(`/api/updateProfile`, qs.stringify(dataForSubmit), {
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+              'Cache-Control': 'no-cache',
+              'x-access-token': this.state.AUTH_TOKEN,
+            },
+            credentials: 'include',
+        })
         .then(res => {
             console.log(res);
             console.log(res.data);
