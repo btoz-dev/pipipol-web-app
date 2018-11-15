@@ -394,10 +394,10 @@ class Polling extends Component {
                       <span className="meta mr-4">{polling.creator} </span>
                       <span className="d-inline-block d-md-none">
                         <span className="meta mr-4">
-                          <i className="fas fa-user mr-1" /> {polling.kategori}
+                          <i className="fas fa-tag mr-1" /> {polling.kategori}
                         </span>
                         <span className="meta">
-                          <i className="far fa-calendar mr-1" />{" "}
+                          <i className="far fa-calendar-alt mr-1" />{" "}
                           {polling.expired} hari lagi
                         </span>
                       </span>

@@ -76,13 +76,13 @@ class Redeem extends Component {
       credentials: 'include',
     })
       .then(res => {
-        console.log(res.data)
+        // console.log(res.data)
         this.setState({ 
           redeem: res.data.list_vouchers, 
           loading: false 
         });
-        console.log("REDEEM - USERDETAILS LOCALSTORAGE")
-        console.log(this.state.userDetails)
+        // console.log("REDEEM - USERDETAILS LOCALSTORAGE")
+        // console.log(this.state.userDetails)
       }
     )
 
@@ -103,8 +103,8 @@ class Redeem extends Component {
         'idVoucher[]': [id]
     }
 
-    console.log("=== DATA YANG DISUBMIT ===")
-    console.log(dataForSubmit)
+    // console.log("=== DATA YANG DISUBMIT ===")
+    // console.log(dataForSubmit)
 
     let dataForSubmitEncoded = queryString.stringify(dataForSubmit);
 
@@ -118,12 +118,12 @@ class Redeem extends Component {
       credentials: 'include',
     })
     .then(res => {
-        console.log("=== RESPONSE ===")
-        console.log(res);
-        console.log(res.data);
+        // console.log("=== RESPONSE ===")
+        // console.log(res);
+        // console.log(res.data);
         let msg = res.data.message
         let sisaPoint = res.data.sisa_point
-        console.log(msg)
+        // console.log(msg)
         if(msg === "Point anda tidak cukup" || msg === "System error"){
           this.setState({
             redeemStatus: false,
@@ -180,7 +180,7 @@ class Redeem extends Component {
   }
 
   toggleModalRedeemHistoryShow(name, img) {
-    console.log(img)
+    // console.log(img)
     this.setState({
       redeemHistoryName: name,
       redeemHistoryImage: img,
@@ -209,10 +209,10 @@ class Redeem extends Component {
       credentials: 'include',
     })
       .then(res => {
-        console.log(res)
+        // console.log(res)
         const redeemHistory = res.data.listRedeem;
 
-        console.log(redeemHistory)
+        // console.log(redeemHistory)
 
         this.setState({
           redeemHistory: redeemHistory,
@@ -243,7 +243,7 @@ class Redeem extends Component {
 
     const redeem = this.state.redeem;
 
-    console.log(redeem)
+    // console.log(redeem)
 
     const redeemItems = redeem.map((item, index) => (
       <div key={item.id} className="card">
