@@ -13,6 +13,7 @@ export function PostData(type, encodedDataUser) {
         fetch(BaseURL+type, {
             method: 'POST',
             headers: {
+              'Access-Control-Allow-Origin': 'http://localhost:3000',
               'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
               'Accept':'application/json; charset=utf-8',
               'x-access-token': AUTH_TOKEN
