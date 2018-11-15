@@ -438,14 +438,18 @@ button.disabled {
 }
 
 .navbar .navbar-brand {
-  padding-left: 1.5rem;
+  padding-left: 1.25rem;
   margin-right: 0;
 }
 
 @media (min-width: 576px) {
   .navbar .navbar-brand {
-    padding-left: 2rem;
+    padding-left: 1.25rem;
   }
+}
+
+.navbar .navbar-brand img {
+  height: 57px;
 }
 
 .navbar-nav {
@@ -1731,6 +1735,10 @@ button.disabled {
 
 .footer .footer-logo-pipipol {
   margin-top: 1rem;
+}
+
+.footer .footer-logo-pipipol img {
+  height: 57px;
 }
 
 .footer .sosmed {

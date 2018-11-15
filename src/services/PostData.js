@@ -1,7 +1,7 @@
 export function PostData(type, encodedDataUser) {
 
-    // let BaseURL = `https://cors-anywhere.herokuapp.com/https://apipipipol.btoz.co.id/api/`;
-    let BaseURL = `https://apipipipol.btoz.co.id/api/`;
+    let BaseURL = `https://cors-anywhere.herokuapp.com/https://apipipipol.btoz.co.id/api/`;
+    // let BaseURL = `https://apipipipol.btoz.co.id/api/`;
     //let BaseURL = 'http://localhost/PHP-Slim-Restful/api/';
 
     return new Promise((resolve, reject) =>{
@@ -13,7 +13,6 @@ export function PostData(type, encodedDataUser) {
         fetch(BaseURL+type, {
             method: 'POST',
             headers: {
-              'X-Requested-With': 'XMLHttpRequest',
               'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
               'Accept':'application/json; charset=utf-8',
               'x-access-token': AUTH_TOKEN

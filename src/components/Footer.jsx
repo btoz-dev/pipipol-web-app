@@ -1,5 +1,5 @@
 import React from "react";
-import logoPipipol  from'./../img/logo-pipipol.png';
+import logoPipipol  from'./../img/logo-pipipol-114x114.png';
 
 const Footer = () => {
   return (

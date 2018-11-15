@@ -79,7 +79,6 @@ class Login extends Component {
 
                 PostData('googleAuth', this.encodedData(postData), {
                     headers: {
-                        'X-Requested-With': 'XMLHttpRequest',
                         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
                         'Cache-Control': 'no-cache',
                         'x-access-token': postData.idtoken

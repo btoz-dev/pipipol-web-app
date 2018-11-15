@@ -16,7 +16,7 @@ import Test from "./Test";
 import Search from "./Search";
 
 import { NavLink } from "react-router-dom";
-import logo from "./../img/logo-pipipol_black.png";
+import logo from "./../img/logo-pipipol-114x114.png";
 import userProfileImgDefault  from'./../img/ic-user.png';
 
 import { slide as Menu } from 'react-burger-menu'
