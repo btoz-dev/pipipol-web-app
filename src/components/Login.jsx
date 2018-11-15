@@ -299,7 +299,7 @@ class Login extends Component {
                                         
 
                                         <GoogleLogin
-                                        clientId="1070882847848-74ju17up0b5joq8ttbuu6i0rsgg0aqrg.apps.googleusercontent.com"
+                                        clientId="406655711555-59vmbcsf2a7e39ikv7p6ktaqfb5obkn6.apps.googleusercontent.com"
                                         buttonText="Login with Google"
                                         onSuccess={responseGoogle}
                                         onFailure={responseGoogle} 
