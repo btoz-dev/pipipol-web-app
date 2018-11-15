@@ -49,11 +49,11 @@ class Login extends Component {
 
             postData = {
                 name: res.name,
-                provider: type,
                 email: res.email,
-                provider_id: res.id,
-                token: res.accessToken,
-                provider_pic: res.picture.data.url
+                provider_id: res.id
+                // provider: type,
+                // token: res.accessToken,
+                // provider_pic: res.picture.data.url
             };
             if (postData) {
                 PostData('facebookAuth', postData).then((result) => {
@@ -77,7 +77,14 @@ class Login extends Component {
 
                 localStorage.setItem("id_token", postData.idtoken);
 
-                PostData('googleAuth', this.encodedData(postData))
+                PostData('googleAuth', this.encodedData(postData), {
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+                        'Cache-Control': 'no-cache',
+                        'x-access-token': postData.idtoken
+                    },
+                    credentials: 'include',
+                })
                 .then((result) => {
                     this.setState({ loadingGoogle: false })
                     let response = result;

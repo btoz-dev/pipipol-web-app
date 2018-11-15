@@ -109,7 +109,14 @@ class Redeem extends Component {
     let dataForSubmitEncoded = queryString.stringify(dataForSubmit);
 
     axios
-    .post(`/api/redeem`, dataForSubmitEncoded)
+    .post(`/api/redeem`, dataForSubmitEncoded, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+        'Cache-Control': 'no-cache',
+        'x-access-token': this.state.AUTH_TOKEN,
+      },
+      credentials: 'include',
+    })
     .then(res => {
         console.log("=== RESPONSE ===")
         console.log(res);
