@@ -104,6 +104,8 @@ class Login extends Component {
         // GOOGLE
         if (type === 'google' && res.w3.U3) {
 
+            let userAvatar = res.profileObj.imageUrl
+
             this.setState({ loadingGoogle: true })
 
             postData = {
@@ -131,7 +133,7 @@ class Login extends Component {
                     let msg = userData.message;
 
                     if(loggedIn){
-                        localStorage.setItem("userAvatar", JSON.stringify(res.profileObj.imageUrl));
+                        localStorage.setItem("userAvatar", userAvatar);
 
                         this.Auth.setUserID(userid)
                         this.Auth.setUserData(userData)
