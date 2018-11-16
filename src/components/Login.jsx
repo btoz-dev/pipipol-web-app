@@ -134,8 +134,6 @@ class Login extends Component {
                     let msg = userData.message;
 
                     if(loggedIn){
-                        localStorage.setItem("userAvatar", googleAvatarUrl);
-
                         this.Auth.setUserID(userid)
                         this.Auth.setUserData(userData)
                         this.Auth.setToken(token) // Setting the token in localStorage
@@ -216,10 +214,13 @@ class Login extends Component {
             console.log(userDetails)
             localStorage.setItem('userDetails', userDetails)
             localStorage.setItem('currentPoint', currentPoint)
-            if(userAvatarUrl === undefined){
-                localStorage.setItem('userAvatar', userProfileImgDefault)
-            }else if(this.state.loadingGoogle){
-                localStorage.setItem('userAvatar', googleAvatarUrl)
+
+            if(userAvatarUrl === undefined || userAvatarUrl === null){
+                if(this.state.loadingGoogle){
+                    localStorage.setItem('userAvatar', googleAvatarUrl)
+                }else[
+                    localStorage.setItem('userAvatar', userProfileImgDefault)
+                ]
             }else{
                 localStorage.setItem('userAvatar', userAvatarUrl)
             }
