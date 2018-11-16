@@ -50,55 +50,15 @@ class Login extends Component {
             postData = {
                 name: res.name,
                 email: res.email,
-                provider_id: res.id
+                fbuserid: res.id
                 // provider: type,
                 // token: res.accessToken,
                 // provider_pic: res.picture.data.url
             };
             if (postData) {
-                PostData('facebookAuth', postData).then((result) => {
-                   let responseJson = result;
-                   sessionStorage.setItem("userData", JSON.stringify(responseJson));
-                   this.setState({redirect: true});
-                });
-            }
-        }
-
-        // GOOGLE
-        if (type === 'google' && res.w3.U3) {
-
-            this.setState({ loadingGoogle: true })
-
-            postData = {
-                idtoken: res.Zi.id_token
-            };
-            
-            if (postData) {
-
-                localStorage.setItem("id_token", postData.idtoken);
-
-
-                // var xhr = new XMLHttpRequest();
-                // xhr.open('POST', 'https://apipipipol.btoz.co.id/api/googleAuth');
-                // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                // xhr.onload = function() {
-                //     console.log('token from api: ' + xhr.responseText);
-                
-                //     localStorage.setItem("userData", JSON.stringify(xhr.response));
-                //     sessionStorage.setItem("userData", JSON.stringify(xhr.response));
-                    
-                //     this.setState({
-                //         loadingGoogle: false,
-                //         redirect: true
-                //     });
-                    
-                // };
-                // xhr.send('idtoken=' + postData.idtoken);
-
-
-                // USING AXIOS            
+       
                 axios
-                .post(`/api/googleAuth`, this.encodedData(postData))
+                .post(`/api/facebookAuth`, this.encodedData(postData))
                 .then(res => {
 
                     console.log(res);
@@ -136,45 +96,62 @@ class Login extends Component {
                 .catch(err => {
                     console.log(err);
                 });
-                
-
-                // PostData('googleAuth', this.encodedData(postData))
-                // .then((result) => {
-                //     this.setState({ loadingGoogle: false })
-                //     let response = result;
-                //     if (response.status >= 200 && response.status < 300) { // Success status lies between 200 to 300
-                //         sessionStorage.setItem("userData", JSON.stringify(response));
-                //         this.setState({redirect: true});
-                //     } else {
-                //         this.notifyErrorAPI("ERROR "+" "+ response.status +" "+ response.statusText)
-                //         //  JIKA GAGAL REMOVE
-                //         localStorage.removeItem('id_token');
-                //         localStorage.removeItem('userData');
-                //     }
-                // });
-                
             }
-            
-            // if (postData) {
-            //     localStorage.setItem("id_token", postData.idtoken);
-            //     PostData('googleAuth', postData).then((result) => {
-            //         console.log("RESULT => api/googleAuth") 
-            //         console.log(result)  
-            //         let responseJson = result;
-            //         if(responseJson){  
-            //             sessionStorage.setItem("userData", JSON.stringify(responseJson));
-            //             this.setState({redirect: true});
-            //             // return (<Redirect to={'/login'}/>)
-            //         }
-            //         else{
-            //             console.log("DAFTAR ERROR")
-            //             this.setState({loading: false})
-            //             this.notifyError("Terjadi kesalahan, silahkan mengulangi lagi.")
-            //         }
-            //     });
-            // }
+        }
 
+        // GOOGLE
+        if (type === 'google' && res.w3.U3) {
+
+            this.setState({ loadingGoogle: true })
+
+            postData = {
+                idtoken: res.Zi.id_token
+            };
             
+            if (postData) {
+
+                localStorage.setItem("id_token", postData.idtoken);
+       
+                axios
+                .post(`/api/googleAuth`, this.encodedData(postData))
+                .then(res => {
+
+                    // console.log(res);
+                    // console.log(res.data);
+                    // console.log(res.data.message)
+
+                    let userData = res.data;
+                    let loggedIn = userData.login
+                    let userid = userData.userid;
+                    let token = userData.token;
+                    let username = userData.username;
+                    let msg = userData.message;
+
+                    if(loggedIn){
+                        localStorage.setItem("userData", JSON.stringify(res));
+                        sessionStorage.setItem("userData", JSON.stringify(res));
+
+                        this.Auth.setUserID(userid)
+                        this.Auth.setUserData(userData)
+                        this.Auth.setToken(token) // Setting the token in localStorage
+                        this.Auth.isLoggedIn(token)
+
+                        this.getUserDetails(userid)
+                        this.setState({
+                            loadingGoogle: false,
+                            redirect: true
+                        });
+                    }else{
+                        this.notifyError();
+                        this.setState({
+                            loading: false
+                        })
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+            }
         }
     }
     
