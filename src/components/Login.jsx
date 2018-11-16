@@ -20,8 +20,9 @@ class Login extends Component {
     constructor(props){
         super(props);
         this.state = {
-            loginMessage: "",
+            loginMessage: '',
             loading: false,
+            loginType: '',
             loadingGoogle: false,
             loadingFacebook: false,
             loginError: false,
@@ -210,7 +211,7 @@ class Login extends Component {
             const userDetails = JSON.stringify(res.data.user_details[0])
             const currentPoint = JSON.stringify(res.data.user_details[0].point)
             const userAvatar = JSON.stringify(res.data.user_details[0].avatar)
-            const userAvatarUrl = JSON.stringify(BaseURL+userAvatar)
+            const userAvatarUrl = JSON.stringify(BaseURL+res.data.user_details[0].avatar)
             console.log("USER AVATAR DAPAT PAS LOGIN:")
             console.log(userAvatar)
 
