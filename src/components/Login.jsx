@@ -100,17 +100,36 @@ class Login extends Component {
                 axios
                 .post(`/api/googleAuth`, this.encodedData(postData))
                 .then(res => {
+
+                    localStorage.setItem("userData", JSON.stringify(res));
+                    sessionStorage.setItem("userData", JSON.stringify(res));
+
                     console.log(res);
                     console.log(res.data);
                     console.log(res.data.message)
 
-                    localStorage.setItem("userData", JSON.stringify(res));
-                    sessionStorage.setItem("userData", JSON.stringify(res));
-                    
-                    this.setState({
-                        loadingGoogle: false,
-                        redirect: true
-                    });
+                    let userData = res.data;
+                    let userid = userData.userid;
+                    let token = userData.token;
+                    let username = userData.username;
+
+                    this.Auth.setUserID(userid)
+                    this.Auth.setUserData(userData)
+                    this.Auth.setToken(token) // Setting the token in localStorage
+                    this.Auth.isLoggedIn(token)
+
+                    if(loggedIn){
+                        this.getUserDetails(res.userid)
+                        this.setState({
+                            loadingGoogle: false,
+                            redirect: true
+                        });
+                    }else{
+                        this.notifyError();
+                        this.setState({
+                            loading: false
+                        })
+                    }
                 })
                 .catch(err => {
                     console.log(err);
