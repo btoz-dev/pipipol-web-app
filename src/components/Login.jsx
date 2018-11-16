@@ -214,10 +214,10 @@ class Login extends Component {
     getUserDetails(userid, googleAvatarUrl){
         axios.get(`/api/getUserDetails/`+userid)
         .then(res => {
-            const userDetails = JSON.stringify(res.data.user_details[0])
-            const currentPoint = JSON.stringify(res.data.user_details[0].point)
-            const userAvatar = JSON.stringify(res.data.user_details[0].avatar)
-            const userAvatarUrl = JSON.stringify(BaseURL+res.data.user_details[0].avatar)
+            let userDetails = JSON.stringify(res.data.user_details[0])
+            let currentPoint = JSON.stringify(res.data.user_details[0].point)
+            let userAvatar = JSON.stringify(res.data.user_details[0].avatar)
+            let userAvatarUrl = JSON.stringify(BaseURL+res.data.user_details[0].avatar)
             console.log("USER AVATAR DAPAT PAS LOGIN:")
             console.log(userAvatar)
 
