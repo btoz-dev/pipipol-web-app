@@ -83,11 +83,11 @@ class Login extends Component {
                 xhr.onload = function() {
                     console.log('token from api: ' + xhr.responseText);
                     
-                    this.setState({ loadingGoogle: false })
+                    // this.setState({ loadingGoogle: false })
                     
-                        localStorage.setItem("userData", JSON.stringify(response));
-                        sessionStorage.setItem("userData", JSON.stringify(response));
-                        this.setState({redirect: true});
+                    //     localStorage.setItem("userData", JSON.stringify(response));
+                    //     sessionStorage.setItem("userData", JSON.stringify(response));
+                    //     this.setState({redirect: true});
                     
                 };
                 xhr.send('idtoken=' + postData.idtoken);
