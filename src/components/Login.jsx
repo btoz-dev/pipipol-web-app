@@ -234,7 +234,6 @@ class Login extends Component {
                 }
             }else{
                 localStorage.setItem('userAvatar', userAvatarUrl)
-                userAvatarUrl = userAvatarUrl
             }
 
             // KIRIM STATES KE TOP MOST PARENT PARAMNYA: (isLoggedIn, userDetails, currentPoint)
