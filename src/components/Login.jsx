@@ -85,8 +85,8 @@ class Login extends Component {
                     
                     this.setState({ loadingGoogle: false })
                     
-                        localStorage.setItem("userData", JSON.stringify(xhr.responseText));
-                        sessionStorage.setItem("userData", JSON.stringify(xhr.responseText));
+                        localStorage.setItem("userData", JSON.stringify(xhr.response));
+                        sessionStorage.setItem("userData", JSON.stringify(xhr.response));
                         this.setState({redirect: true});
                     
                 };
