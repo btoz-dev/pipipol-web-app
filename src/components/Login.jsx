@@ -47,6 +47,8 @@ class Login extends Component {
 
             this.setState({ loadingFacebook: true })
 
+            console.log(res)
+
             postData = {
                 name: res.name,
                 email: res.email,
