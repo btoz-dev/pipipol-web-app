@@ -227,11 +227,14 @@ class Login extends Component {
             if(userAvatar === 'undefined' || userAvatar === 'null'){
                 if(this.state.loginType === 'google' || this.state.loginType === 'facebook'){
                     localStorage.setItem('userAvatar', googleAvatarUrl)
+                    userAvatarUrl = googleAvatarUrl
                 }else{
                     localStorage.setItem('userAvatar', userProfileImgDefault)
+                    userAvatarUrl = userProfileImgDefault
                 }
             }else{
                 localStorage.setItem('userAvatar', userAvatarUrl)
+                userAvatarUrl = userAvatarUrl
             }
 
             // KIRIM STATES KE TOP MOST PARENT PARAMNYA: (isLoggedIn, userDetails, currentPoint)
