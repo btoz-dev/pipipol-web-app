@@ -84,17 +84,11 @@ class Login extends Component {
                     console.log('token from api: ' + xhr.responseText);
                     
                     this.setState({ loadingGoogle: false })
-                    let response = result;
-                    if (response.status >= 200 && response.status < 300) { // Success status lies between 200 to 300
+                    
                         localStorage.setItem("userData", JSON.stringify(response));
                         sessionStorage.setItem("userData", JSON.stringify(response));
                         this.setState({redirect: true});
-                    } else {
-                        this.notifyErrorAPI("ERROR "+" "+ response.status +" "+ response.statusText)
-                        //  JIKA GAGAL REMOVE
-                        localStorage.removeItem('id_token');
-                        localStorage.removeItem('userData');
-                    }
+                    
                 };
                 xhr.send('idtoken=' + id_token);
                 
