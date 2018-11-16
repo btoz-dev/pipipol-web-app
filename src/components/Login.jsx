@@ -47,7 +47,10 @@ class Login extends Component {
         // FACEBOOK
         if (type === 'facebook' && res.email) {
 
-            this.setState({ loadingFacebook: true })
+            this.setState({ 
+                loginType: 'facebook',
+                loadingFacebook: true
+            })
 
             console.log(res)
 
@@ -108,7 +111,10 @@ class Login extends Component {
 
             let googleAvatarUrl = res.profileObj.imageUrl
 
-            this.setState({ loadingGoogle: true })
+            this.setState({ 
+                loginType: 'google',
+                loadingGoogle: true 
+            })
 
             postData = {
                 idtoken: res.Zi.id_token
@@ -219,7 +225,7 @@ class Login extends Component {
             localStorage.setItem('currentPoint', currentPoint)
 
             if(userAvatar === 'undefined' || userAvatar === 'null'){
-                if(this.state.loadingGoogle){
+                if(this.state.loginType === 'google' || this.state.loginType === 'facebook'){
                     localStorage.setItem('userAvatar', googleAvatarUrl)
                 }else{
                     localStorage.setItem('userAvatar', userProfileImgDefault)
