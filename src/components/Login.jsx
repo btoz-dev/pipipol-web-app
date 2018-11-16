@@ -209,7 +209,8 @@ class Login extends Component {
         .then(res => {
             const userDetails = JSON.stringify(res.data.user_details[0])
             const currentPoint = JSON.stringify(res.data.user_details[0].point)
-            const userAvatarUrl = JSON.stringify(BaseURL+res.data.user_details[0].avatar)
+            const userAvatar = JSON.stringify(res.data.user_details[0].avatar)
+            const userAvatarUrl = JSON.stringify(BaseURL+userAvatar)
             console.log("USER AVATAR DAPAT PAS LOGIN:")
             console.log(userAvatarUrl)
 
