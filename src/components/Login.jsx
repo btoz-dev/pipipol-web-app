@@ -210,8 +210,9 @@ class Login extends Component {
             const userDetails = JSON.stringify(res.data.user_details[0])
             const currentPoint = JSON.stringify(res.data.user_details[0].point)
             const userAvatarUrl = JSON.stringify(BaseURL+res.data.user_details[0].avatar)
-            console.log("USER DETAILS DAPAT PAS LOGIN:")
-            console.log(userDetails)
+            console.log("USER AVATAR DAPAT PAS LOGIN:")
+            console.log(userAvatarUrl)
+
             localStorage.setItem('userDetails', userDetails)
             localStorage.setItem('currentPoint', currentPoint)
 
