@@ -131,9 +131,7 @@ class Login extends Component {
                     let msg = userData.message;
 
                     if(loggedIn){
-                        localStorage.setItem("userData", JSON.stringify(res));
-                        sessionStorage.setItem("userData", JSON.stringify(res));
-                        localStorage.setItem("userAvatar", JSON.stringify(res.w3.Paa));
+                        localStorage.setItem("userAvatar", JSON.stringify(res.profileObj.imageUrl));
 
                         this.Auth.setUserID(userid)
                         this.Auth.setUserData(userData)
