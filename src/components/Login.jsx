@@ -92,8 +92,9 @@ class Login extends Component {
                 .then((result) => {
                     this.setState({ loadingGoogle: false })
                     let response = result;
+                    console.log(response)
                     if (response.status >= 200 && response.status < 300) { // Success status lies between 200 to 300
-                        localStorage.setItem("userData", JSON.stringify(response));
+=                        localStorage.setItem("userData", JSON.stringify(response));
                         sessionStorage.setItem("userData", JSON.stringify(response));
                         this.setState({redirect: true});
                     } else {
