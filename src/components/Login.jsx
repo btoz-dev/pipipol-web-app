@@ -133,7 +133,7 @@ class Login extends Component {
                     if(loggedIn){
                         localStorage.setItem("userData", JSON.stringify(res));
                         sessionStorage.setItem("userData", JSON.stringify(res));
-                        localStorage.setItem("userAvatar", res.w3.Paa);
+                        localStorage.setItem("userAvatar", JSON.stringify(res.w3.Paa));
 
                         this.Auth.setUserID(userid)
                         this.Auth.setUserData(userData)
