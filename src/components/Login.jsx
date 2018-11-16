@@ -218,7 +218,7 @@ class Login extends Component {
             localStorage.setItem('currentPoint', currentPoint)
             if(userAvatarUrl === undefined){
                 localStorage.setItem('userAvatar', userProfileImgDefault)
-            }else if(loadingGoogle){
+            }else if(this.state.loadingGoogle){
                 localStorage.setItem('userAvatar', googleAvatarUrl)
             }else{
                 localStorage.setItem('userAvatar', userAvatarUrl)
