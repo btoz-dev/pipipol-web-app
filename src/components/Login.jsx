@@ -9,6 +9,7 @@ import {PostData} from './../services/PostData';
 import { ToastContainer, toast } from 'react-toastify';
 import bgRedeem  from'./../img/bg-redeem.jpg';
 import logoPipipol  from'./../img/logo-pipipol.png';
+import userProfileImgDefault  from'./../img/ic-user.png';
 
 const qs = require('query-string');
 
@@ -104,7 +105,7 @@ class Login extends Component {
         // GOOGLE
         if (type === 'google' && res.w3.U3) {
 
-            let userAvatar = res.profileObj.imageUrl
+            let googleAvatarUrl = res.profileObj.imageUrl
 
             this.setState({ loadingGoogle: true })
 
@@ -133,14 +134,14 @@ class Login extends Component {
                     let msg = userData.message;
 
                     if(loggedIn){
-                        localStorage.setItem("userAvatar", userAvatar);
+                        localStorage.setItem("userAvatar", googleAvatarUrl);
 
                         this.Auth.setUserID(userid)
                         this.Auth.setUserData(userData)
                         this.Auth.setToken(token) // Setting the token in localStorage
                         this.Auth.isLoggedIn(token)
 
-                        this.getUserDetails(userid)
+                        this.getUserDetails(userid, googleAvatarUrl)
                         this.setState({
                             loadingGoogle: false,
                             redirect: true
@@ -205,7 +206,7 @@ class Login extends Component {
     }
     
 
-    getUserDetails(userid){
+    getUserDetails(userid, googleAvatarUrl){
         axios.get(`/api/getUserDetails/`+userid)
         .then(res => {
             const userDetails = JSON.stringify(res.data.user_details[0])
@@ -215,7 +216,13 @@ class Login extends Component {
             console.log(userDetails)
             localStorage.setItem('userDetails', userDetails)
             localStorage.setItem('currentPoint', currentPoint)
-            localStorage.setItem('userAvatar', userAvatarUrl)
+            if(userAvatarUrl === undefined){
+                localStorage.setItem('userAvatar', userProfileImgDefault)
+            }else if(loadingGoogle){
+                localStorage.setItem('userAvatar', googleAvatarUrl)
+            }else{
+                localStorage.setItem('userAvatar', userAvatarUrl)
+            }
 
             // KIRIM STATES KE TOP MOST PARENT PARAMNYA: (isLoggedIn, userDetails, currentPoint)
             window.updateTopMostParent("true", userDetails, currentPoint, userAvatarUrl); 
