@@ -101,25 +101,27 @@ class Login extends Component {
                 .post(`/api/googleAuth`, this.encodedData(postData))
                 .then(res => {
 
-                    localStorage.setItem("userData", JSON.stringify(res));
-                    sessionStorage.setItem("userData", JSON.stringify(res));
-
                     console.log(res);
                     console.log(res.data);
                     console.log(res.data.message)
 
                     let userData = res.data;
+                    let loggedIn = userData.login
                     let userid = userData.userid;
                     let token = userData.token;
                     let username = userData.username;
-
-                    this.Auth.setUserID(userid)
-                    this.Auth.setUserData(userData)
-                    this.Auth.setToken(token) // Setting the token in localStorage
-                    this.Auth.isLoggedIn(token)
+                    let msg = userData.message;
 
                     if(loggedIn){
-                        this.getUserDetails(res.userid)
+                        localStorage.setItem("userData", JSON.stringify(res));
+                        sessionStorage.setItem("userData", JSON.stringify(res));
+
+                        this.Auth.setUserID(userid)
+                        this.Auth.setUserData(userData)
+                        this.Auth.setToken(token) // Setting the token in localStorage
+                        this.Auth.isLoggedIn(token)
+
+                        this.getUserDetails(userid)
                         this.setState({
                             loadingGoogle: false,
                             redirect: true
