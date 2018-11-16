@@ -212,12 +212,12 @@ class Login extends Component {
             const userAvatar = JSON.stringify(res.data.user_details[0].avatar)
             const userAvatarUrl = JSON.stringify(BaseURL+userAvatar)
             console.log("USER AVATAR DAPAT PAS LOGIN:")
-            console.log(userAvatarUrl)
+            console.log(userAvatar)
 
             localStorage.setItem('userDetails', userDetails)
             localStorage.setItem('currentPoint', currentPoint)
 
-            if(userAvatarUrl === undefined || userAvatarUrl === null){
+            if(userAvatar === undefined || userAvatar === null){
                 if(this.state.loadingGoogle){
                     localStorage.setItem('userAvatar', googleAvatarUrl)
                 }else{
