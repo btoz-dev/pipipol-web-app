@@ -77,20 +77,44 @@ class Login extends Component {
 
                 localStorage.setItem("id_token", postData.idtoken);
 
-                var xhr = new XMLHttpRequest();
-                xhr.open('POST', 'https://apipipipol.btoz.co.id/api/googleAuth');
-                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                xhr.onload = function() {
-                    console.log('token from api: ' + xhr.responseText);
+
+                // var xhr = new XMLHttpRequest();
+                // xhr.open('POST', 'https://apipipipol.btoz.co.id/api/googleAuth');
+                // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                // xhr.onload = function() {
+                //     console.log('token from api: ' + xhr.responseText);
+                
+                //     localStorage.setItem("userData", JSON.stringify(xhr.response));
+                //     sessionStorage.setItem("userData", JSON.stringify(xhr.response));
                     
-                    this.setState({ loadingGoogle: false })
+                //     this.setState({
+                //         loadingGoogle: false,
+                //         redirect: true
+                //     });
                     
-                        localStorage.setItem("userData", JSON.stringify(xhr.response));
-                        sessionStorage.setItem("userData", JSON.stringify(xhr.response));
-                        this.setState({redirect: true});
+                // };
+                // xhr.send('idtoken=' + postData.idtoken);
+
+
+                // USING AXIOS            
+                axios
+                .post(`/api/googleAuth`, this.encodedData(postData))
+                .then(res => {
+                    console.log(res);
+                    console.log(res.data);
+                    console.log(res.data.message)
+
+                    localStorage.setItem("userData", JSON.stringify(res));
+                    sessionStorage.setItem("userData", JSON.stringify(res));
                     
-                };
-                xhr.send('idtoken=' + postData.idtoken);
+                    this.setState({
+                        loadingGoogle: false,
+                        redirect: true
+                    });
+                })
+                .catch(err => {
+                    console.log(err);
+                });
                 
 
                 // PostData('googleAuth', this.encodedData(postData))
@@ -107,6 +131,7 @@ class Login extends Component {
                 //         localStorage.removeItem('userData');
                 //     }
                 // });
+                
             }
             
             // if (postData) {
@@ -128,23 +153,7 @@ class Login extends Component {
             //     });
             // }
 
-            // USING AXIOS
-            // localStorage.setItem("id_token", res.Zi.id_token);
-            // let dataForSubmit = { 
-            //     'idtoken': res.Zi.id_token
-            // }
-            // console.log(dataForSubmit)
-        
-            // axios
-            // .post(`/api/googleAuth`, this.encodedData(dataForSubmit))
-            // .then(res => {
-            //     console.log(res);
-            //     console.log(res.data);
-            //     console.log(res.data.message)
-            // })
-            // .catch(err => {
-            //     console.log(err);
-            // });
+            
         }
     }
     
