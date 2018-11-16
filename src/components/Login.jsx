@@ -119,7 +119,7 @@ class Login extends Component {
                 .then(res => {
 
                     // console.log(res);
-                    // console.log(res.data);
+                    console.log(res.data);
                     // console.log(res.data.message)
 
                     let userData = res.data;
@@ -309,7 +309,7 @@ class Login extends Component {
                                         <FacebookLogin
                                         appId="657632311297060"
                                         autoLoad={false}
-                                        fields="name,email,picture"
+                                        fields="name,email,id"
                                         callback={responseFacebook}
                                         cssClass="btn btn-lg btn-facebook" 
                                         icon="fa-facebook" />
