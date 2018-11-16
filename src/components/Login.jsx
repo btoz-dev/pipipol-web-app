@@ -110,6 +110,7 @@ class Login extends Component {
                 idtoken: res.Zi.id_token
             };
             
+            
             if (postData) {
 
                 localStorage.setItem("id_token", postData.idtoken);
@@ -119,6 +120,7 @@ class Login extends Component {
                 .then(res => {
 
                     // console.log(res);
+                    console.log("RESULT DATA");
                     console.log(res.data);
                     // console.log(res.data.message)
 
@@ -126,12 +128,12 @@ class Login extends Component {
                     let loggedIn = userData.login
                     let userid = userData.userid;
                     let token = userData.token;
-                    let username = userData.username;
                     let msg = userData.message;
 
                     if(loggedIn){
                         localStorage.setItem("userData", JSON.stringify(res));
                         sessionStorage.setItem("userData", JSON.stringify(res));
+                        localStorage.setItem("userAvatar", res.w3.Paa);
 
                         this.Auth.setUserID(userid)
                         this.Auth.setUserData(userData)
@@ -144,7 +146,7 @@ class Login extends Component {
                             redirect: true
                         });
                     }else{
-                        this.notifyError();
+                        this.notifyError(msg);
                         this.setState({
                             loading: false
                         })
