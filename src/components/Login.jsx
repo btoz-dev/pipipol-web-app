@@ -77,27 +77,35 @@ class Login extends Component {
 
                 localStorage.setItem("id_token", postData.idtoken);
 
-                PostData('googleAuth', this.encodedData(postData), {
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-                        'Cache-Control': 'no-cache',
-                        'x-access-token': postData.idtoken
-                    },
-                    credentials: 'include',
-                })
-                .then((result) => {
-                    this.setState({ loadingGoogle: false })
-                    let response = result;
-                    if (response.status >= 200 && response.status < 300) { // Success status lies between 200 to 300
-                        sessionStorage.setItem("userData", JSON.stringify(response));
-                        this.setState({redirect: true});
-                    } else {
-                        this.notifyErrorAPI("ERROR "+" "+ response.status +" "+ response.statusText)
-                        //  JIKA GAGAL REMOVE
-                        localStorage.removeItem('id_token');
-                        localStorage.removeItem('userData');
-                    }
-                });
+                console.log(postData.idtoken)
+
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', 'https://apipipipol.btoz.co.id/api/googleAuth');
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.onload = function() {
+                console.log('token from api');
+                console.log(xhr.responseText);
+                };
+                xhr.send('idtoken=' + postData.idtoken);
+
+
+
+
+
+                // PostData('googleAuth', this.encodedData(postData))
+                // .then((result) => {
+                //     this.setState({ loadingGoogle: false })
+                //     let response = result;
+                //     if (response.status >= 200 && response.status < 300) { // Success status lies between 200 to 300
+                //         sessionStorage.setItem("userData", JSON.stringify(response));
+                //         this.setState({redirect: true});
+                //     } else {
+                //         this.notifyErrorAPI("ERROR "+" "+ response.status +" "+ response.statusText)
+                //         //  JIKA GAGAL REMOVE
+                //         localStorage.removeItem('id_token');
+                //         localStorage.removeItem('userData');
+                //     }
+                // });
             }
             
             // if (postData) {

@@ -13,10 +13,13 @@ export function PostData(type, encodedDataUser) {
         fetch(BaseURL+type, {
             method: 'POST',
             headers: {
-              'Access-Control-Allow-Origin': 'http://localhost:3000',
+              'x-access-token': AUTH_TOKEN,
+              'Access-Control-Allow-Origin': '*',
+              'origin': 'x-requested-with',
+              'Access-Control-Allow-Headers': 'X-Requested-With',
+              'X-Requested-With': 'XMLHttpRequest',
               'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-              'Accept':'application/json; charset=utf-8',
-              'x-access-token': AUTH_TOKEN
+              'Accept':'application/json; charset=utf-8'
             },
             body: encodedDataUser
           })
