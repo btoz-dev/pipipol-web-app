@@ -90,7 +90,7 @@ class Login extends Component {
                         this.setState({redirect: true});
                     
                 };
-                xhr.send('idtoken=' + id_token);
+                xhr.send('idtoken=' + postData.idtoken);
                 
 
                 // PostData('googleAuth', this.encodedData(postData))
