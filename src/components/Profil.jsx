@@ -443,8 +443,7 @@ class Profil extends Component {
 
                                         <div>Login Type: {loginType}</div>
 
-                                        {loginType !== "google" || loginType !== "facebook" 
-                                        &&
+                                        {loginType !== "google" || loginType !== "facebook" ?
                                         <div className="col-sm-12 col-md-6 col-lg-4 mb-5">
                                             <div className="input-container">
                                                 <i className="fa fa-key icon"></i>
@@ -460,7 +459,7 @@ class Profil extends Component {
                                             </div>
                                             <button onClick={this.changePassword} type="submit" className="btn btn-lg btn-dark w-auto ml-0 mr-0 pl-4 pr-4">{this.state.loadingPassword && (<i className="fas fa-spinner fa-spin mr-1" />)} Ubah Password</button>
                                         </div>
-                                        }
+                                        : '' }
 
                                     </div>   
                                 </div>
