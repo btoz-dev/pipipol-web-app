@@ -453,7 +453,7 @@ class Polling extends Component {
                       {/* <!-- /END POLL QUESTION --> */}
                       {/* <!-- POLL CAPTCHA --> */}
                       <div className="poll-captcha row">
-                      { this.state.polled 
+                      { this.state.polled
                         ?
                         <div></div>
                         :
@@ -478,7 +478,7 @@ class Polling extends Component {
                       }
 
                         <div className="col-4">
-                          { this.state.polled 
+                          { this.state.polled
                             ?
                             <button onClick={this.toggleModalResultsShow} className="btn btn-danger">
                               {this.state.loadingSubmitPoll && (
@@ -522,7 +522,7 @@ class Polling extends Component {
             <ModalBody className="poll-captcha">
               {captcha.imgUrl 
               ?
-              <img className="img-fluid" src={"https://apipipipol.btoz.co.id" + captcha.imgUrl} alt="Cari dan temukan kode sandi!" />
+              <img className="img-fluid" src={"https://apipipipol.btoz.co.id" + captcha.imgUrl} alt='Klik ulang tombol "Captcha" jika gambar Captcha tidak keluar.' />
               :
               <span><i className="fas fa-spinner fa-spin text-center mr-1" /> Loading kode sandi..</span>
               }
