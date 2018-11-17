@@ -9,8 +9,8 @@ import "./_html/css/style.css";
 
 const AUTH_TOKEN = localStorage.getItem('id_token');
 
-console.log("AXIOS AUTH_TOKEN ")
-console.log(AUTH_TOKEN)
+// console.log("AXIOS AUTH_TOKEN ")
+// console.log(AUTH_TOKEN)
 
 axios.defaults.baseURL = 'https://apipipipol.btoz.co.id';
 axios.defaults.headers.common['x-access-token'] = AUTH_TOKEN;

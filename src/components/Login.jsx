@@ -227,6 +227,7 @@ class Login extends Component {
             localStorage.setItem('currentPoint', currentPoint)
 
             if(userAvatar === 'undefined' || userAvatar === 'null'){
+                localStorage.setItem('userAvatar', userProfileImgDefault)
                 if(this.state.loginType === 'google' || this.state.loginType === 'facebook'){
                     localStorage.setItem('userAvatar', googleAvatarUrl)
                     userAvatarUrl = googleAvatarUrl
