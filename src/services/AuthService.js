@@ -87,18 +87,18 @@ export default class AuthService {
 
     logout() {
         // Clear user token and profile data from localStorage
-        localStorage.removeItem('id_token');
-        localStorage.removeItem('userData');
-        localStorage.removeItem('userDetails');
-        localStorage.removeItem('userid');
-        localStorage.removeItem('isLoggedIn');
-        localStorage.removeItem('sisaPoint');
-        localStorage.removeItem('currentPoint');
-        localStorage.removeItem('userAvatar');
-        localStorage.removeItem('loginType');
+        // localStorage.removeItem('id_token');
+        // localStorage.removeItem('userData');
+        // localStorage.removeItem('userDetails');
+        // localStorage.removeItem('userid');
+        // localStorage.removeItem('isLoggedIn');
+        // localStorage.removeItem('sisaPoint');
+        // localStorage.removeItem('currentPoint');
+        // localStorage.removeItem('userAvatar');
+        // localStorage.removeItem('loginType');
 
-
-        sessionStorage.removeItem('userData');
+        localStorage.clear()
+        sessionStorage.clear();
         
 
         // KASIH TAU SI ROUTER KLO UDAH SIGN OUT
