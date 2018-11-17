@@ -95,6 +95,7 @@ export default class AuthService {
         localStorage.removeItem('sisaPoint');
         localStorage.removeItem('currentPoint');
         localStorage.removeItem('userAvatar');
+        localStorage.removeItem('loginType');
 
 
         sessionStorage.removeItem('userData');
