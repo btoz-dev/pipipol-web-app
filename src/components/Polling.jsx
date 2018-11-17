@@ -34,7 +34,7 @@ class Polling extends Component {
       modalReportShow: false,
       pollingResults: [],
       polled: false,
-      pollRespondents: localStorage.getItem("pollRespondents"),
+      pollRespondents: null,
       reportReason: '',
 
     };
@@ -64,13 +64,13 @@ class Polling extends Component {
     if(this.state.AUTH_TOKEN){
       const req = await fetch(BaseURL + "/api/getDetailPolls/" + this.state.idPoll);
       const res = await req.json();
+      console.log(res)
       this.setState({ 
         activePolling: res.list_detail_polls[0], 
         activeAnswers: res.list_detail_polls[0].answers,
+        pollRespondents: res.list_detail_polls[0].popularity,
         loading: false
       });
-      localStorage.setItem("pollRespondents", res.list_detail_polls[0].popularity)
-      console.log(res)
     }
   };
 
@@ -185,8 +185,10 @@ class Polling extends Component {
 
           this.setState({
             modalResultsShow: true,
-            polled: true
+            polled: true,
+            pollRespondents: parseInt(this.state.pollRespondents + 1)
           });
+          
         }else{
           console.log("GAK BERHASIL")
           this.notifyError()
@@ -571,7 +573,7 @@ class Polling extends Component {
                 Pilihanmu: <strong>{choosenAnswer}</strong>
               </p>
               <br />
-              <h5>Hasil saat ini dari <strong>{localStorage.getItem("pollRespondents")} responden</strong></h5>
+              <h5>Hasil saat ini dari <strong>{this.state.pollRespondents} responden</strong></h5>
 
               <PollingResults pollingResults={this.state.pollingResults} />
 
