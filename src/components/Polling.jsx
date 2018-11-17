@@ -7,6 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import PollingResults from '../components/PollingResults';
+import brokenImage  from'./../img/broken-image.png';
 
 const BaseURL = `https://apipipipol.btoz.co.id`;
 
@@ -524,7 +525,7 @@ class Polling extends Component {
             <ModalBody className="poll-captcha">
               {captcha.imgUrl 
               ?
-              <img className="img-fluid" src={"https://apipipipol.btoz.co.id" + captcha.imgUrl} alt='Klik ulang tombol "Captcha" jika gambar Captcha tidak keluar.' />
+              <img className="img-fluid" src={"https://apipipipol.btoz.co.id" + captcha.imgUrl} onError={(e)=>{e.target.onerror = null; e.target.src=brokenImage}} alt='Klik ulang tombol "Captcha" jika gambar tidak keluar.' />
               :
               <span><i className="fas fa-spinner fa-spin text-center mr-1" /> Loading kode sandi..</span>
               }
