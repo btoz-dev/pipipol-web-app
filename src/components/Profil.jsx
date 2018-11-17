@@ -394,8 +394,7 @@ class Profil extends Component {
                                                 {!userBadge ? <i className="ic fas fa-award" /> : <img src={ BaseURL+userBadge } alt="" />}
                                             </div>
                                         </div>
-                                        <div className="col-sm-12 col-md-6 col-lg-5 mb-5" 
-                                        className={classnames('col-sm-12 col-md-6 col-lg-5 mb-5', { login-social: loginType !== 'google' || loginType !== 'facebook' })}>
+                                        <div className="col-sm-12 col-md-6 col-lg-5 mb-5">
                                             {/* <div className="input-container">
                                                 <i className="fa fa-user icon"></i>
                                                 <input disabled defaultValue={userDetails.username} onChange={this.onChange} className="input-field" type="text" placeholder="Username" name="username" />
