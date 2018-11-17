@@ -6,6 +6,8 @@ import userProfileImgDefault  from'./../img/ic-user.png';
 import bgRedeem  from'./../img/bg-redeem.jpg';
 import { ToastContainer, toast } from 'react-toastify';
 
+import classnames from 'classnames';
+
 var scrollToElement = require('scroll-to-element');
 
 const qs = require('query-string');
@@ -392,7 +394,8 @@ class Profil extends Component {
                                                 {!userBadge ? <i className="ic fas fa-award" /> : <img src={ BaseURL+userBadge } alt="" />}
                                             </div>
                                         </div>
-                                        <div className="col-sm-12 col-md-6 col-lg-5 mb-5">
+                                        <div className="col-sm-12 col-md-6 col-lg-5 mb-5" 
+                                        className={classnames('col-sm-12 col-md-6 col-lg-5 mb-5', { 'col-sm-12 col-md-12 col-lg-9 mb-5': this.state.loginType === 'google' || this.state.loginType === 'facebook' })}>
                                             {/* <div className="input-container">
                                                 <i className="fa fa-user icon"></i>
                                                 <input disabled defaultValue={userDetails.username} onChange={this.onChange} className="input-field" type="text" placeholder="Username" name="username" />
@@ -439,7 +442,7 @@ class Profil extends Component {
                                         </div>
 
                                         {this.loginType !== 'google' || !this.loginType !== 'facebook'
-                                        &&
+                                        ?
                                         <div className="col-sm-12 col-md-6 col-lg-4 mb-5">
                                             <div className="input-container">
                                                 <i className="fa fa-key icon"></i>
@@ -455,6 +458,8 @@ class Profil extends Component {
                                             </div>
                                             <button onClick={this.changePassword} type="submit" className="btn btn-lg btn-dark w-auto ml-0 mr-0 pl-4 pr-4">{this.state.loadingPassword && (<i className="fas fa-spinner fa-spin mr-1" />)} Ubah Password</button>
                                         </div>
+                                        :
+                                        ''
                                         }
 
                                     </div>   
