@@ -89,7 +89,6 @@ class Search extends React.Component {
     
 
     fetch(getPollsAPI(limit, page, sortBy, kategori, searchBy), {
-      method: 'get',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
         'Cache-Control': 'no-cache',
