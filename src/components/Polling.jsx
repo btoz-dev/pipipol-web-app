@@ -34,6 +34,7 @@ class Polling extends Component {
       modalReportShow: false,
       pollingResults: [],
       polled: false,
+      pollRespondents: localStorage.getItem("pollRespondents"),
       reportReason: '',
 
     };
@@ -68,6 +69,8 @@ class Polling extends Component {
         activeAnswers: res.list_detail_polls[0].answers,
         loading: false
       });
+      localStorage.setItem("pollRespondents", res.list_detail_polls[0].popularity)
+      console.log(res)
     }
   };
 
@@ -568,7 +571,7 @@ class Polling extends Component {
                 Pilihanmu: <strong>{choosenAnswer}</strong>
               </p>
               <br />
-              <h5>Hasil Saat Ini</h5>
+              <h5>Hasil saat ini dari <strong>{localStorage.getItem("pollRespondents")} responden</strong></h5>
 
               <PollingResults pollingResults={this.state.pollingResults} />
 
