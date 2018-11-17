@@ -45,56 +45,63 @@ class Login extends Component {
         let postData;
 
         // FACEBOOK
-        if (type === 'facebook' && res.email) {
+        if (type === 'facebook') {
 
             this.setState({ 
                 loginType: 'facebook',
                 loadingFacebook: true
             })
 
-            console.log(res)
+            let email = res.email
+            if(email === undefined){
+                email = res.first_name.toLowerCase()+res.last_name.toLowerCase()
+            }
 
             postData = {
+                email: email,
                 name: res.name,
-                email: res.email,
-                fbuserid: res.id
+                fbuserid: res.userID,
+                
                 // provider: type,
                 // token: res.accessToken,
                 // provider_pic: res.picture.data.url
             };
             if (postData) {
+
+                localStorage.setItem("id_token", res.accessToken);
+
+                let facebookAvatarUrl = res.picture.data.url
        
                 axios
                 .post(`/api/facebookAuth`, this.encodedData(postData))
                 .then(res => {
 
-                    console.log(res);
+                    // console.log(res);
+                    console.log("RESULT DATA");
                     console.log(res.data);
-                    console.log(res.data.message)
+                    // console.log(res.data.message)
 
                     let userData = res.data;
                     let loggedIn = userData.login
                     let userid = userData.userid;
                     let token = userData.token;
-                    let username = userData.username;
                     let msg = userData.message;
 
                     if(loggedIn){
-                        localStorage.setItem("userData", JSON.stringify(res));
-                        sessionStorage.setItem("userData", JSON.stringify(res));
-
                         this.Auth.setUserID(userid)
                         this.Auth.setUserData(userData)
                         this.Auth.setToken(token) // Setting the token in localStorage
                         this.Auth.isLoggedIn(token)
 
-                        this.getUserDetails(userid)
+                        localStorage.setItem('loginType', type)
+
+                        this.getUserDetails(userid, facebookAvatarUrl)
                         this.setState({
-                            loadingGoogle: false,
+                            loadingFacebook: false,
                             redirect: true
                         });
                     }else{
-                        this.notifyError();
+                        this.notifyError(msg);
                         this.setState({
                             loading: false
                         })
@@ -333,7 +340,8 @@ class Login extends Component {
                                         <FacebookLogin
                                         appId="657632311297060"
                                         autoLoad={false}
-                                        fields="name,email,id"
+                                        fields="id,name,first_name,last_name,email,picture"
+                                        scope="public_profile, email"
                                         callback={responseFacebook}
                                         cssClass="btn btn-lg btn-facebook" 
                                         icon="fa-facebook" />
