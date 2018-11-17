@@ -60,9 +60,6 @@ class Search extends React.Component {
   }
 
   onInitialSearch = e => {
-    console.log("KATEGORI")
-    console.log(this.state.kategori)
-
       // RESET 
     if(this.state.kategori !== '' && this.state.page !== 1){
       this.setState({
@@ -77,8 +74,6 @@ class Search extends React.Component {
         page: 1,
         noMorePolls: false
       }, () => {
-        console.log('SEARCH BY')
-        console.log(this.state.serachBy)
         this.fetchStories(this.state.limit, this.state.page, this.state.sortBy, this.state.kategori, this.state.searchBy);
       });
     }
@@ -105,8 +100,8 @@ class Search extends React.Component {
         // console.log("LIST POLLS AWAL")
         // console.log(this.state.list_polls)
 
-        console.log("RESULT LENGTH")
-        console.log(result.list_polls.length);
+        // console.log("RESULT LENGTH")
+        // console.log(result.list_polls.length);
 
         let searchResult = result.list_polls.length
         if(searchResult === 0){
@@ -170,7 +165,7 @@ class Search extends React.Component {
     });
   }
   applySearchBy(searchBy) {    
-    console.log(searchBy)
+    // console.log(searchBy)
     this.setState({
       searchBy: searchBy
     }, () => {
