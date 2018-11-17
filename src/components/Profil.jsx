@@ -441,7 +441,7 @@ class Profil extends Component {
                                             <button onClick={this.updateProfile} type="submit" className="btn btn-lg btn-danger w-auto ml-0 mr-0 pl-4 pr-4">{this.state.loadingProfile && (<i className="fas fa-spinner fa-spin mr-1" />)} Update Profil</button>
                                         </div>
 
-                                        {loginType !== 'google' || loginType !== 'facebook'
+                                        {loginType !== '"google"' || loginType !== '"facebook"'
                                         ?
                                         <div className="col-sm-12 col-md-6 col-lg-4 mb-5">
                                             <div className="input-container">
