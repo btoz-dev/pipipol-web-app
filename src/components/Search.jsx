@@ -29,7 +29,6 @@ class Search extends React.Component {
     super(props);
 
     this.state = {
-      AUTH_TOKEN: localStorage.getItem("id_token"),
       result: [],
       allPolls: [],
       list_polls: [],
@@ -88,14 +87,7 @@ class Search extends React.Component {
 
     
 
-    fetch(getPollsAPI(limit, page, sortBy, kategori, searchBy), {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-        'Cache-Control': 'no-cache',
-        'x-access-token': this.state.AUTH_TOKEN,
-      },
-      credentials: 'include',
-    })
+    fetch(getPollsAPI(limit, page, sortBy, kategori, searchBy))
       .then(response => response.json())
       .then(result => {
 
