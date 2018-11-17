@@ -146,6 +146,8 @@ class Login extends Component {
                         this.Auth.setToken(token) // Setting the token in localStorage
                         this.Auth.isLoggedIn(token)
 
+                        localStorage.setItem('loginType', type)
+
                         this.getUserDetails(userid, googleAvatarUrl)
                         this.setState({
                             loadingGoogle: false,
@@ -226,7 +228,6 @@ class Login extends Component {
 
             if(userAvatar === 'undefined' || userAvatar === 'null'){
                 if(this.state.loginType === 'google' || this.state.loginType === 'facebook'){
-                    localStorage.setItem('loginType', this.state.loginType)
                     localStorage.setItem('userAvatar', googleAvatarUrl)
                     userAvatarUrl = googleAvatarUrl
                 }else{
