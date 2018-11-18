@@ -81,13 +81,19 @@ class Search extends React.Component {
   };
 
   onPaginatedSearch = e => {
-    this.fetchStories(this.state.limit, this.state.page, this.state.sortBy, this.state.kategori, this.state.searchBy);
+    if(this.state.page > 1){
+      this.setState({
+        limit: 11
+      }, () => {
+        this.fetchStories(this.state.limit, this.state.page, this.state.sortBy, this.state.kategori, this.state.searchBy);
+      });
+    }
   }
 
   fetchStories = (limit, page, sortBy, kategori, searchBy) => {
 
-    console.log("TOKEN")
-    console.log(this.state.AUTH_TOKEN)
+    // console.log("TOKEN")
+    // console.log(this.state.AUTH_TOKEN)
     
     axios.get(getPollsAPI(limit, page, sortBy, kategori, searchBy), {
       method: 'get',
@@ -101,7 +107,7 @@ class Search extends React.Component {
       .then(response => {
 
         let result = response.data
-
+        
         // console.log("PAGE")
         // console.log(page)
 
@@ -111,11 +117,23 @@ class Search extends React.Component {
         // console.log("LIST POLLS AWAL")
         // console.log(this.state.list_polls)
 
+        // console.log("LIST POLLS UPDATE")
+        // console.log(this.state.list_polls)
+
         // console.log("RESULT LENGTH")
         // console.log(result.list_polls.length);
 
         let searchResult = result.list_polls.length
+
+        console.log("PAGE")
+        console.log(page)
+        console.log("LIMIT")
+        console.log(limit)
+        console.log("RESULT LENGTH")
+        console.log(searchResult)
+
         if(searchResult === 0){
+          this.setState({ noMorePolls: true });
           this.notifyError("Maaf, tidak ada hasil pencarian yang sesuai dengan keyword tersebut. Silahkan coba lagi dengan keyword yang lain")  
           return
         }
@@ -123,6 +141,8 @@ class Search extends React.Component {
         this.onSetResult(result, page, sortBy, kategori, searchBy);
 
         if(page === 1){
+          this.setState({ limit: 12 })
+
           let allPolls = sort(result.list_polls).desc(this.state.sortBy)
           let firstPoll = allPolls[0]
           let mainPolls = allPolls.slice(1,5)
@@ -132,17 +152,15 @@ class Search extends React.Component {
             mainPolls: mainPolls,
             loading: false
           })
+        }else{
+          this.setState({ limit: 11 })
         }
-        // console.log(result.list_polls.length);
-        // console.log("LIST POLLS UPDATE")
-        // console.log(this.state.list_polls)
 
-        if (result.list_polls.length < limit) {
-          this.setState({
-            noMorePolls: true
-          });
+
+        if (searchResult < parseInt(limit+1) || searchResult === 0) {
+          this.setState({ noMorePolls: true });
         }
-        
+  
       });
   };
 
