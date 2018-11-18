@@ -244,3 +244,22 @@
     position: relative;
     top: -88px !important;
 }
+
+
+.col-load-more{
+    .poll-card{
+        background-color: #ec2828;
+        .poll-btn-quickview{
+            display: block;
+            color: #fff;
+                .fas{
+                    position: static;
+                    transform: scale(1);
+                    color: #fff;
+                    margin: 0;
+                    font-size: 7rem;
+                }
+            
+        }
+    }
+}

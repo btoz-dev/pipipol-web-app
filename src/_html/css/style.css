@@ -1239,6 +1239,24 @@ button.disabled {
   top: -88px !important;
 }
 
+.col-load-more .poll-card {
+  background-color: #ec2828;
+}
+
+.col-load-more .poll-card .poll-btn-quickview {
+  display: block;
+  color: #fff;
+}
+
+.col-load-more .poll-card .poll-btn-quickview .fas {
+  position: static;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  color: #fff;
+  margin: 0;
+  font-size: 7rem;
+}
+
 .poll-single {
   padding: 2rem 0 7rem;
   color: #fff;

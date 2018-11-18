@@ -36,7 +36,7 @@ class Search extends React.Component {
       firstPoll: [],
       mainPolls: [],
       page: 1,
-      limit: 12,
+      limit: 11,
       kategori: '',
       sortBy: 'popularity',
       searchBy: '',
@@ -81,13 +81,7 @@ class Search extends React.Component {
   };
 
   onPaginatedSearch = e => {
-    if(this.state.page > 1){
-      this.setState({
-        limit: 11
-      }, () => {
-        this.fetchStories(this.state.limit, this.state.page, this.state.sortBy, this.state.kategori, this.state.searchBy);
-      });
-    }
+    this.fetchStories(this.state.limit, this.state.page, this.state.sortBy, this.state.kategori, this.state.searchBy);
   }
 
   fetchStories = (limit, page, sortBy, kategori, searchBy) => {
@@ -108,29 +102,29 @@ class Search extends React.Component {
 
         let result = response.data
         
-        // console.log("PAGE")
-        // console.log(page)
+        console.log("PAGE")
+        console.log(page)
 
-        // console.log("LIST RESULT")
-        // console.log(result.list_polls)
+        console.log("LIST RESULT")
+        console.log(result.list_polls)
 
-        // console.log("LIST POLLS AWAL")
-        // console.log(this.state.list_polls)
+        console.log("LIST POLLS AWAL")
+        console.log(this.state.list_polls)
 
-        // console.log("LIST POLLS UPDATE")
-        // console.log(this.state.list_polls)
+        console.log("LIST POLLS UPDATE")
+        console.log(this.state.list_polls)
 
-        // console.log("RESULT LENGTH")
-        // console.log(result.list_polls.length);
+        console.log("RESULT LENGTH")
+        console.log(result.list_polls.length);
 
         let searchResult = result.list_polls.length
 
-        console.log("PAGE")
-        console.log(page)
-        console.log("LIMIT")
-        console.log(limit)
-        console.log("RESULT LENGTH")
-        console.log(searchResult)
+        // console.log("PAGE")
+        // console.log(page)
+        // console.log("LIMIT")
+        // console.log(limit)
+        // console.log("RESULT LENGTH")
+        // console.log(searchResult)
 
         if(searchResult === 0){
           this.setState({ noMorePolls: true });
@@ -141,8 +135,6 @@ class Search extends React.Component {
         this.onSetResult(result, page, sortBy, kategori, searchBy);
 
         if(page === 1){
-          this.setState({ limit: 12 })
-
           let allPolls = sort(result.list_polls).desc(this.state.sortBy)
           let firstPoll = allPolls[0]
           let mainPolls = allPolls.slice(1,5)
@@ -152,10 +144,7 @@ class Search extends React.Component {
             mainPolls: mainPolls,
             loading: false
           })
-        }else{
-          this.setState({ limit: 11 })
         }
-
 
         if (searchResult < parseInt(limit+1) || searchResult === 0) {
           this.setState({ noMorePolls: true });
@@ -265,13 +254,14 @@ class Search extends React.Component {
                 allPolls={this.state.list_polls.slice(5)}
                 page={this.state.page}
                 onPaginatedSearch={this.onPaginatedSearch}
+                noMorePolls={this.state.noMorePolls}
                 />
 
-                {!noMorePolls && (
+                {/* {!noMorePolls && (
                 <button onClick={this.onPaginatedSearch} className="btn btn-lg btn-danger loadmore pl-5 pr-5 mt-5 mb-5 mx-auto d-block">
                   {this.state.loading && (<i className="fas fa-spinner fa-spin mr-1" />)} Tampilkan lebih banyak
                 </button>
-                )}
+                )} */}
               </div>
             </div>
               
