@@ -93,7 +93,7 @@ class Login extends Component {
                         this.Auth.setToken(token) // Setting the token in localStorage
                         this.Auth.isLoggedIn(token)
 
-                        localStorage.setItem('loginType', type)
+                        localStorage.setItem('loginType', 'social')
 
                         this.getUserDetails(userid, facebookAvatarUrl)
                         this.setState({
@@ -153,7 +153,7 @@ class Login extends Component {
                         this.Auth.setToken(token) // Setting the token in localStorage
                         this.Auth.isLoggedIn(token)
 
-                        localStorage.setItem('loginType', type)
+                        localStorage.setItem('loginType', 'social')
 
                         this.getUserDetails(userid, googleAvatarUrl)
                         this.setState({
