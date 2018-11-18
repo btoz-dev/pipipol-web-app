@@ -48,7 +48,7 @@ class Login extends Component {
         if (type === 'facebook') {
 
             this.setState({ 
-                loginType: 'facebook',
+                loginType: 'social',
                 loadingFacebook: true
             })
 
@@ -119,7 +119,7 @@ class Login extends Component {
             let googleAvatarUrl = res.profileObj.imageUrl
 
             this.setState({ 
-                loginType: 'google',
+                loginType: 'social',
                 loadingGoogle: true 
             })
 
@@ -235,7 +235,7 @@ class Login extends Component {
 
             if(userAvatar === 'undefined' || userAvatar === 'null'){
                 localStorage.setItem('userAvatar', userProfileImgDefault)
-                if(this.state.loginType === 'google' || this.state.loginType === 'facebook'){
+                if(this.state.loginType === 'social'){
                     localStorage.setItem('userAvatar', googleAvatarUrl)
                     userAvatarUrl = googleAvatarUrl
                 }else{
