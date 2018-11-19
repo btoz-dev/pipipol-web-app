@@ -127,6 +127,8 @@ class Search extends React.Component {
         // console.log(searchResult)
 
         if(searchResult === 0){
+          console.log("RESULT LENGTH")
+          console.log(searchResult)
           this.setState({ noMorePolls: true });
           this.notifyError("Maaf, tidak ada hasil pencarian yang sesuai dengan keyword tersebut. Silahkan coba lagi dengan keyword yang lain")  
           return

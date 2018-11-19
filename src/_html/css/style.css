@@ -1880,6 +1880,47 @@ button.disabled {
   text-align: center;
 }
 
+.modal-body .validation-input-message {
+  position: static;
+}
+
+.modal-body input[type=text],
+.modal-body input[type=email] {
+  border: 1px solid #e1e1e1;
+  border-radius: 25px;
+  padding: .5rem 1rem;
+  background: none;
+  color: #000;
+}
+
+.modal-body input[type=text]::-webkit-input-placeholder,
+.modal-body input[type=email]::-webkit-input-placeholder {
+  color: #000;
+  opacity: 0.5;
+  font-style: italic;
+}
+
+.modal-body input[type=text]:-ms-input-placeholder,
+.modal-body input[type=email]:-ms-input-placeholder {
+  color: #000;
+  opacity: 0.5;
+  font-style: italic;
+}
+
+.modal-body input[type=text]::-ms-input-placeholder,
+.modal-body input[type=email]::-ms-input-placeholder {
+  color: #000;
+  opacity: 0.5;
+  font-style: italic;
+}
+
+.modal-body input[type=text]::placeholder,
+.modal-body input[type=email]::placeholder {
+  color: #000;
+  opacity: 0.5;
+  font-style: italic;
+}
+
 .modal-title {
   text-align: center;
   width: 100%;

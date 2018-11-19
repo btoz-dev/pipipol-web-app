@@ -10,6 +10,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import bgRedeem  from'./../img/bg-redeem.jpg';
 import logoPipipol  from'./../img/logo-pipipol.png';
 import userProfileImgDefault  from'./../img/ic-user.png';
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import SimpleReactValidator from 'simple-react-validator';
 
 const qs = require('query-string');
 
@@ -26,11 +28,18 @@ class Login extends Component {
             loadingGoogle: false,
             loadingFacebook: false,
             loginError: false,
-            redirect: false
+            redirect: false,
+            userEmail: '',
+            modalForgotShow: ''
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
+        this.toggleModalForgotShow = this.toggleModalForgotShow.bind(this);
+        this.handleChangeUserEmail = this.handleChangeUserEmail.bind(this);
         this.Auth = new AuthService();
+
+        this.validatorEmail = new SimpleReactValidator();
+        this.submitForgotPassword = this.submitForgotPassword.bind(this);
 
         this.signup = this.signup.bind(this);
     }
@@ -257,6 +266,54 @@ class Login extends Component {
         })
     }
 
+    submitForgotPassword(){
+        let postData = {
+            email: this.state.userEmail,
+        }
+        console.log(postData)
+        
+        axios.post(`/api/forgot-password`, this.encodedData(postData))
+        .then(res => {
+            console.log("RESPONSE LUPA PASSWORD:")
+            console.log(res)
+
+            let success = res.data['forgot-password']
+            let msg = res.data.message    
+
+            if (success) {
+                this.notify(msg);
+                this.toggleModalForgotShow()
+            } else {
+                this.notifyErrorAPI(msg);
+            }
+        })
+    }
+
+    handleChangeUserEmail(ev) {
+        // console.log(ev.target.value)
+        this.setState({
+            userEmail: ev.target.value
+        }, () => {
+            if( !this.validatorEmail.fieldValid('email') ){
+                this.validatorEmail.showMessages();
+            }
+        });
+    }
+
+    toggleModalForgotShow() {
+        this.setState({
+            modalForgotShow: !this.state.modalForgotShow
+        });
+    }
+
+    notify = (msg) => {
+        toast(msg, {
+            position: toast.POSITION.TOP_CENTER,
+            className: 'pipipol-notify',
+            autoClose: 15000
+        });
+    };
+
     notifyError = () => {
         toast.error(this.state.loginMessage, {
             position: toast.POSITION.TOP_CENTER,
@@ -326,7 +383,7 @@ class Login extends Component {
                                             <input onChange={this.handleChange} className="input-field" type="password" placeholder="Password" name="password" />
                                         </div>
                                         
-                                        <div className="text-lupa-password"><a href="./">Lupa password?</a></div>
+                                        <div className="text-lupa-password"><a href="#" onClick={this.toggleModalForgotShow}>Lupa password?</a></div>
                                         <button type="submit" className="btn btn-lg btn-danger">
                                             {this.state.loading && (<i className="fas fa-spinner fa-spin mr-2" />)} Login
                                         </button>
@@ -364,6 +421,35 @@ class Login extends Component {
                         </div>
                     </section>
                 </div>
+
+
+                {/* <!-- MODAL LUPA PASSWORD --> */}
+                <Modal isOpen={this.state.modalForgotShow} toggle={this.toggleModalForgotShow} centered={true} className={this.props.className}>
+                    <ModalHeader>
+                        Lupa Password Anda?
+                    </ModalHeader>
+                    <ModalBody>
+                        <h6 className="mb-4">Kami akan bantu untuk me-reset password Anda. <br />Silahkan masukan akun email Anda!</h6>
+                        <div className="">
+                            <input
+                                className="text-center forgot-email"
+                                name="userEmail"
+                                value={this.state.userEmail}
+                                onChange={this.handleChangeUserEmail}
+                                type="email"
+                                placeholder="Masukan email Anda.."
+                                autocomplete="off"
+                            />
+                        </div>
+                        {this.validatorEmail.message('email', this.state.userEmail, 'required|email', 'validation-input-message text-danger small font-italic mt-1')}
+                    </ModalBody>
+                    <ModalFooter>
+                        <button onClick={this.toggleModalForgotShow} className="btn btn-dark">Batalkan</button>
+                        <button onClick={this.submitForgotPassword} className="btn btn-danger">Reset Password</button>
+                    </ModalFooter>
+                </Modal>
+                {/* <!-- /END MODAL LUPA PASSWORD --> */}
+
             </div>
         )
     }

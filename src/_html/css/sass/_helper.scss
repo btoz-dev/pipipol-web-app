@@ -54,7 +54,25 @@
   }
   .modal-body{
       text-align: center;
+      .validation-input-message{
+          position: static;
+      }
   }
+
+    .modal-body input[type=text],
+    .modal-body input[type=email]{
+        border: 1px solid #e1e1e1;
+        border-radius: 25px;
+        padding: .5rem 1rem;
+        background: none;
+        color: #000;
+        &::placeholder {
+            color: #000;
+            opacity: 0.5;
+            font-style: italic;
+        }
+    }
+    
    .modal-title{
        text-align: center;
        width: 100%;
@@ -67,6 +85,7 @@
            padding-right: 1rem;
        }
    }
+   
 
    .progress{
        border-radius: 0;
