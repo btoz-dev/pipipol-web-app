@@ -398,6 +398,8 @@ class Login extends Component {
                                         scope="public_profile, email"
                                         callback={responseFacebook}
                                         cssClass="btn btn-lg btn-facebook" 
+                                        isMobile={true}
+                                        disableMobileRedirect={true}
                                         icon="fa-facebook" />
                                         
 
