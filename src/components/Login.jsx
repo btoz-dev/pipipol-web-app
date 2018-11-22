@@ -344,8 +344,8 @@ class Login extends Component {
             console.log(response);
             this.signup(response, 'google');
         }
-        
-        if (this.state.redirect || sessionStorage.getItem('userData')) {
+
+        if (this.state.redirect) {
             return (<Redirect to={'/'}/>)
         }
 
