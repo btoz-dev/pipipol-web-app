@@ -333,11 +333,6 @@ class Login extends Component {
 
 
     render() {
-
-        if (this.state.redirect || sessionStorage.getItem('userData')) {
-            return (<Redirect to={'/'}/>)
-        }
-
         const responseFacebook = (response) => {
             console.log("facebook console");
             console.log(response);
@@ -348,6 +343,10 @@ class Login extends Component {
             console.log("google console");
             console.log(response);
             this.signup(response, 'google');
+        }
+        
+        if (this.state.redirect || sessionStorage.getItem('userData')) {
+            return (<Redirect to={'/'}/>)
         }
 
         return (
