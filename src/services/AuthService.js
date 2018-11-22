@@ -99,8 +99,7 @@ export default class AuthService {
 
         localStorage.clear()
         sessionStorage.clear();
-
-        window.FB.logout()
+        
         
 
         // KASIH TAU SI ROUTER KLO UDAH SIGN OUT

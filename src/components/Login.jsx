@@ -262,7 +262,7 @@ class Login extends Component {
                 loading: false
             })
 
-            this.props.history.replace('/');
+            // this.props.history.replace('/');
         })
     }
 
@@ -345,11 +345,7 @@ class Login extends Component {
             this.signup(response, 'google');
         }
 
-        console.log("REDIRECT STATE")
-        console.log(this.state.redirect)
-        if (this.state.redirect) {
-            return (<Redirect to={'/'}/>)
-        }
+        
 
         return (
             <div
