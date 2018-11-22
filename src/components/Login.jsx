@@ -345,6 +345,8 @@ class Login extends Component {
             this.signup(response, 'google');
         }
 
+        console.log("REDIRECT STATE")
+        console.log(this.state.redirect)
         if (this.state.redirect) {
             return (<Redirect to={'/'}/>)
         }
