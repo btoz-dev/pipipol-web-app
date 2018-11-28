@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import AuthService from './AuthService';
 
 export default function withAuth(AuthComponent) {
-    const Auth = new AuthService('https://apipipipol.btoz.co.id');
+    const Auth = new AuthService('https://api.pipipol.com');
     return class AuthWrapped extends Component {
         constructor() {
             super();

@@ -5,7 +5,7 @@ import Search from "./Search";
 
 const qs = require('query-string');
 
-const BaseURL = `https://apipipipol.btoz.co.id`;
+const BaseURL = `https://api.pipipol.com`;
 
 class Test extends Component {
 

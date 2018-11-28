@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Loader from "./Loader";
 
-let BaseURL = "https://apipipipol.btoz.co.id/";
+let BaseURL = "https://api.pipipol.com/";
 
 class Feed extends React.Component {
   constructor(props) {
@@ -62,7 +62,7 @@ class Feed extends React.Component {
                   className="poll-card"
                   style={{
                     backgroundImage:
-                      "url(https://apipipipol.btoz.co.id" + polling.image + ")"
+                      "url(https://api.pipipol.com" + polling.image + ")"
                   }}
                 >
                   <div className="poll-overlay" />

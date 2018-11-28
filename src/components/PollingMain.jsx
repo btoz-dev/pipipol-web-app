@@ -8,7 +8,7 @@ const PollingMain = ({ mainPolls }) => (
       
       {mainPolls.map(polling => (
       <div key={polling.polls_id} className="col-lg-6 col-md-12 col-sm-6 col-xs-12">
-        <div className="poll-card" style={{ backgroundImage: "url(https://apipipipol.btoz.co.id" + polling.image + ")" }}>
+        <div className="poll-card" style={{ backgroundImage: "url(https://api.pipipol.com" + polling.image + ")" }}>
           <div className="poll-overlay" />
           <div className="poll-content">
             <div className="poll-copy">

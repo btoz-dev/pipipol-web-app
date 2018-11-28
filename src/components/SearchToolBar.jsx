@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-const BaseURL = "https://apipipipol.btoz.co.id";
+const BaseURL = "https://api.pipipol.com";
 
 class SearchToolBar extends Component {
   constructor(props) {

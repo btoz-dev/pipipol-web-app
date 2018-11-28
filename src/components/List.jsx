@@ -3,7 +3,7 @@ import axios from "axios";
 import { createFilter } from '../util/Filter';
 import { createSorter } from '../util/Sort';
 
-const BaseURL = `https://apipipipol.btoz.co.id`;
+const BaseURL = `https://api.pipipol.com`;
 
 class List extends Component {
   state = {

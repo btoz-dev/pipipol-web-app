@@ -22,7 +22,7 @@ const applySetResult = (result, sortBy) => prevState => ({
 });
 
 const getPollsAPI = (limit, page, sortBy, kategori, searchBy) =>
-  `https://apipipipol.btoz.co.id/api/getPolls?page=${page}&limit=${limit}&kategori=${kategori}&search=${searchBy}`;
+  `https://api.pipipol.com/api/getPolls?page=${page}&limit=${limit}&kategori=${kategori}&search=${searchBy}`;
 
 class Search extends React.Component {
   constructor(props) {

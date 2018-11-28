@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const PollingFirst = ({ firstPoll }) => (
 
   <div className="col-md-5 col-sm-12">
-    <div className="poll-card featured" style={{ backgroundImage:"url(https://apipipipol.btoz.co.id" + firstPoll.image + ")" }}>
+    <div className="poll-card featured" style={{ backgroundImage:"url(https://api.pipipol.com" + firstPoll.image + ")" }}>
       <div className="poll-overlay" />
       <div className="poll-content">
         <div className="poll-category btn btn-outline">

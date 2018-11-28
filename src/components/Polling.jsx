@@ -9,7 +9,7 @@ import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import PollingResults from '../components/PollingResults';
 import brokenImage  from'./../img/broken-image.png';
 
-const BaseURL = `https://apipipipol.btoz.co.id`;
+const BaseURL = `https://api.pipipol.com`;
 
 class Polling extends Component {
   constructor(props) {
@@ -379,7 +379,7 @@ class Polling extends Component {
             className="site-content container-fluid"
             style={{
               backgroundImage:
-                "url(https://apipipipol.btoz.co.id" + polling.image + ")"
+                "url(https://api.pipipol.com" + polling.image + ")"
             }}
           >
             <div className="bg-container container-fluid p-3">
@@ -426,7 +426,7 @@ class Polling extends Component {
                     <div className="poll-image">
                       <img
                         className="img-fluid"
-                        src={"https://apipipipol.btoz.co.id" + polling.image}
+                        src={"https://api.pipipol.com" + polling.image}
                         alt={polling.title}
                       />
                     </div>
@@ -525,7 +525,7 @@ class Polling extends Component {
             <ModalBody className="poll-captcha">
               {captcha.imgUrl 
               ?
-              <img className="img-fluid" src={"https://apipipipol.btoz.co.id" + captcha.imgUrl} onError={(e)=>{e.target.onerror = null; e.target.src=brokenImage}} alt='Klik ulang tombol "Captcha" jika gambar tidak keluar.' />
+              <img className="img-fluid" src={"https://api.pipipol.com" + captcha.imgUrl} onError={(e)=>{e.target.onerror = null; e.target.src=brokenImage}} alt='Klik ulang tombol "Captcha" jika gambar tidak keluar.' />
               :
               <span><i className="fas fa-spinner fa-spin text-center mr-1" /> Loading kode sandi..</span>
               }

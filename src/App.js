@@ -6,7 +6,7 @@ import Pollings from "./components/Pollings";
 import Feed from "./components/Feed";
 
 
-const BaseURL = "https://apipipipol.btoz.co.id";
+const BaseURL = "https://api.pipipol.com";
 
 class App extends Component {
   
@@ -54,7 +54,7 @@ class App extends Component {
                   className="poll-card featured"
                   style={{
                     backgroundImage:
-                      "url(https://apipipipol.btoz.co.id" + firstpoll.image + ")"
+                      "url(https://api.pipipol.com" + firstpoll.image + ")"
                   }}
                 >
                   <div className="poll-overlay" />

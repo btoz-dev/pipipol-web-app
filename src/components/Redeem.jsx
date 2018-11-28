@@ -12,7 +12,7 @@ const queryString = require('query-string');
 
 var scrollToElement = require('scroll-to-element');
 
-const BaseURL = "https://apipipipol.btoz.co.id";
+const BaseURL = "https://api.pipipol.com";
 
 class Redeem extends Component {
   constructor(props) {
@@ -253,7 +253,7 @@ class Redeem extends Component {
         <div className="card-body">
           <img
             className="card-img-top"
-            src={"https://apipipipol.btoz.co.id" + item.voucher_img}
+            src={"https://api.pipipol.com" + item.voucher_img}
             alt={item.voucher_name}
           />
         </div>
@@ -406,7 +406,7 @@ class Redeem extends Component {
                 { this.state.modalTitle }
               </ModalHeader>
               <ModalBody className="p-5">
-                {/* <img className="card-img-top" src={"https://apipipipol.btoz.co.id" + redeem[3].voucher_img} alt="" /> */}
+                {/* <img className="card-img-top" src={"https://api.pipipol.com" + redeem[3].voucher_img} alt="" /> */}
                 <i className="fas fa-box-open mt-2 mb-2" />
                 <p>Anda telah berhasil menukarkan poin Anda dengan hadiah <strong>{this.state.nameVoucher}</strong> sebesar <strong>{this.state.pointVoucher} poin.</strong></p>
               </ModalBody>
@@ -427,7 +427,7 @@ class Redeem extends Component {
                 { this.state.redeemHistoryName }
               </ModalHeader>
               <ModalBody className="p-5">
-                <img className="card-img-top" src={"https://apipipipol.btoz.co.id" + this.state.redeemHistoryImage} alt={this.state.redeemHistoryName} />
+                <img className="card-img-top" src={"https://api.pipipol.com" + this.state.redeemHistoryImage} alt={this.state.redeemHistoryName} />
               </ModalBody>
               <ModalFooter>
                 <button onClick={this.toggleModalRedeemHistoryHide} className="btn btn-danger pl-5 pr-5">

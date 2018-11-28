@@ -15,7 +15,7 @@ import SimpleReactValidator from 'simple-react-validator';
 
 const qs = require('query-string');
 
-const BaseURL = "https://apipipipol.btoz.co.id";
+const BaseURL = "https://api.pipipol.com";
 
 class Login extends Component {
 

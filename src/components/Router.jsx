@@ -25,7 +25,7 @@ var scrollToElement = require('scroll-to-element');
 
 const Auth = new AuthService();
 
-const BaseURL = "https://apipipipol.btoz.co.id";
+const BaseURL = "https://api.pipipol.com";
 
 
 
