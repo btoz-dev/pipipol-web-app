@@ -5,7 +5,7 @@ import Search from "./Search";
 
 const qs = require('query-string');
 
-const BaseURL = `https://api.pipipol.com`;
+const BaseURL = `https://api.pipipol.com/api`;
 
 class Test extends Component {
 
@@ -25,12 +25,51 @@ class Test extends Component {
         this.testGet = this.testGet.bind(this);
     }
 
+    encodedData = (data) => {
+        return Object.keys(data).map((key) => {
+            return encodeURIComponent(key) + '=' + encodeURIComponent(data[key]);
+        }).join('&');
+    }
+
     testGet (){
         axios
         .get(`/api/redeemHistory`)
         .then(res => {
             console.log("TEST : redeemHistory")
             console.log(res.data)
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    }
+
+    submitTestDaftar() {        
+        let dataForSubmit = { 
+            username: 'tester33a', 
+            email: 'tester33@testing.com',
+            password: '5a81d5f44d635b58ca6803ccd3082c47'
+        }
+
+        console.log("=== DATA YANG DISUBMIT ===")
+        console.log(this.state.AUTH_TOKEN)
+
+        axios
+        .post(BaseURL+`/register`, dataForSubmit,{
+            headers: {
+              'x-access-token': this.state.AUTH_TOKEN,
+              'Access-Control-Allow-Origin': '*',
+              'origin': 'x-requested-with',
+              'Access-Control-Allow-Headers': 'X-Requested-With',
+              'X-Requested-With': 'XMLHttpRequest',
+              'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+              'Accept':'application/json; charset=utf-8'
+            },
+            body: dataForSubmit
+        })
+        .then(res => {
+            console.log("=== RESPONSE ===")
+            console.log(res);
+            console.log(res.data);
         })
         .catch(err => {
             console.log(err);
@@ -164,6 +203,7 @@ class Test extends Component {
                 </form>
                 {!$imagePreview && <img src={imagePreviewUrl} />}
 
+                <button onClick={this.submitTestDaftar} type="submit" className="btn btn-lg btn-danger w-100 mt-3 mb-3">submitTestDaftar</button>
 
                 <button onClick={this.testGet} type="submit" className="btn btn-lg btn-danger w-100 mt-3 mb-3">Test Get API Data</button>
                 <button onClick={this.uploadHandler} type="submit" className="btn btn-lg btn-danger w-100 mt-3 mb-3">Upload Avatar</button>

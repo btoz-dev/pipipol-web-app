@@ -29,6 +29,11 @@ export function PostData(type, encodedDataUser) {
             console.log(res)
             resolve(res);
           })
+          // .then(function(response){
+          //   return response.json()
+          // }).then(function(body){
+          //   console.log("PostData =>", body);
+          // })
           .catch((error) => {
             localStorage.removeItem('id_token');
             sessionStorage.removeItem('userData');

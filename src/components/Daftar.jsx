@@ -21,7 +21,8 @@ class Daftar extends Component {
             passwordConfirm: '',
             redirectToReferrer: false,
             login: false,
-            notifMsg: ''
+            notifMsg: '',
+            loading: false
         };
         
     
@@ -130,23 +131,48 @@ class Daftar extends Component {
         if(this.state.username && this.state.email && this.state.password && this.state.passwordConfirm){
             
             if(this.state.password === this.state.passwordConfirm){
-                PostData('register', this.encodedData(postData)).then((result) => {
-                    let responseJson = result;
-                    if(responseJson){  
-                        console.log("DAFTAR SUKSES") 
-                        console.log(responseJson)       
+
+                fetch(`https://api.pipipol.com/api/register`, {
+                    method: 'POST',
+                    headers: {
+                      'Access-Control-Allow-Origin': '*',
+                      'origin': 'x-requested-with',
+                      'Access-Control-Allow-Headers': 'X-Requested-With',
+                      'X-Requested-With': 'XMLHttpRequest',
+                      'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+                      'Accept':'application/json; charset=utf-8'
+                    },
+                    body: this.encodedData(postData)
+                })
+                .then((response) => {
+                    return response.json()
+                    console.log("response.json() =>", response);
+                })
+                .then((body) => {
+                    
+                    let registerMessage = body.message
+
+                    if(body.register){  
+                        console.log("DAFTAR SUKSES")  
                         this.setState({
                             redirectToReferrer: true,
                             loading: false
                         });
                         // return (<Redirect to={'/login'}/>)
-                    }
-                    else{
-                        console.log("DAFTAR ERROR")
+                    }else{
+                        console.log("DAFTAR FAILED")
                         this.setState({loading: false})
-                        this.notifyError("Terjadi kesalahan, silahkan mengulangi lagi.")
+                        this.notifyError(registerMessage)
                     }
+                })
+                .catch((error) => {
+                    localStorage.removeItem('id_token');
+                    sessionStorage.removeItem('userData');
+                    console.log("=== RESPONSE ERROR DARI POSTDATA ===")
+                    console.log(error)
+                    this.notifyError(error)
                 });
+                
             }else{
                 console.log("PASSWORD BEDA!!!!")
                 this.notifyError("Password tidak cocok, silahkan periksa kembali.")
@@ -170,7 +196,7 @@ class Daftar extends Component {
         toast.error(msg, {
             position: toast.POSITION.TOP_CENTER,
             className: 'pipipol-notify',
-            autoClose: 7000
+            autoClose: 15000
         });
     };
 
