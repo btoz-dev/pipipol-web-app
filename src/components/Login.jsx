@@ -211,6 +211,7 @@ class Login extends Component {
                 const userid = res.userid
                 const loggedIn = res.login
                 const msg = res.message
+                console.log("LOGIN MESG => ", msg)
                 this.setState({
                     loginMessage: msg
                 })
@@ -221,6 +222,8 @@ class Login extends Component {
                     this.setState({
                         loading: false
                     })
+                    localStorage.clear()
+                    sessionStorage.clear();
                 }
             })
             .catch(err =>{

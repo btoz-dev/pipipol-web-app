@@ -25,7 +25,7 @@ export default class AuthService {
             this.setUserData(res)
             this.setToken(res.token) // Setting the token in localStorage
             this.isLoggedIn(res.token)
-            this.getSetUserDetails(res.userid)
+            // this.getSetUserDetails(res.userid)
             return Promise.resolve(res);
         })
     }
@@ -48,7 +48,7 @@ export default class AuthService {
             
             let userDetails = JSON.stringify(res.data.user_details[0])
             // console.log(userDetails)
-            localStorage.setItem('userDetails', userDetails)
+            // localStorage.setItem('userDetails', userDetails)
         })
     }
 
