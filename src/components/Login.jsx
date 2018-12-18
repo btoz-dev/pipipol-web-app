@@ -30,7 +30,7 @@ class Login extends Component {
             loginError: false,
             redirect: false,
             userEmail: '',
-            modalForgotShow: ''
+            modalForgotShow: false
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
@@ -440,7 +440,7 @@ class Login extends Component {
                                 onChange={this.handleChangeUserEmail}
                                 type="email"
                                 placeholder="Masukan email Anda.."
-                                autocomplete="off"
+                                autoComplete="off"
                             />
                         </div>
                         {this.validatorEmail.message('email', this.state.userEmail, 'required|email', 'validation-input-message text-danger small font-italic mt-1')}

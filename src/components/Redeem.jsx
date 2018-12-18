@@ -335,7 +335,7 @@ class Redeem extends Component {
                 </div>
               </div>
 
-              <div class="container mt-5">
+              <div className="container mt-5">
                 <Nav tabs className="justify-content-center">
                   <NavItem>
                     <NavLink

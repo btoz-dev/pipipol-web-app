@@ -200,12 +200,18 @@ class Search extends React.Component {
       autoClose: 7000
     });
   };
+
+  
+
   notifyError = (msg) => {
-    toast.error(msg, {
+    let toastId = null;
+    if (! toast.isActive(this.toastId)) {
+      this.toastId = toast.error(msg, {
         position: toast.POSITION.TOP_CENTER,
         className: 'pipipol-notify',
         autoClose: 7000
-    });
+      });
+    }
   };
 
   render() {

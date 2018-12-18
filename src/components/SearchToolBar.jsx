@@ -72,7 +72,7 @@ class SearchToolBar extends Component {
                 <input onChange={this.clickApplySearchBy} type="text" className="form-control pl-4 pr-4" placeholder="Cari Polling.." aria-label="Cari Polling" />
                 <div className="input-group-btn">
                   <button type="button" className="btn btn-dark pr-3 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {this.state.filterBy !== '' ? this.state.filterBy : 'Semua Kategori'} <i class="fas fa-angle-down ml-1"></i>
+                    {this.state.filterBy !== '' ? this.state.filterBy : 'Semua Kategori'} <i className="fas fa-angle-down ml-1"></i>
                   </button>
                   <div className="dropdown-menu dropdown-menu-right">
                     <a onClick={this.chooseFilterBy} data-value="" className="dropdown-item" href="#">Semua kategori</a>
@@ -97,12 +97,12 @@ class SearchToolBar extends Component {
               <div className="row">
                 <div className="col-6">
                   <button className="btn btn-red mb-3 mt-3" onClick={this.clickApplySortByPopular}>
-                    {this.state.sortBy === 'popularity' ? <i class="fas fa-check mr-1"></i> : ''} Populer
+                    {this.state.sortBy === 'popularity' ? <i className="fas fa-check mr-1"></i> : ''} Populer
                   </button>
                 </div>
                 <div className="col-6">
                   <button className="btn btn-outline mb-3 mt-3" onClick={this.clickApplySortByLatest}>
-                    {this.state.sortBy === 'polls_id' ? <i class="fas fa-check mr-1"></i> : ''} Terkini
+                    {this.state.sortBy === 'polls_id' ? <i className="fas fa-check mr-1"></i> : ''} Terkini
                   </button>
                 </div>
               </div>
